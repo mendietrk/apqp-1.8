@@ -1,0 +1,78 @@
+<%- include ('partials/_header'); %>
+
+<h2>Lista de Registros</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Usuario 1</th>
+            <th>Usuario 2</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% if (acs && acs.length > 0) { %> 
+            <% acs.forEach(acs => { %>
+                <tr>
+                    <td><%= acs.us1 %></td>
+                    <td><%= acs.us2 %></td>
+                    <td>
+                        <a href="/ace/edit/<%= acs._id %>" class="edit-btn">Editar</a>
+                        <% if (acs && acs._id) { %>
+                            <a href="/acep/<%= acs._id %>" class="edit-btn">AC</a>
+                        <% } else { %>
+                            <p>Error: ID no encontrado</p>
+                        <% } %>
+                        
+                    </td>
+                </tr>
+            <% }) %>
+        <% } else { %>
+            <tr>
+                <td colspan="3">No hay datos disponibles</td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
+
+<!-- 🔹 FORMULARIO SIEMPRE VISIBLE -->
+
+<h2>Ingresar Nuevo Registro</h2>
+<form action="/ace/submit" method="POST">
+    <label for="us1">Usuario 1:</label>
+    <input type="text" id="us1" name="us1" placeholder="Usuario 1" required>
+
+    <label for="us2">Usuario 2:</label>
+    <input type="text" id="us2" name="us2" placeholder="Usuario 2" required>
+
+    <% const fieldNames = [
+        'Part Number', 'Customer Name', 'Current 8D Status', 'Reported by', 'Date Reported',
+        'Samples received', 'Emergency Response Action', 'Team Champion', 'Team Leader',
+        'Team Member', 'Team Member', 'Team Member', 'Position / Department', 'Position / Department',
+        'Position / Department', 'Position / Department', 'Position / Department',
+        'Problem Description What', 'Problem Description When', 'Problem Description how many',
+        'Action Detail', 'Action Detail', 'Responsible', 'Responsible',
+        'Implementation Date', 'Implementation Date', 'Containment coverage', 'Containment coverage',
+        'Problem', '1st Why?', '2nd Why?', '3rd Why?', '4th Why?', '5th Why?', 'Final Root Cause',
+        'Corrective Action Detail', 'Responsible', 'Implementation Date', 'Validation Date', 'c coverage',
+        'Corrective Action Detail', 'Responsible', 'Implementation Date', 'Validation Date', 'c coverage',
+        'Corrective Action Detail', 'Responsible', 'Implementation Date', 'Validation Date', 'c coverage',
+        'Implementation Detail', 'Responsible', 'Implementation Date', 'Validation Date', 'c coverage',
+        'Implementation Detail', 'Responsible', 'Implementation Date', 'Validation Date', 'c coverage',
+        'Implementation Detail', 'Responsible', 'Implementation Date', 'Validation Date', 'c coverage',
+        'Prevent Recurrence', 'Responsible', 'Implementation Date', 'Validation Date', 'c coverage',
+        'Prevent Recurrence', 'Responsible', 'Implementation Date', 'Validation Date', 'c coverage',
+        'Prevent Recurrence', 'Responsible', 'Implementation Date', 'Validation Date', 'c coverage',
+        'Prepared by', 'Position / Department', 'Approved by', 'Position / Department', 'Date', 'Date'
+    ]; %>
+
+    <% for(let i = 1; i <= fieldNames.length; i++) { %>
+        <label for="ac<%= i %>"><%= fieldNames[i-1] %>:</label>
+        <input type="text" id="ac<%= i %>" name="ac<%= i %>" placeholder="<%= fieldNames[i-1] %>">
+    <% } %>
+
+    <button type="submit">Enviar</button>
+</form>
+
+
+  <%- include ('partials/_footer'); %>

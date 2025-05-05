@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= subtitle %></title>
+  <style>
+    @font-face {
+      font-family: 'sans-serif';
+      src: local('sans-serif'), url('/fonts/sans-serif.ttf') format('truetype');
+    }
+
+    @media print {
+      body { margin: 0; padding: 0; }
+      .container { width: 100%; margin: 0; box-shadow: none; border: none; }
+    }
+
+    @page { size: 8.5in 11in; margin: 0.5in; }
+
+    body {
+      font-family: 'DengXian', sans-serif;
+      background-color: #f9f9f9;
+      padding: 0;
+      margin: 0;
+      color: #333;
+    }
+
+    .container {
+      background: #fff;
+      padding: 1in 0.3in;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-sizing: border-box;
+      min-height: 10in;
+    }
+
+    .top-content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 2rem;
+    }
+
+    .logo {
+      max-width: 180px;
+      height: auto;
+    }
+
+    .title-section {
+      text-align: right;
+      flex: 1;
+      border-bottom: 4px solid #005288;
+      padding-bottom: 0.5rem;
+      margin-left: 1rem;
+    }
+
+    .title-section h1 {
+      font-size: 2rem;
+      color: #08184d;
+      margin: 0 0 0.25rem;
+    }
+
+    .title-section h2 {
+      font-size: 1.5rem;
+      color: #08184d;
+      margin: 0;
+    }
+
+    .description {
+      font-size: 1.3rem;
+      color: #222;
+      margin-top: 2rem;
+      margin-bottom: 3rem;
+      line-height: 1.6;
+      white-space: nowrap;
+      text-align: left;
+    }
+
+    .footer-bar {
+      background-color: #003893;
+      color: white;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      gap: 1rem;
+    }
+
+    .footer-left { white-space: nowrap; }
+    .footer-center { text-align: center; white-space: nowrap; }
+    .footer-right { text-align: right; white-space: nowrap; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="top-content">
+      <div class="header">
+        <img src="data:image/png;base64,<%= logoBase64 %>" alt="KUNHWA Logo" class="logo">
+        <div class="title-section">
+          <h1>PPAP <%= pars.pa6 %></h1>
+          <h2><%= subtitle %></h2>
+        </div>
+      </div>
+      <div class="description">
+        <%= description %>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <div class="footer-left">KUNHWA MEXICO</div>
+      <div class="footer-center"></div>
+      <div class="footer-right"><%= footerText %></div>
+    </div>
+  </div>
+</body>
+</html>

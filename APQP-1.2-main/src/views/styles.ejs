@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+    
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --container-bg: #f0f0f0;
+      --icon-color: #000000;
+    }
+    
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Lato', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    
+    .container {
+      background-color: var(--container-bg);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    }
+    
+    .dark-mode {
+      --bg-color: #121212;
+      --text-color: #ffffff;
+      --container-bg: #1e1e1e;
+      --icon-color: #ffffff;
+    }
+    
+    .sunset-mode {
+      --bg-color: #ff7f50;
+      --text-color: #2c3e50;
+      --container-bg: #ffa07a;
+      --icon-color: #2c3e50;
+    }
+    
+    .theme-toggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      font-size: 24px;
+      background: rgba(0, 0, 0, 0.3); /* Fondo semitransparente para mejor visibilidad */
+      border: none;
+      padding: 10px;
+      border-radius: 50%;
+      color: white; /* Asegurar que el icono sea visible */
+      z-index: 1000;
+    }
+    
+    .theme-toggle i {
+      display: none;
+    }
+    
+    .theme-toggle .fa-moon {
+      display: block;
+    }
+
+    .dark-mode .theme-toggle {
+      background: rgba(255, 255, 255, 0.3);
+      color: black;
+    }
+    
+    .dark-mode .fa-moon {
+      display: none;
+    }
+    
+    .dark-mode .fa-sun {
+      display: block;
+    }
+
+    .sunset-mode .theme-toggle {
+      background: rgba(255, 255, 255, 0.3);
+      color: black;
+    }
+
+    .sunset-mode .fa-moon {
+      display: none;
+    }
+
+    .sunset-mode .fa-sun {
+      display: none;
+    }
+
+    .sunset-mode .fa-sunset {
+      display: block;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modo Oscuro y Atardecer</title>
+</head>
+<body>
+  <button id="theme-toggle" class="theme-toggle">
+    <i class="fas fa-moon"></i>
+    <i class="fas fa-sun"></i>
+    <i class="fas fa-sunset"></i>
+  </button>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const theme = localStorage.getItem("theme");
+      if (theme === "dark") {
+        document.body.classList.add("dark-mode");
+      } else if (theme === "sunset") {
+        document.body.classList.add("sunset-mode");
+      }
+      updateIcons();
+    });
+
+    document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
+
+    function toggleTheme() {
+      if (document.body.classList.contains("dark-mode")) {
+        document.body.classList.remove("dark-mode");
+        document.body.classList.add("sunset-mode");
+        localStorage.setItem("theme", "sunset");
+      } else if (document.body.classList.contains("sunset-mode")) {
+        document.body.classList.remove("sunset-mode");
+        localStorage.removeItem("theme");
+      } else {
+        document.body.classList.add("dark-mode");
+        localStorage.setItem("theme", "dark");
+      }
+      updateIcons();
+    }
+
+    function updateIcons() {
+      const button = document.getElementById("theme-toggle");
+      
+      button.querySelector(".fa-moon").style.display = 
+        document.body.classList.contains("dark-mode") || document.body.classList.contains("sunset-mode") ? "none" : "block";
+        
+      button.querySelector(".fa-sun").style.display = 
+        document.body.classList.contains("dark-mode") ? "block" : "none";
+        
+      button.querySelector(".fa-sunset").style.display = 
+        document.body.classList.contains("sunset-mode") ? "block" : "none";
+    }
+  </script>
+</body>
+</html>

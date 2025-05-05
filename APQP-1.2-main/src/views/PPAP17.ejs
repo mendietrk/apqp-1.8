@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Customer-Specific Requirements</title>
+  <style>
+    @font-face {
+      font-family: 'sans-serif';
+      src: local('sans-serif'), url('/fonts/sans-serif.ttf') format('truetype');
+    }
+
+    @media print {
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        width: 100%;
+        margin: 0;
+        box-shadow: none;
+        border: none;
+      }
+    }
+
+    @page {
+      size: 8.5in 11in;
+      margin: 1in;
+    }
+
+    body {
+      font-family: 'sans-serif', sans-serif;
+      background-color: #f9f9f9;
+      padding: 0;
+      margin: 0;
+      color: #333;
+    }
+    .container {
+      background: #fff;
+      padding: 1in;
+      height: 9in;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-sizing: border-box;
+    }
+    .top-content {
+      flex-shrink: 0;
+    }
+    .title-section {
+      text-align: right;
+      border-bottom: 4px solid #005288;
+      padding-bottom: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .title-section h1,
+    .title-section h2 {
+      color: #08184d;
+      margin: 0;
+    }
+    .description {
+      font-size: 1.2rem;
+      color: #222;
+      margin: 2rem 0 3rem;
+    }
+    .logo {
+      width: 200px;
+      margin-bottom: 1rem;
+    }
+    .footer-bar {
+      background-color: #003893;
+      color: white;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      gap: 1rem;
+    }
+    .footer-left {
+      white-space: nowrap;
+    }
+    .footer-center {
+      text-align: center;
+      white-space: nowrap;
+    }
+    .footer-right {
+      text-align: right;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="top-content">
+      <img src="/images/ppap/image001.png" alt="KUNHWA Logo" class="logo">
+      <div class="title-section">
+        <h1>PPAP <%= pars.pa6 %></h1>
+        <h2>17. Customer-Specific Requirements</h2>
+      </div>
+      <div class="description">
+        Customer-Specific Requirements <%= pars.pa6 %> not required for annual validation.
+      </div>
+    </div>
+    <div class="footer-bar">
+      <div class="footer-left">KUNHWA MEXICO</div>
+      <div class="footer-center"></div>
+      <div class="footer-right">PPAP <%= pars.pa6 %> CUSTOMER-SPECIFIC REQUIREMENTS</div>
+    </div>
+  </div>
+</body>
+</html>

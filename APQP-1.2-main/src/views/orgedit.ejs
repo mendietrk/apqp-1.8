@@ -1,0 +1,52 @@
+<%- include ('partials/_header'); %>
+
+<!-- FORM -->
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Editar</h1>
+
+        <div style="display: inline-block;">
+            <a href="/org/delete/<%= orgs._id %>" class="edit-btn" style="color: red;">Borrar</a>
+
+        <div class=container>
+            <div class="container">
+                <div class="container">
+                    <form action="/org/update/<%= orgs._id %>" method="POST">
+                        <label for="us1">Organización:</label>
+                        <div class="label1">
+                            <input class="label1" type="text" name="us1" placeholder="Usuario" value="<%= orgs._id %>">
+                        </div>
+                        <div>
+                            <input type="text" name="or1" placeholder="Organización" value="<%= orgs.or1 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="or2" placeholder="Nombre completo" value="<%= orgs.or2 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="or3" placeholder="Dirección" value="<%= orgs.or3 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="or4" placeholder="Ciudad" value="<%= orgs.or4 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="or5" placeholder="Estado" value="<%= orgs.or5 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="or6" placeholder="Pais" value="<%= orgs.or6 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="or7" placeholder="c.p" value="<%= orgs.or7 %>">
+                        </div>
+                        
+                        
+                            <a href="/org" class="btn">Cancel</a>
+                            <button type="submit" class="btn">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include ('partials/_footer'); %>

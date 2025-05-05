@@ -1,0 +1,29 @@
+<%- include ('../partials/styles'); %>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nodejs Passport Local</title>
+</head>
+<body>
+  <!-- NAVIGATION -->
+  <% if (!user) { %>
+  <a href="/signin">Ingresar</a>
+  <a href="/signup">Registrarse</a>
+  <% } else { %>
+  <a href="/logout">Salir</a>
+  <a href="/profile">Perfil</a>
+  <% } %>
+
+  <%if (signinMessage) {%>
+    <p><%= signinMessage %></p>
+  <% } %>
+  <%if (signupMessage) {%>
+    <p><%= signupMessage %></p>
+  <% } %>
+
+  <%- body %>
+</body>
+</html>

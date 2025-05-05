@@ -1,0 +1,46 @@
+<%- include ('styles'); %>
+
+<div class="col-md-7">
+    <div>
+        
+    </div>
+    <table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Cliente</th>
+            <th>codigo del proveedor</th>
+            <!-- <th>password</th>
+            <th>puesto</th>
+            <th>área</th>
+            <th>telefono</th>
+            <th>correo</th> -->
+        </tr>
+    </thead>
+  
+    <tbody>
+        <% for(var i = 0; i < cust.length; i++) { %>
+      </div>
+      <td><%= cust[i].cu1 %></td>
+      <td><%= cust[i].cu2 %></td>
+  
+      <!-- <td><%= cust[i].cu3 %></td>
+        <td><%= cust[i].cu4 %></td>
+        <td><%= cust[i].cu5 %></td>
+        <td><%= cust[i].cu6 %></td>
+        <td><%= cust[i].cu7 %></td> -->
+      
+        <td class="plus">
+                  
+                    <a href="/cust/edit/<%= cust[i]._id %>" class="edit-btn">Editar</a>
+
+                    <a href="/par/<%= cust[i]._id %>" class="edit-btn">Registrar Componente</a>
+                  
+                  
+                </td>
+            </tr>
+        <% } %>   
+        </tbody>
+    </table>
+  </div>
+
+  <%- include ('partials/_footer'); %>

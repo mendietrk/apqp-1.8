@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Análisis FMEA</title>
+  <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+  <h1>Editar Análisis FMEA</h1>
+  <form action="/fmea/<%= fmea._id %>?_method=PUT" method="POST">
+    <label for="nombre">Nombre:</label>
+    <input type="text" name="nombre" id="nombre" value="<%= fmea.nombre %>" required>
+    <br>
+    <label for="modoFalla">Modo de Falla:</label>
+    <input type="text" name="modoFalla" id="modoFalla" value="<%= fmea.modoFalla %>" required>
+    <br>
+    <label for="efecto">Efecto:</label>
+    <input type="text" name="efecto" id="efecto" value="<%= fmea.efecto %>" required>
+    <br>
+    <label for="causa">Causa:</label>
+    <input type="text" name="causa" id="causa" value="<%= fmea.causa %>" required>
+    <br>
+    <label for="severidad">Severidad:</label>
+    <input type="number" name="severidad" id="severidad" value="<%= fmea.severidad %>" required>
+    <br>
+    <label for="ocurrencia">Ocurrencia:</label>
+    <input type="number" name="ocurrencia" id="ocurrencia" value="<%= fmea.ocurrencia %>" required>
+    <br>
+    <label for="deteccion">Detección:</label>
+    <input type="number" name="deteccion" id="deteccion" value="<%= fmea.deteccion %>" required>
+    <br>
+    <button type="submit">Actualizar</button>
+  </form>
+  <a href="/">Regresar</a>
+</body>
+</html>

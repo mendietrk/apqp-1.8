@@ -1,0 +1,94 @@
+<%- include ('partials/_header'); %>
+
+
+<form action="/ope/submit" method="POST">
+
+  <label class="label1" for="us1">Usuario:</label>
+  <input class="label1" type="text" id="us1" name="us1" placeholder="Usuario" value="<%= par && par.us1 %>">
+
+  <label class="label1" for="or1">Organización:</label>
+  <input class="label1" type="text" id="or1" name="or1" placeholder="Organización" value="<%= par && par.or1 %>">
+  
+  <label class="label1" for="or2"></label>
+  <input class="label1" type="text" id="or2" name="or2" placeholder="" value="<%= par && par.or2 %>">
+  
+  <label class="label1" for="or3"></label>
+  <input class="label1" type="text" id="or3" name="or3" placeholder="" value="<%= par && par.or3 %>">
+  
+  <label class="label1" for="or4"></label>
+  <input class="label1" type="text" id="or4" name="or4" placeholder="" value="<%= par && par.or4 %>">
+  
+  <label class="label1" for="or5"></label>
+  <input class="label1" type="text" id="or5" name="or5" placeholder="" value="<%= par && par.or5 %>">
+  
+  <label class="label1" for="or7"></label>
+  <input class="label1" type="text" id="or7" name="or7" placeholder="" value="<%= par && par.or7 %>">
+  
+  <label class="label1" for="cu1">Cliente:</label>
+  <input class="label1" type="text" id="cu1" name="cu1" placeholder="Cliente" value="<%= par && par.cu1 %>">
+
+  <label class="label1" for="cu2"></label>
+  <input class="label1" type="text" id="cu2" name="cu2" placeholder="" value="<%= par && par.cu2 %>">
+
+  <label class="label1" for="cu3"></label>
+  <input class="label1" type="text" id="cu3" name="cu3" placeholder="" value="<%=par && par.cu3 %>">
+
+    <label class="label1" for="pa1">Num interno:</label>
+    <input class="label1" type="text" id="pa1" name="pa1" placeholder="Num interno" value="<%= par && par.pa1 %>">
+    
+    <label class="label1" for="pa2">Rev interna</label>
+    <input class="label1" type="text" id="pa2" name="pa2" placeholder="Rev interna" value="<%= par && par.pa2 %>">
+    
+    <label class="label1" for="pa4">Nombre de pieza</label>
+    <input class="label1" type="text" id="pa4" name="pa4" placeholder="Nombre de pieza" value="<%= par && par.pa4 %>">
+    
+     
+    <label class="label1" for="pa6">Num de pza. del cliente</label>
+    <input class="label1" type="text" id="pa6" name="pa6" placeholder="Num de pza. del cliente" value="<%= par && par.pa6 %>">
+    
+    <label class="label1" for="pa10">Nivel de ingria.</label>
+    <input class="label1" type="text" id="pa10" name="pa10" placeholder="Nivel de ingria." value="<%= par && par.pa10 %>">
+
+    <label class="label1" for="pa11">Fecha de cambio de ingria.</label>
+    <input class="label1" type="text" id="pa11" name="pa11" placeholder="Fecha de cambio de ingria." value="<%= par && par.pa11 %>">
+
+    <label for="op1">Número de operación:</label>
+    <input type="text" id="op1" name="op1" placeholder="Número de operación">
+    
+    <label for="op2">Maquina/estación:</label>
+    <input type="text" id="op2" name="op2" placeholder="Maquina/estación">
+    
+    <label for="op3">Descripción:</label>
+    <input type="text" id="op3" name="op3" placeholder="Descripción">
+    
+    <label for="op4">Comentarios:</label>
+    <input type="text" id="op4" name="op4" placeholder="Comentarios">
+    
+    <label for="op5">Tipo:</label>
+    <input type="text" id="op5" name="op5" placeholder="Tipo">
+    
+    <label for="op6">Próposito de la operación</label>
+    <input type="text" id="op6" name="op6" placeholder="Próposito de la operación">
+    
+    <!-- <label for="op7">Num de dibujo del cliente:</label>
+    <input type="text" id="op7" name="op7" placeholder="Num de dibujo del cliente">
+
+    <label for="op8">Aplicación:</label>
+    <input type="text" id="op8" name="op8" placeholder="Aplicación">
+
+    <label for="op9">comentarios:</label>
+    <input type="text" id="op9" name="op9" placeholder="comentarios">
+
+    <label for="op10">Nivel de ingria.</label>
+    <input type="text" id="op10" name="op10" placeholder="Nivel de ingria.">
+
+    <label for="op11">Fecha de cambio de ingria.</label>
+    <input type="text" id="op11" name="op11" placeholder="Nivel de ingria.">
+
+    <label for="op12">Historial de cambios</label>
+    <input type="text" id="op12" name="op12" placeholder="Nivel de ingria."> -->
+  
+    <button class=btn type="submit">Enviar</button>
+  </form>
+
+<%- include ('partials/_footer'); %>

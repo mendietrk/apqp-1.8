@@ -1,0 +1,46 @@
+<%- include ('partials/_header'); %>
+
+<div class="col-md-7">
+    <div>
+        <a href="/" class="btn">Volver</a>
+    </div>
+    <table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Organización</th>
+            <th>Nombre completo</th>
+            <!-- <th>password</th>
+            <th>puesto</th>
+            <th>área</th>
+            <th>telefono</th>
+            <th>correo</th> -->
+        </tr>
+    </thead>
+  
+    <tbody>
+        <% for(var i = 0; i < orgs.length; i++) { %>
+      </div>
+      <td><%= orgs[i].or1 %></td>
+      <td><%= orgs[i].or2 %></td>
+  
+      <!-- <td><%= orgs[i].or3 %></td>
+        <td><%= orgs[i].or4 %></td>
+        <td><%= orgs[i].or5 %></td>
+        <td><%= orgs[i].or6 %></td>
+        <td><%= orgs[i].or7 %></td> -->
+      
+        <td class="plus">
+                  
+                    <a href="/org/edit/<%= orgs[i]._id %>" class="edit-btn">Editar</a>
+
+                    <a href="/cust/<%= orgs[i]._id %>" class="edit-btn">Registrar Cliente</a>
+                  
+                  
+                </td>
+            </tr>
+        <% } %>   
+        </tbody>
+    </table>
+  </div>
+
+  <%- include ('partials/_footer'); %>

@@ -1,0 +1,67 @@
+<%- include ('partials/_header'); %>
+
+<form action="/pro/submit" method="POST">
+
+    <label class="label1" for="us1">Usuario:</label>
+    <input class="label1" type="text" id="us1" name="us1" placeholder="Usuario" value="<%= pro && pro.us1 %>">
+  
+    <label class="label1" for="or1">Organización:</label>
+    <input class="label1" type="text" id="or1" name="or1" placeholder="Organización" value="<%= pro && pro.or1 %>">
+
+    <label for="pg1">Titulo</label>
+<input type="text" id="pg1" name="pg1" placeholder="Titulo">
+
+<label for="pg2">codigo</label>
+<input type="text" id="pg2" name="pg2" placeholder="codigo">
+
+<label for="pg3">Rev</label>
+<input type="text" id="pg3" name="pg3" placeholder="Rev">
+
+<label for="pg4">Razón de revisión</label>
+<input type="text" id="pg4" name="pg4" placeholder="Razón de revisión">
+
+<label for="pg5">Fecha</label>
+<input type="text" id="pg5" name="pg5" placeholder="Fecha">
+
+<label for="pg6">Autor</label>
+<input type="text" id="pg6" name="pg6" placeholder="Autor">
+
+<label for="pg7">Aprobado</label>
+<input type="text" id="pg7" name="pg7" placeholder="Aprobado">
+
+<label for="pg8">Revisado</label>
+<input type="text" id="pg8" name="pg8" placeholder="Revisado">
+
+<label for="pg9">Objetivo</label>
+<input type="text" id="pg9" name="pg9" placeholder="Objetivo">
+
+<label for="pg10">Alcance</label>
+<input type="text" id="pg10" name="pg10" placeholder="Alcance">
+
+<label for="pg11">Responsables</label>
+<input type="text" id="pg11" name="pg11" placeholder="Responsables">
+
+<label for="pg12">Diagrama</label>
+<input type="text" id="pg12" name="pg12" placeholder="Diagrama">
+
+<label for="pg13">Responsable</label>
+<input type="text" id="pg13" name="pg13" placeholder="Responsable">
+
+<label for="pg14">Entradas</label>
+<input type="text" id="pg14" name="pg14" placeholder="Entradas">
+
+<label for="pg15">Actividad</label>
+<input type="text" id="pg15" name="pg15" placeholder="Actividad">
+
+<label for="pg16">Salida</label>
+<input type="text" id="pg16" name="pg16" placeholder="Salida">
+
+<label for="pg17">Registro</label>
+<input type="text" id="pg17" name="pg17" placeholder="Registro">
+
+
+
+<button class=btn type="submit">Enviar</button>
+</form>
+
+<%- include ('partials/_footer'); %>

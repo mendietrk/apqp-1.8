@@ -1,0 +1,63 @@
+<%- include ('partials/_header'); %>
+
+<!-- FORM -->
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Editar</h1>
+
+        <div style="display: inline-block;">
+            <a href="/ace/delete/<%= acs._id %>" class="edit-btn" style="color: red;">Borrar</a>
+
+            <form action="/ace/update/<%= acs._id %>" method="POST">
+                <label for="us1">Usuario:</label>
+                <div>
+                    <input class="label1" type="text" id="us1" name="us1" placeholder="Usuario" value="<%= acs.us1 %>">
+                </div>
+                <div>
+                    <input class="label1" type="text" id="us2" name="us2" placeholder="Usuario" value="<%= acs.us2 %>">
+                </div>
+                <% const fields = {
+                    ac1: 'Part Number', ac2: 'Customer Name', ac3: 'Current 8D Status', ac4: 'Reported by',
+                    ac5: 'Date Reported', ac6: 'Samples received', ac7: 'Emergency Response Action',
+                    ac8: 'Team Champion', ac9: 'Team Leader', ac10: 'Team Member', ac11: 'Team Member',
+                    ac12: 'Team Member', ac13: 'Position / Department', ac14: 'Position / Department',
+                    ac15: 'Position / Department', ac16: 'Position / Department', ac17: 'Position / Department',
+                    ac18: 'Problem Description What', ac19: 'Problem Description When',
+                    ac20: 'Problem Description how many', ac21: 'Action Detail', ac22: 'Action Detail',
+                    ac23: 'Responsible', ac24: 'Responsible', ac25: 'Implementation Date', ac26: 'Implementation Date',
+                    ac27: 'Containment coverage', ac28: 'Containment coverage', ac29: 'Problem', ac30: '1st Why?',
+                    ac31: '2nd Why?', ac32: '3rd Why?', ac33: '4th Why?', ac34: '5th Why?', ac35: 'Final Root Cause',
+                    ac36: 'Corrective Action Detail', ac37: 'Responsible', ac38: 'Implementation Date',
+                    ac39: 'Validation Date', ac40: 'c coverage', ac41: 'Corrective Action Detail', ac42: 'Responsible',
+                    ac43: 'Implementation Date', ac44: 'Validation Date', ac45: 'c coverage', ac46: 'Corrective Action Detail',
+                    ac47: 'Responsible', ac48: 'Implementation Date', ac49: 'Validation Date', ac50: 'c coverage',
+                    ac51: 'Implementation Detail', ac52: 'Responsible', ac53: 'Implementation Date', ac54: 'Validation Date',
+                    ac55: 'c coverage', ac56: 'Implementation Detail', ac57: 'Responsible', ac58: 'Implementation Date',
+                    ac59: 'Validation Date', ac60: 'c coverage', ac61: 'Implementation Detail', ac62: 'Responsible',
+                    ac63: 'Implementation Date', ac64: 'Validation Date', ac65: 'c coverage', ac66: 'Prevent Recurrence',
+                    ac67: 'Responsible', ac68: 'Implementation Date', ac69: 'Validation Date', ac70: 'c coverage',
+                    ac71: 'Prevent Recurrence', ac72: 'Responsible', ac73: 'Implementation Date', ac74: 'Validation Date',
+                    ac75: 'c coverage', ac76: 'Prevent Recurrence', ac77: 'Responsible', ac78: 'Implementation Date',
+                    ac79: 'Validation Date', ac80: 'c coverage', ac81: 'Prepared by', ac82: 'Position / Department',
+                    ac83: 'Approved by', ac84: 'Position / Department', ac85: 'Date', ac86: 'Date'
+                };
+                for (let key in fields) { %>
+                <div>
+                    <label for="<%= key %>"><%= fields[key] %>:</label>
+                    <input type="text" id="<%= key %>" name="<%= key %>" placeholder="<%= fields[key] %>" value="<%= acs[key] %>">
+                </div>
+                <% } %>
+                        
+                        
+                        
+                            <a href="/chr" class="btn">Cancel</a>
+                            <button type="submit" class="btn">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include ('partials/_footer'); %>

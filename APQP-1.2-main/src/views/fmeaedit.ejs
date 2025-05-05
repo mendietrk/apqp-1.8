@@ -1,0 +1,181 @@
+<%- include('partials/_header'); %>
+
+<!-- FORM -->
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Editar</h1>
+
+        <!-- Botón de borrar -->
+        <div style="display: inline-block;">
+            <a href="/fme/delete/<%= fmeas._id %>" class="edit-btn" style="color: red;">Borrar</a>
+        </div>
+
+        <!-- Botón de duplicar -->
+        <div style="display: inline-block;">
+            <a href="/fme/dup/<%= fmeas._id %>" class="edit-btn" style="color: rgb(64, 12, 207);">Duplicar</a>
+        </div>
+
+        <!-- Formulario de edición -->
+        <div class="container">
+            <form action="/fme/update/<%= fmeas._id %>" method="POST">
+                <!-- Campo: Usuario -->
+                <div>
+                    <label for="us1">Usuario:</label>
+                    <input type="text" id="us1" name="us1" placeholder="Usuario" value="<%= fmeas.us1 %>">
+                </div>
+
+                <!-- Campo: Organización -->
+                <div>
+                    <label for="or1">Organización:</label>
+                    <input type="text" id="or1" name="or1" placeholder="Organización" value="<%= fmeas.or1 %>">
+                </div>
+
+                <!-- Campo: Cliente -->
+                <div>
+                    <label for="cu1">Cliente:</label>
+                    <input type="text" id="cu1" name="cu1" placeholder="Cliente" value="<%= fmeas.cu1 %>">
+                </div>
+
+                <!-- Campo: Número interno -->
+                <div>
+                    <label for="pa1">Número interno:</label>
+                    <input type="text" id="pa1" name="pa1" placeholder="Número interno" value="<%= fmeas.pa1 %>">
+                </div>
+
+                <div>
+                    <input type="text" name="pa4" placeholder="Nombre de pieza" value="<%= fmeas.pa4 %>">
+                </div>
+                <div>
+                    <input type="text" name="pa5" placeholder="Número de dibujo interno" value="<%= fmeas.pa5 %>">
+                </div>
+                <div>
+                    <input type="text" name="pa6" placeholder="Num de pza. del cliente" value="<%= fmeas.pa6 %>">
+                </div>
+
+                <!-- Campo: Número de operación -->
+                <div>
+                    <label for="ch1">Número de operación:</label>
+                    <input type="text" id="ch1" name="ch1" placeholder="Número de operación" value="<%= fmeas.ch1 %>">
+                </div>
+
+                <!-- Campo: Fecha AMEF Original -->
+                <div>
+                    <label for="fm1">Fecha AMEF Original:</label>
+                    <input type="date" id="fm1" name="fm1" value="<%= fmeas.fm1 %>">
+                </div>
+
+                <!-- Campo: Fecha de la última revisión -->
+                <div>
+                    <label for="fm2">Fecha de la última revisión:</label>
+                    <input type="date" id="fm2" name="fm2" value="<%= fmeas.fm2 %>">
+                </div>
+
+                <!-- Campo: Revisión -->
+                <div>
+                    <label for="fm3">Revisión:</label>
+                    <input type="text" id="fm3" name="fm3" placeholder="Revisión" value="<%= fmeas.fm3 %>">
+                </div>
+
+                <!-- Campo: Equipo -->
+                <div>
+                    <label for="fm4">Equipo:</label>
+                    <input type="text" id="fm4" name="fm4" placeholder="Equipo" value="<%= fmeas.fm4 %>">
+                </div>
+
+                <!-- Campo: Entrada (KIPV) -->
+                <div>
+                    <label for="fm5">Entrada (KIPV):</label>
+                    <input type="text" id="fm5" name="fm5" placeholder="Entrada (KIPV)" value="<%= fmeas.fm5 %>">
+                </div>
+
+                <!-- Campo: Modo de falla -->
+                <div>
+                    <label for="fm6">Modo de falla:</label>
+                    <input type="text" id="fm6" name="fm6" placeholder="Modo de falla" value="<%= fmeas.fm6 %>">
+                </div>
+
+                <!-- Campo: Efecto de falla -->
+                <div>
+                    <label for="fm7">Efecto de falla:</label>
+                    <input type="text" id="fm7" name="fm7" placeholder="Efecto de falla" value="<%= fmeas.fm7 %>">
+                </div>
+
+                <!-- Campo: SEV -->
+                <div>
+                    <label for="fm8">SEV:</label>
+                    <input type="number" id="fm8" name="fm8" placeholder="SEV" min="1" max="10" value="<%= fmeas.fm8 %>">
+                </div>
+
+                <!-- Campo: Causas -->
+                <div>
+                    <label for="fm9">Causas:</label>
+                    <input type="text" id="fm9" name="fm9" placeholder="Causas" value="<%= fmeas.fm9 %>">
+                </div>
+
+                <!-- Campo: OCC -->
+                <div>
+                    <label for="fm10">OCC:</label>
+                    <input type="number" id="fm10" name="fm10" placeholder="OCC" min="1" max="10" value="<%= fmeas.fm10 %>">
+                </div>
+
+                <!-- Campo: Controles actuales -->
+                <div>
+                    <label for="fm11">Controles actuales:</label>
+                    <input type="text" id="fm11" name="fm11" placeholder="Controles actuales" value="<%= fmeas.fm11 %>">
+                </div>
+
+                <!-- Campo: DET -->
+                <div>
+                    <label for="fm12">DET:</label>
+                    <input type="number" id="fm12" name="fm12" placeholder="DET" min="1" max="10" value="<%= fmeas.fm12 %>">
+                </div>
+
+                <!-- Campo: RPN -->
+                <div>
+                    <label for="fm13">RPN:</label>
+                    <input type="number" id="fm13" name="fm13" placeholder="RPN" readonly value="<%= fmeas.fm13 %>">
+                </div>
+
+                <!-- Botones de acción -->
+                <div>
+                    <a href="/fme" class="btn">Cancelar</a>
+                    <button type="submit" class="btn">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Script para calcular el RPN automáticamente -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Obtén los campos de SEV, OCC, DET y RPN
+        const sevInput = document.getElementById('fm8');
+        const occInput = document.getElementById('fm10');
+        const detInput = document.getElementById('fm12');
+        const rpnInput = document.getElementById('fm13');
+
+        // Función para calcular el RPN
+        function calculateRPN() {
+            const sev = parseInt(sevInput.value) || 0; // Convierte a número o usa 0 si está vacío
+            const occ = parseInt(occInput.value) || 0; // Convierte a número o usa 0 si está vacío
+            const det = parseInt(detInput.value) || 0; // Convierte a número o usa 0 si está vacío
+
+            // Calcula el RPN
+            const rpn = sev * occ * det;
+
+            // Actualiza el campo RPN
+            rpnInput.value = rpn;
+        }
+
+        // Escucha los cambios en los campos SEV, OCC y DET
+        sevInput.addEventListener('input', calculateRPN);
+        occInput.addEventListener('input', calculateRPN);
+        detInput.addEventListener('input', calculateRPN);
+
+        // Calcula el RPN al cargar la página (por si ya hay valores)
+        calculateRPN();
+    });
+</script>
+
+<%- include('partials/_footer'); %>

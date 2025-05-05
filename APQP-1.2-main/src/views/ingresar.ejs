@@ -1,0 +1,74 @@
+<%- include ('styles'); %>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Balance de Movimientos</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <h1>Balance Total: <%= balanceTotal.toFixed(2) %> MXN</h1>
+
+  <!-- Formulario para actualizar tipos de cambio -->
+  <h2>Actualizar Tipos de Cambio</h2>
+  <form action="/actualizar-tipos-cambio" method="POST">
+    <label for="moneda">Moneda:</label>
+    <select name="moneda" id="moneda">
+      <option value="ETH">Ethereum (ETH)</option>
+      <option value="BTC">Bitcoin (BTC)</option>
+      <option value="USD">Dólares (USD)</option>
+    </select>
+    <label for="compra">Tipo de Cambio (Compra en MXN):</label>
+    <input type="number" name="compra" step="0.01" required>
+    <label for="venta">Tipo de Cambio (Venta en MXN):</label>
+    <input type="number" name="venta" step="0.01" required>
+    <button type="submit">Actualizar</button>
+  </form>
+
+  <!-- Formulario para agregar movimientos -->
+  <h2>Agregar Movimiento</h2>
+  <form action="/agregar-movimiento" method="POST">
+    <label for="tipo">Tipo:</label>
+    <select name="tipo" id="tipo">
+      <option value="entrada">Entrada</option>
+      <option value="salida">Salida</option>
+    </select>
+    <label for="monto">Monto:</label>
+    <input type="number" name="monto" step="0.01" required>
+    <label for="moneda">Moneda:</label>
+    <select name="moneda" id="moneda">
+      <option value="ETH">Ethereum (ETH)</option>
+      <option value="BTC">Bitcoin (BTC)</option>
+      <option value="USD">Dólares (USD)</option>
+    </select>
+    <label for="descripcion">Descripción:</label>
+    <input type="text" name="descripcion" required>
+    <button type="submit">Agregar</button>
+  </form>
+
+  <!-- Balances por denominación -->
+  <h2>Balances por Denominación</h2>
+  <ul>
+    <% for (const moneda in denominaciones) { %>
+      <li>
+        <%= moneda %>: <%= denominaciones[moneda].balance.toFixed(4) %>
+        (Compra: <%= denominaciones[moneda].compra %> MXN, Venta: <%= denominaciones[moneda].venta %> MXN)
+      </li>
+    <% } %>
+  </ul>
+
+  <!-- Registro de movimientos -->
+  <h2>Registro de Movimientos</h2>
+  <ul>
+    <% movimientos.forEach(movimiento => { %>
+      <li>
+        <span class="fecha"><%= movimiento.fecha %></span> -
+        <span class="<%= movimiento.tipo %>"><%= movimiento.tipo %>: <%= movimiento.monto.toFixed(4) %> <%= movimiento.moneda %></span>
+        (<%= movimiento.descripcion %>)
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>

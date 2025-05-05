@@ -1,0 +1,59 @@
+<%- include('partials/_header'); %>
+
+<div class="container mt-4">
+    <h2 class="mb-4">Formulario de Registro</h2>
+    
+    <form action="/submit" method="POST" class="form-container">
+        <div class="form-group">
+            <label for="us1">Usuario:</label>
+            <input type="text" class="form-control" id="us1" name="us1" placeholder="Ingrese su usuario">
+        </div>
+
+        <div class="form-group">
+            <label for="us2">Nombre completo:</label>
+            <input type="text" class="form-control" id="us2" name="us2" placeholder="Ingrese su nombre completo">
+        </div>
+
+        <div class="form-group">
+            <label for="us3">Contraseña:</label>
+            <input type="password" class="form-control" id="us3" name="us3" placeholder="Cree una contraseña">
+        </div>
+
+        <div class="form-group">
+            <label for="us4">Puesto:</label>
+            <input type="text" class="form-control" id="us4" name="us4" placeholder="Ingrese su puesto" >
+        </div>
+
+        <div class="form-group">
+            <label for="us5">Área:</label>
+            <input type="text" class="form-control" id="us5" name="us5" placeholder="Ingrese su área" >
+        </div>
+
+        <div class="form-group">
+            <label for="us6">Teléfono:</label>
+            <input type="number" class="form-control" id="us6" name="us6" placeholder="Ingrese su teléfono" >
+        </div>
+
+        <div class="form-group">
+            <label for="us7">Correo alternativo:</label>
+            <input type="email" class="form-control" id="us7" name="us7" placeholder="correo@alternativo.com" >
+        </div>
+
+        <div class="form-group">
+            <label for="email">Correo electrónico principal:</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="correo@principal.com" >
+        </div>
+
+        <div class="form-group">
+            <label for="password">Contraseña principal:</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Cree su contraseña principal" >
+        </div>
+
+        <div class="form-actions mt-4">
+            <a href="/db" class="btn btn-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+</div>
+
+<%- include('partials/_footer'); %>

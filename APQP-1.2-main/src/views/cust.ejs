@@ -1,0 +1,55 @@
+<%- include ('partials/_header'); %>
+
+
+
+<form action="/cust/submit" method="POST">
+
+  <label class="label1" for="us1">Usuario:</label>
+  <input class="label1" type="text" id="us1" name="us1" placeholder="Usuario" value="<%= org && org.us1 %>">
+
+  <label class="label1" for="or1">Organización:</label>
+  <input class="label1" type="text" id="or1" name="or1" placeholder="Organización" value="<%= org && org.or1 %>">
+  
+  <label class="label1" for="or1"></label>
+  <input class="label1" type="text" id="or2" name="or2" placeholder="" value="<%= org && org.or2 %>">
+  
+  <label class="label1" for="or1"></label>
+  <input class="label1" type="text" id="or3" name="or3" placeholder="" value="<%= org && org.or3 %>">
+  
+  <label class="label1" for="or1"></label>
+  <input class="label1" type="text" id="or4" name="or4" placeholder="" value="<%= org && org.or4 %>">
+  
+  <label class="label1" for="or1"></label>
+  <input class="label1" type="text" id="or5" name="or5" placeholder="" value="<%= org && org.or5 %>">
+  
+  <label class="label1" for="or1"></label>
+  <input class="label1" type="text" id="or7" name="or7" placeholder="" value="<%= org && org.or7 %>">
+  
+  <label for="cu1">Cliente:</label>
+  <input type="text" id="cu1" name="cu1" placeholder="Nombre breve">
+  
+  <label for="cu2">Código:</label>
+  <input type="text" id="cu2" name="cu2" placeholder="asignado al proveedor">
+  
+  <label for="cu3">Cliente:</label>
+  <input type="text" id="cu3" name="cu3" placeholder="razón social">
+  
+  <label for="cu4">direccion:</label>
+  <input type="text" id="cu4" name="cu4" placeholder="calle y número">
+
+  <label for="cu5">Ciudad:</label>
+  <input type="text" id="cu5" name="cu5" placeholder="Ciudad">
+  
+  <label for="cu6">Estado:</label>
+  <input type="text" id="cu6" name="cu6" placeholder="Estado">
+  
+  <label for="cu7">Pais</label>
+  <input type="text" id="cu7" name="cu7" placeholder="Pais">
+  
+  <label for="cu8">c.p:</label>
+  <input type="text" id="cu8" name="cu8" placeholder="c.p">
+
+  <button class=btn type="submit">Enviar</button>
+</form>
+     
+  <%- include ('partials/_footer'); %>

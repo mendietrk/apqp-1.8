@@ -1,0 +1,120 @@
+<%- include ('partials/_header'); %>
+
+<!-- FORM -->
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Editar</h1>
+
+        <div style="display: inline-block;">
+            <a href="/pcp/delete/<%= pcps._id %>" class="edit-btn" style="color: red;">Borrar</a>
+
+        <div class=container>
+            <div class="container">
+                <div class="container">
+                    <form action="/pcp/update/<%= pcps._id %>" method="POST">
+                        <div>
+                            <label for="pc1">Numero de PCP:</label>
+                            <input type="text" name="pc1" placeholder="Numero de PCP" value="<%= pcps && pcps.pc1 %>">
+                        </div>
+                        
+                        <div>
+                            <label for="pc2">Preparado por:</label>
+                            <input type="text" name="pc2" placeholder="Preparado por" value="<%= pcps && pcps.pc2 %>">
+                        </div>
+                        
+                        <div>
+                            <label for="pc3">Fecha de inicio:</label>
+                            <input type="text" name="pc3" placeholder="Fecha de inicio" value="<%= pcps && pcps.pc3 %>">
+                        </div>
+                        
+                        <div>
+                            <label for="pc4">Fecha de Revisión:</label>
+                            <input type="text" name="pc4" placeholder="Fecha de Revisión" value="<%= pcps && pcps.pc4 %>">
+                        </div>
+                        
+                        <div>
+                            <label for="pc5">Equipo:</label>
+                            <input type="text" name="pc5" placeholder="Equipo" value="<%= pcps && pcps.pc5 %>">
+                        </div>
+                        
+                        <div>
+                            <label for="pc6">no. de op.:</label>
+                            <input type="text" name="pc6" placeholder="no. de op." value="<%= pcps && pcps.pc6 %>">
+                        </div>
+                        
+                        <div>
+                            <label for="pc7">nombre de la op.:</label>
+                            <input type="text" name="pc7" placeholder="nombre de la op." value="<%= pcps && pcps.pc7 %>">
+                        </div>
+                        
+                        <div>
+                            <label for="pc8">maquina:</label>
+                            <input type="text" name="pc8" placeholder="maquina" value="<%= pcps && pcps.pc8 %>">
+                        </div>
+                        
+                        <div>
+                            <label for="pc9">no.:</label>
+                            <input type="text" name="pc9" placeholder="no." value="<%= pcps && pcps.pc9 %>">
+                        </div>
+                        
+                        <div>
+                            <label for="pc10">producto:</label>
+                            <input type="text" name="pc10" placeholder="producto" value="<%= pcps && pcps.pc10 %>">
+                        </div>
+                        
+                        <div>
+                            <label for="pc11">proceso:</label>
+                            <input type="text" name="pc11" placeholder="proceso" value="<%= pcps && pcps.pc11 %>">
+                        </div>
+                        
+                        <div>
+                            <label for="pc12">special ch:</label>
+                            <input type="text" name="pc12" placeholder="special ch" value="<%= pcps && pcps.pc12 %>">
+                        </div>
+                        
+                        <div>
+                            <label for="pc13">tolerancia:</label>
+                            <input type="text" name="pc13" placeholder="tolerancia" value="<%= pcps && pcps.pc13 %>">
+                        </div>
+                        
+                        <div>
+                            <label for="pc14">tecnica de medición:</label>
+                            <input type="text" name="pc14" placeholder="tecnica de medición" value="<%= pcps && pcps.pc14 %>">
+                        </div>
+                        
+                        <div>
+                            <label for="pc15">tamaño:</label>
+                            <input type="text" name="pc15" placeholder="tamaño" value="<%= pcps && pcps.pc15 %>">
+                        </div>
+                        
+                        <div>
+                            <label for="pc16">frecuencia:</label>
+                            <input type="text" name="pc16" placeholder="frecuencia" value="<%= pcps && pcps.pc16 %>">
+                        </div>
+                        
+                        <div>
+                            <label for="pc17">Metodo de control:</label>
+                            <input type="text" name="pc17" placeholder="Metodo de control" value="<%= pcps && pcps.pc17 %>">
+                        </div>
+                        
+                        <div>
+                            <label for="pc18">Plan de reacción:</label>
+                            <input type="text" name="pc18" placeholder="Plan de reacción" value="<%= pcps && pcps.pc18 %>">
+                        </div>
+                        
+                        <div>
+                            <label for="pc19">Fecha clave:</label>
+                            <input type="text" name="pc19" placeholder="Fecha clave" value="<%= pcps && pcps.pc19 %>">
+                        </div>
+                        
+                        <a href="/pcp" class="btn">Cancel</a>
+                        <button type="submit" class="btn">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<%- include ('partials/_footer'); %>

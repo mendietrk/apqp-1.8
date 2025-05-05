@@ -1,0 +1,80 @@
+<%- include ('partials/_header'); %>
+
+<!-- FORM -->
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Editar</h1>
+
+        <div style="display: inline-block;">
+            <a href="/chr/delete/<%= chrs._id %>" class="edit-btn" style="color: red;">Borrar</a>
+
+        <div class=container>
+            <div class="container">
+                <div class="container">
+                    <form action="/chr/update/<%= chrs._id %>" method="POST">
+                        <label for="us1">Usuario:</label>
+                        <div>
+                            <input class="label1" type="text" id="us1" name="us1" placeholder="Usuario" value="<%= chrs.us1 %>">
+                        </div>
+                        <div>
+                            <input class="label1" type="text" id="or1" name="or1" placeholder="Organización" value="<%= chrs.or1 %>">
+                        </div>
+                        <div>
+                            <input tclass="label1" ype="text" id="cu1" name="cu1" placeholder="Cliente" value="<%= chrs.cu1 %>">
+                        </div>
+                        <div>
+                            <input class="label1" type="text" name="pa1" placeholder="Num interno" value="<%= chrs.pa1 %>">
+                        </div>
+                        <div>
+                            <input class="label1" type="text" name="op1" placeholder="Num operación" value="<%= chrs.ch1 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="ch1" placeholder="Número de caracteristica" value="<%= chrs.ch1 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="ch2" placeholder="Simbolo de caracteristica especial" value="<%= chrs.ch2 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="ch3" placeholder="Descripción" value="<%= chrs.ch3 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="ch4" placeholder="especificación" value="<%= chrs.ch4 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="ch5" placeholder="Tipo" value="<%= chrs.ch5 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="ch6" placeholder="mínimo" value="<%= chrs.ch6 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="ch7" placeholder="máximo" value="<%= chrs.ch7 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="ch8" placeholder="unidad" value="<%= chrs.ch8 %>">
+                        </div>
+                        <!-- <div>
+                            <input type="text" name="op9" placeholder="comentarios" value="<%= chrs.op9 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="op10" placeholder="Nivel de ingria." value="<%= chrs.op10 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="op11" placeholder="Fecha de cambio de ingria." value="<%= chrs.op11 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="op12" placeholder="Historial de cambios" value="<%= chrs.op12 %>">
+                        </div> -->
+                        
+                        
+                        
+                            <a href="/chr" class="btn">Cancel</a>
+                            <button type="submit" class="btn">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include ('partials/_footer'); %>
