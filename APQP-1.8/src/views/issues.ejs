@@ -1,0 +1,73 @@
+<%- include('partials/_header'); %>
+
+<form action="/actividades" method="POST">
+    <div>
+      <label>Índice:</label>
+      <input type="number" name="indice" required>
+    </div>
+  
+    <div>
+      <label>Actividad:</label>
+      <input type="text" name="actividad" required>
+    </div>
+  
+    <div>
+      <label>Responsable:</label>
+      <input type="text" name="responsable" required>
+    </div>
+  
+    <div>
+    <label for="inicio">Inicio:</label>
+    <input type="date" name="inicio" id="inicio">
+  </div>
+
+  <div>
+    <label for="plazo">Plazo:</label>
+    <input type="date" name="plazo" id="plazo">
+  </div>
+
+  <div>
+    <label for="dias">Días:</label>
+    <input type="number" name="dias" id="dias" readonly>
+  </div>
+
+  <div>
+    <label for="inicioReal">Inicio Real:</label>
+    <input type="date" name="inicioReal" id="inicioReal">
+  </div>
+
+  <div>
+    <label for="fin">Fin:</label>
+    <input type="date" name="fin" id="fin">
+  </div>
+
+  <div>
+    <label for="diasReal">Días Real:</label>
+    <input type="number" name="diasReal" id="diasReal" readonly>
+  </div>
+  
+    <div>
+      <label>Observaciones:</label>
+      <textarea name="observaciones" rows="3"></textarea>
+    </div>
+  
+    <div>
+      <label>Email para:</label>
+      <input type="email" name="emailPara">
+    </div>
+  
+    <div>
+      <label>Email CC:</label>
+      <input type="email" name="emailCC">
+    </div>
+  
+    <div>
+      <label>Diferencia de Días:</label>
+      <input type="number" name="difDias">
+    </div>
+  
+    <div>
+      <button type="submit">Guardar</button>
+    </div>
+  </form>
+  

@@ -1,0 +1,45 @@
+<h2>Lista de Registros</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Usuario 1</th>
+            <th>Usuario 2</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% if (acs && acs.length > 0) { %> 
+            <% acs.forEach(ac => { %>
+                <tr>
+                    <td><%= ac.us1 %></td>
+                    <td><%= ac.us2 %></td>
+                    <td>
+                        <a href="/ace/edit/<%= ac._id %>" class="edit-btn">Editar</a>
+                    </td>
+                </tr>
+            <% }) %>
+        <% } else { %>
+            <tr>
+                <td colspan="3">No hay datos disponibles</td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
+
+<!-- 🔹 FORMULARIO SIEMPRE VISIBLE -->
+<h2>Ingresar Nuevo Registro</h2>
+<form action="/ace/submit" method="POST">
+    <label for="us1">Usuario 1:</label>
+    <input type="text" id="us1" name="us1" placeholder="Usuario 1" required>
+
+    <label for="us2">Usuario 2:</label>
+    <input type="text" id="us2" name="us2" placeholder="Usuario 2" required>
+
+    <% for(let i = 1; i <= 86; i++) { %>
+        <label for="ac<%= i %>">AC<%= i %>:</label>
+        <input type="text" id="ac<%= i %>" name="ac<%= i %>" placeholder="AC<%= i %>">
+    <% } %>
+
+    <button type="submit">Enviar</button>
+</form>

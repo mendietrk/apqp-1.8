@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ingresar Subgrupo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 10px;
+    }
+
+    form {
+      max-width: 400px;
+      margin: auto;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin: 6px 0;
+      box-sizing: border-box;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    h2 {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+    <h2>Nuevo Subgrupo</h2>
+    <form action="/subgrupo/nuevo" method="POST">
+        <label for="pa6">Número de parte:</label>
+        <select name="pa6" id="pa6" required>
+          <% partes.forEach(p => { %>
+            <option value="<%= p.pa6 %>"><%= p.pa6 %></option>
+          <% }) %>
+        </select><br>
+    
+        <label for="pa7">Versión:</label>
+        <input type="text" name="pa7" id="pa7" required><br><br>
+    
+        <% for(let i = 1; i <= 5; i++) { %>
+          <label>Muestra <%= i %>: <input type="number" name="muestra<%= i %>" step="any" required></label><br>
+        <% } %>
+    
+        <button type="submit">Guardar</button>
+      </form>
+    </body>
+    </html>

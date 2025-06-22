@@ -1,0 +1,233 @@
+<%- include ('styles'); %>
+
+
+<form action="/par/submit" method="POST">
+
+  <label class="label1" for="us1">Usuario:</label>
+  <input class="label1" type="text" id="us1" name="us1" placeholder="Usuario" value="<%= cus && cus.us1 %>">
+
+  <label class="label1" for="or1">Organización:</label>
+  <input class="label1" type="text" id="or1" name="or1" placeholder="Organización" value="<%= cus && cus.or1 %>">
+  
+  <label class="label1" for="or1"></label>
+  <input class="label1" type="text" id="or2" name="or2" placeholder="" value="<%= cus && cus.or2 %>">
+  
+  <label class="label1" for="or1"></label>
+  <input class="label1" type="text" id="or3" name="or3" placeholder="" value="<%= cus && cus.or3 %>">
+  
+  <label class="label1" for="or1"></label>
+  <input class="label1" type="text" id="or4" name="or4" placeholder="" value="<%= cus && cus.or4 %>">
+  
+  <label class="label1" for="or1"></label>
+  <input class="label1" type="text" id="or5" name="or5" placeholder="" value="<%= cus && cus.or5 %>">
+  
+  <label class="label1" for="or1"></label>
+  <input class="label1" type="text" id="or7" name="or7" placeholder="" value="<%= cus && cus.or7 %>">
+  
+  <label class="label1" for="cu1">Cliente:</label>
+  <input class="label1" type="text" id="cu1" name="cu1" placeholder="Cliente" value="<%= cus && cus.cu1 %>">
+
+  <label class="label1" for="cu2"></label>
+  <input class="label1" type="text" id="cu2" name="cu2" placeholder="" value="<%= cus && cus.cu2 %>">
+
+  <label class="label1" for="cu3"></label>
+  <input class="label1" type="text" id="cu3" name="cu3" placeholder="" value="<%= cus && cus.cu3 %>">
+
+    <label for="pa1">Num interno:</label>
+    <input type="text" id="pa1" name="pa1" placeholder="Num interno">
+    
+    <label for="pa2">Rev interna:</label>
+    <input type="text" id="pa2" name="pa2" placeholder="Rev interna">
+    
+    <label for="pa3">Fecha de rev:</label>
+    <input type="text" id="pa3" name="pa3" placeholder="Fecha de rev">
+    
+    <label for="pa4">Nombre de pieza:</label>
+    <input type="text" id="pa4" name="pa4" placeholder="Nombre de pieza">
+    
+    <label for="pa5">Número de dibujo interno:</label>
+    <input type="text" id="pa5" name="pa5" placeholder="Número de dibujo interno">
+    
+    <label for="pa6">Num de pza. del cliente</label>
+    <input type="text" id="pa6" name="pa6" placeholder="Num de pza. del cliente">
+    
+    <label for="pa7">Num de dibujo del cliente:</label>
+    <input type="text" id="pa7" name="pa7" placeholder="Num de dibujo del cliente">
+
+    <label for="pa8">Aplicación:</label>
+    <input type="text" id="pa8" name="pa8" placeholder="Aplicación">
+
+    <label for="pa9">comentarios:</label>
+    <input type="text" id="pa9" name="pa9" placeholder="comentarios">
+
+    <label for="pa10">Nivel de ingria.</label>
+    <input type="text" id="pa10" name="pa10" placeholder="Nivel de ingria.">
+
+    <label for="pa11">Fecha de cambio de ingria.</label>
+    <input type="text" id="pa11" name="pa11" placeholder="Nivel de ingria.">
+
+    <label for="pa12">Historial de cambios</label>
+    <input type="text" id="pa12" name="pa12" placeholder="Nivel de ingria.">
+
+    <label for="pa13">Peso</label>
+<input type="text" id="pa13" name="pa13" placeholder="Peso">
+
+<label for="pa14">Cod. de comprador</label>
+<input type="text" id="pa14" name="pa14" placeholder="Cod. de comprador">
+
+<label for="pa15">Contenido de sustancias restringidas (SI)</label>
+<input type="text" id="pa15" name="pa15" placeholder="Marcar con una X">
+
+<label for="pa16">Contenido de sustancias restringidas (NO)</label>
+<input type="text" id="pa16" name="pa16" placeholder="Marcar con una X">
+
+<label for="pa17">Los plásticos han sido debidamente identificados conforme a ISO (SI)</label>
+<input type="text" id="pa17" name="pa17" placeholder="Marcar con una X">
+
+<label for="pa18">Los plásticos han sido debidamente identificados conforme a ISO (NO)</label>
+<input type="text" id="pa18" name="pa18" placeholder="Marcar con una X">
+
+<label for="pa19">Initial submision</label>
+<input type="text" id="pa19" name="pa19" placeholder="Marcar con una X">
+
+<label for="pa20">Engineering change</label>
+<input type="text" id="pa20" name="pa20" placeholder="Marcar con una X">
+
+<label for="pa21">Tooling transfer, replacement, refurbishment, or additional correction of discrepancy</label>
+<input type="text" id="pa21" name="pa21" placeholder="Marcar con una X">
+
+<label for="pa22">Tooling inactive >than 1 year</label>
+<input type="text" id="pa22" name="pa22" placeholder="Marcar con una X">
+
+<label for="pa23">Change to Optional Construction or material</label>
+<input type="text" id="pa23" name="pa23" placeholder="Marcar con una X">
+
+<label for="pa24">Sub-Supplier or Material Source Change</label>
+<input type="text" id="pa24" name="pa24" placeholder="Marcar con una X">
+
+<label for="pa25">Change in Part Processing</label>
+<input type="text" id="pa25" name="pa25" placeholder="Marcar con una X">
+
+<label for="pa26">Parts Produced at Additional Location</label>
+<input type="text" id="pa26" name="pa26" placeholder="Marcar con una X">
+
+<label for="pa27">Other - Please specify:</label>
+<input type="text" id="pa27" name="pa27" placeholder="Other - Please specify:">
+
+<label for="pa28">Level 1</label>
+<input type="text" id="pa28" name="pa28" placeholder="Marcar con una X">
+
+<label for="pa29">Level 2</label>
+<input type="text" id="pa29" name="pa29" placeholder="Marcar con una X">
+
+<label for="pa30">Level 3</label>
+<input type="text" id="pa30" name="pa30" placeholder="Marcar con una X">
+
+<label for="pa31">Level 4</label>
+<input type="text" id="pa31" name="pa31" placeholder="Marcar con una X">
+
+<label for="pa32">Level 5</label>
+<input type="text" id="pa32" name="pa32" placeholder="Marcar con una X">
+
+<label for="pa33">Dimensional measurement</label>
+<input type="text" id="pa33" name="pa33" placeholder="Dimensional measurement">
+
+<label for="pa34">Material and functional test</label>
+<input type="text" id="pa34" name="pa34" placeholder="Material and functional test">
+
+<label for="pa35">Appearance criteria and</label>
+<input type="text" id="pa35" name="pa35" placeholder="Appearance criteria and">
+
+<label for="pa36">Statistical process package</label>
+<input type="text" id="pa36" name="pa36" placeholder="Statistical process package">
+
+<label for="pa37">These results meet all drawing and specification requirements (YES)</label>
+<input type="text" id="pa37" name="pa37" placeholder="Marcar con una X">
+
+<label for="pa38">These results meet all drawing and specification requirements (NO)</label>
+<input type="text" id="pa38" name="pa38" placeholder="Marcar con una X">
+
+<label for="pa39">Molde</label>
+<input type="text" id="pa39" name="pa39" placeholder="Molde">
+
+<label for="pa40">Cavidades</label>
+<input type="text" id="pa40" name="pa40" placeholder="Cavidades">
+
+<label for="pa41">Proceso</label>
+<input type="text" id="pa41" name="pa41" placeholder="Proceso">
+
+<label for="pa42">Rate</label>
+<input type="text" id="pa42" name="pa42" placeholder="Rate">
+
+<label for="pa43">Justificación</label>
+<input type="text" id="pa43" name="pa43" placeholder="Justificación">
+
+<label for="pa45">Submitted by: (IMDS)</label>
+<input type="text" id="pa45" name="pa45" placeholder="Submitted by: (IMDS)">
+
+<label for="pa46">Submitted by: (other customer format)</label>
+<input type="text" id="pa46" name="pa46" placeholder="Submitted by: (other customer format)">
+
+<label for="pa47">No. De orden de compra</label>
+<input type="text" id="pa47" name="pa47" placeholder="No. De orden de compra">
+
+<label for="pa48">Cada herramental esta debidamente identificado (SI)</label>
+<input type="text" id="pa48" name="pa48" placeholder="Cada herramental esta debidamente identificado (SI)">
+
+<label for="pa49">Cada herramental esta debidamente identificado (NO)</label>
+<input type="text" id="pa49" name="pa49" placeholder="Cada herramental esta debidamente identificado (NO)">
+
+<label for="pa50">Cada herramental esta debidamente identificado (NA)</label>
+<input type="text" id="pa50" name="pa50" placeholder="Cada herramental esta debidamente identificado (NA)">
+
+<label for="pa51">Cada</label>
+<input type="text" id="pa51" name="pa51" placeholder="Cada">
+
+<label for="pa52">Aprobado por:</label>
+<input type="text" id="pa52" name="pa52" placeholder="Aprobado por:">
+
+<label for="pa53">Fecha</label>
+<input type="text" id="pa53" name="pa53" placeholder="Fecha">
+
+<label for="pa54">Cargo</label>
+<input type="text" id="pa54" name="pa54" placeholder="Cargo">
+
+<label for="pa55">Dpto.</label>
+<input type="text" id="pa55" name="pa55" placeholder="Dpto.">
+
+<label for="pa56">Tel</label>
+<input type="text" id="pa56" name="pa56" placeholder="Tel">
+
+<label for="pa57">Fax</label>
+<input type="text" id="pa57" name="pa57" placeholder="Fax">
+
+<label for="pa58">Email</label>
+<input type="text" id="pa58" name="pa58" placeholder="Email">
+
+<label for="pa59">Aprobado</label>
+<input type="text" id="pa59" name="pa59" placeholder="Aprobado">
+
+<label for="pa60">ident de sustancias NA</label>
+<input type="text" id="pa60" name="pa60" placeholder="ident de sustancias NA">
+
+<label for="pa61">Ident ISO NA</label>
+<input type="text" id="pa61" name="pa61" placeholder="Ident ISO NA">
+
+<label for="pa62">Checking aid #</label>
+<input type="text" id="pa62" name="pa62" placeholder="Checking aid #">
+
+<label for="pa63">eng level</label>
+<input type="text" id="pa63" name="pa63" placeholder="eng level">
+
+<label for="pa64">date</label>
+<input type="text" id="pa64" name="pa64" placeholder="date">
+
+<label for="pa65">imagen dropbox</label>
+<input type="text" id="pa65" name="pa65" placeholder="imagen dropbox">
+
+
+  
+    <button class=btn type="submit">Enviar</button>
+  </form>
+
+<%- include ('partials/_footer'); %>

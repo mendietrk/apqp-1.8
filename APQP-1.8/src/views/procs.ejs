@@ -1,0 +1,50 @@
+<%- include ('partials/_header'); %>
+
+<div class="col-md-7">
+    <div>
+        
+    </div>
+    <table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Titulo</th>
+            <!-- <th>password</th>
+            <th>puesto</th>
+            <th>área</th>
+            <th>telefono</th>
+            <th>correo</th> -->
+        </tr>
+    </thead>
+  
+    <tbody>
+        <% for(var i = 0; i < procs.length; i++) { %>
+      </div>
+      <td><%= procs[i].pg2 %></td>
+      <!-- <td><%= procs[i].pg1 %></td> -->
+      <td><%= procs[i].pg12 %></td>
+      <td><%= procs[i].pg13 %></td>
+  
+      <!-- <td><%= procs[i].or3 %></td>
+        <td><%= procs[i].or4 %></td>
+        <td><%= procs[i].or5 %></td>
+        <td><%= procs[i].or6 %></td>
+        <td><%= procs[i].or7 %></td> -->
+      
+        <td class="plus">
+                  
+                    <a href="/pro/edit/<%= procs[i]._id %>" class="edit-btn">Editar</a>
+                    <a href="/pro/view/<%= procs[i]._id %>" class="edit-btn">Ver</a>
+
+                
+                    <a href="/reg/<%= procs[i]._id %>" class="edit-btn">Registro</a>
+                  
+                  
+                </td>
+            </tr>
+        <% } %>   
+        </tbody>
+    </table>
+  </div>
+
+  <%- include ('partials/_footer'); %>

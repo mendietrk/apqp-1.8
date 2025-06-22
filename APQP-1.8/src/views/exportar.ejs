@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Exportar Muestras</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; }
+    form { margin-bottom: 2rem; }
+    label { margin-right: 0.5rem; }
+    select, button { padding: 0.5rem; margin-right: 1rem; }
+    pre { background-color: #f4f4f4; padding: 1rem; border-radius: 5px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>Filtrar Muestras por Parte y Versión</h1>
+
+  <form method="POST" action="/exportar">
+    <label for="pa6">Número de parte:</label>
+    <select name="pa6" id="pa6" required>
+      <option value="">Seleccione...</option>
+      <% partes.forEach(function(par) { %>
+        <option value="<%= par.pa6 %>"><%= par.pa6 %></option>
+      <% }); %>
+    </select>
+
+    <label for="pa7">Versión:</label>
+    <select name="pa7" id="pa7" required>
+      <option value="">Seleccione...</option>
+      <% versiones.forEach(function(ver) { %>
+        <option value="<%= ver.pa7 %>"><%= ver.pa7 %></option>
+      <% }); %>
+    </select>
+
+    <button type="submit">Filtrar</button>
+  </form>
+
+  <% if (filtrados && filtrados.length > 0) { %>
+    <h2>Muestras Encontradas</h2>
+    <pre><% filtrados.forEach(function(item) {
+      item.muestras.forEach(function(valor) { %><%= valor %>
+<% }); }); %></pre>
+  <% } else if (filtrados) { %>
+    <p>No se encontraron registros con esos filtros.</p>
+  <% } %>
+</body>
+</html>
+
+

@@ -1,0 +1,61 @@
+<%- include ('partials/_header'); %>
+<!-- <div>
+    <a href="/flowchart" class="btn">Generar Diagrama de Flujo</a>
+</div>
+<div>
+    <a href="/pcp" class="btn">Generar Plan de control de proceso</a>
+</div>
+<div>
+    <a href="/fmea" class="btn">Generar FMEA</a>
+</div> -->
+<div class="col-md-7">
+    <div>
+        
+    </div>
+    <table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Número de operación:</th>
+            <th>Descripción:</th>
+            <!-- <th>password</th>
+            <th>puesto</th>
+            <th>área</th>
+            <th>telefono</th>
+            <th>correo</th> -->
+        </tr>
+    </thead>
+  
+    <tbody>
+        <% for(var i = 0; i < opes.length; i++) { %>
+      </div>
+      <td><%= opes[i].op1 %></td>
+      <td><%= opes[i].op3 %></td>
+  
+      <!-- <td><%= opes[i].op3 %></td>
+        <td><%= opes[i].op4 %></td>
+        <td><%= opes[i].op5 %></td>
+        <td><%= opes[i].op6 %></td>
+        <td><%= opes[i].op7 %></td> -->
+      
+        <td class="plus">
+                  
+                    <a href="/ope/edit/<%= opes[i]._id %>" class="edit-btn">Editar</a>
+
+                    <a href="/chr/<%= opes[i]._id %>" class="edit-btn">Registrar Caracteristica</a>
+                    
+                    <a href="/fme/<%= opes[i]._id %>" class="edit-btn">Registrar FMEA</a>
+
+                    <% if (opes[i] && opes[i].op1) { %>
+                    <div>
+                        <a href="/flowchart/<%= opes[i].cu1 %>" class="edit-btn">Flow</a>
+                    </div>
+                    <% } %>
+                  
+                </td>
+            </tr>
+        <% } %>   
+        </tbody>
+    </table>
+  </div>
+
+  <%- include ('partials/_footer'); %>

@@ -1,0 +1,86 @@
+<%- include ('partials/_header'); %>
+
+
+<form action="/pcp/submit" method="POST">
+
+    <label class="label1" for="us1">Usuario:</label>
+    <input class="label1" type="text" id="us1" name="us1" placeholder="Usuario" value="<%= pcps && pcps.us1 %>">
+
+    <label class="label1" for="or2"></label>
+    <input class="label1" type="text" id="or2" name="or2" placeholder="" value="<%= pcps && pcps.or2 %>">
+    
+  <label class="label1" for="cu2"></label>
+  <input class="label1" type="text" id="cu2" name="cu2" placeholder="" value="<%= pcps && pcps.cu2 %>">
+
+  <label class="label1" for="pa1">Num interno:</label>
+  <input class="label1" type="text" id="pa1" name="pa1" placeholder="Num interno" value="<%= pcps && pcps.pa1 %>">
+  
+  <label class="label1" for="pa2">Rev interna</label>
+  <input class="label1" type="text" id="pa2" name="pa2" placeholder="Rev interna" value="<%= pcps && pcps.pa2 %>">
+  
+  <label class="label1" for="pa4">Nombre de pieza</label>
+  <input class="label1" type="text" id="pa4" name="pa4" placeholder="Nombre de pieza" value="<%= pcps && pcps.pa4 %>">
+  
+  <label for="pc1">Número de PCP:</label>
+  <input type="text" id="pc1" name="pc1" placeholder="Número de PCP">
+  
+  <label for="pc2">Preparado por:</label>
+  <input type="text" id="pc2" name="pc2" placeholder="Preparado por">
+  
+  <label for="pc3">Fecha de inicio:</label>
+  <input type="text" id="pc3" name="pc3" placeholder="Fecha de inicio">
+  
+  <label for="pc4">Fecha de Revisión:</label>
+  <input type="text" id="pc4" name="pc4" placeholder="Fecha de Revisión">
+  
+  <label for="pc5">Equipo:</label>
+  <input type="text" id="pc5" name="pc5" placeholder="Equipo">
+  
+  <label for="pc6">No. de OP:</label>
+  <input type="text" id="pc6" name="pc6" placeholder="No. de OP">
+  
+  <label for="pc7">Nombre de la OP:</label>
+  <input type="text" id="pc7" name="pc7" placeholder="Nombre de la OP">
+  
+  <label for="pc8">Máquina:</label>
+  <input type="text" id="pc8" name="pc8" placeholder="Máquina">
+  
+  <label for="pc9">No.:</label>
+  <input type="text" id="pc9" name="pc9" placeholder="No.">
+  
+  <label for="pc10">Producto:</label>
+  <input type="text" id="pc10" name="pc10" placeholder="Producto">
+  
+  <label for="pc11">Proceso:</label>
+  <input type="text" id="pc11" name="pc11" placeholder="Proceso">
+  
+  <label for="pc12">Special CH:</label>
+  <input type="text" id="pc12" name="pc12" placeholder="Special CH">
+  
+  <label for="pc13">Tolerancia:</label>
+  <input type="text" id="pc13" name="pc13" placeholder="Tolerancia">
+  
+  <label for="pc14">Técnica de medición:</label>
+  <input type="text" id="pc14" name="pc14" placeholder="Técnica de medición">
+  
+  <label for="pc15">Tamaño:</label>
+  <input type="text" id="pc15" name="pc15" placeholder="Tamaño">
+  
+  <label for="pc16">Frecuencia:</label>
+  <input type="text" id="pc16" name="pc16" placeholder="Frecuencia">
+  
+  <label for="pc17">Método de control:</label>
+  <input type="text" id="pc17" name="pc17" placeholder="Método de control">
+  
+  <label for="pc18">Plan de reacción:</label>
+  <input type="text" id="pc18" name="pc18" placeholder="Plan de reacción">
+  
+  <label for="pc19">Fecha clave:</label>
+  <input type="text" id="pc19" name="pc19" placeholder="Fecha clave">
+  
+
+  
+  <button class=btn type="submit">Enviar</button>
+</form>
+
+<%- include ('partials/_footer'); %>

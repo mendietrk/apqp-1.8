@@ -1,0 +1,109 @@
+const express = require('express');
+const router = express.Router();
+const mongoose = require('mongoose');
+const Subgrupo = require('../models/Subgrupo');
+
+router.get('/grafico', async (req, res) => {
+  try {
+    const subgrupos = await Subgrupo.find().sort({ fecha: 1 });
+
+    const datos = subgrupos.map((sg, index) => {
+      const promedio = sg.muestras.reduce((a, b) => a + b, 0) / sg.muestras.length;
+      const rango = Math.max(...sg.muestras) - Math.min(...sg.muestras);
+      return {
+        numero: index + 1,
+        promedio: parseFloat(promedio.toFixed(2)),
+        rango: parseFloat(rango.toFixed(2)),
+        fecha: sg.fecha.toISOString().split('T')[0]
+      };
+    });
+
+    res.render('grafico', { datos });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error al obtener los datos');
+  }
+});
+
+
+// Ruta principal: muestra resumen de todas las entidades
+router.get('/auditoria', async (req, res) => {
+  try {
+    const resultados = await Promise.all(Object.keys(entidades).map(async (tipo) => {
+      const datos = await entidades[tipo].modelo.find();
+      return { tipo, datos };
+    }));
+
+    const contexto = Object.fromEntries(resultados.map(({ tipo, datos }) => [tipo + 's', datos]));
+    res.render('auditoria', contexto);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error al cargar la auditoría');
+  }
+});
+
+// Ruta de edición GET
+router.get('/auditoria/:tipo/:id', async (req, res) => {
+  const { tipo, id } = req.params;
+
+  if (!entidades[tipo]) return res.status(404).send('Entidad no válida');
+  if (!mongoose.Types.ObjectId.isValid(id)) return res.status(400).send('ID no válido');
+
+  try {
+    const entidad = await entidades[tipo].modelo.findById(id);
+    if (!entidad) return res.status(404).send('Registro no encontrado');
+
+    res.render(entidades[tipo].vista, { [tipo]: entidad });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error al cargar los datos');
+  }
+});
+
+// Ruta de edición POST
+router.post('/auditoria/:tipo/:id', async (req, res) => {
+  const { tipo, id } = req.params;
+  const datosActualizados = req.body;
+
+  if (!entidades[tipo]) return res.status(404).send('Entidad no válida');
+  if (!mongoose.Types.ObjectId.isValid(id)) return res.status(400).send('ID no válido');
+
+  try {
+    const modelo = entidades[tipo].modelo;
+    const entidad = await modelo.findByIdAndUpdate(id, datosActualizados, { new: true });
+
+    if (!entidad) return res.status(404).send('Registro no encontrado');
+
+    res.redirect('/auditoria');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error al guardar los cambios');
+  }
+});
+
+router.get('/subgrupo/nuevo', (req, res) => {
+  res.render('formulario');
+});
+
+// Procesar formulario
+router.post('/subgrupo', async (req, res) => {
+  try {
+    const muestras = [
+      parseFloat(req.body.muestra1),
+      parseFloat(req.body.muestra2),
+      parseFloat(req.body.muestra3),
+      parseFloat(req.body.muestra4),
+      parseFloat(req.body.muestra5)
+    ];
+
+    const nuevoSubgrupo = new Subgrupo({ muestras });
+    await nuevoSubgrupo.save();
+
+    res.redirect('/grafico'); // o a una página de confirmación
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error al guardar el subgrupo');
+  }
+});
+
+module.exports = router;

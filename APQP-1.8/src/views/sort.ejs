@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Datos Ordenados y Ajuste</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background-color: #f7f9fc;
+    }
+    h1 {
+      color: #0056b3;
+    }
+    .data-list {
+      margin-top: 20px;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      list-style-type: none;
+    }
+    .data-item {
+      background-color: #e0ecff;
+      padding: 10px 15px;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      font-size: 0.95em;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex: 0 0 calc(20% - 10px);
+    }
+    .index {
+      font-weight: bold;
+      color: #007bff;
+      min-width: 40px;
+      text-align: right;
+    }
+    .value {
+      flex: 1;
+    }
+    a.button, button.button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    a.button:hover, button.button:hover {
+      background-color: #0056b3;
+    }
+    form {
+      margin-top: 30px;
+    }
+    input[type="number"] {
+      width: 80px;
+      margin-right: 10px;
+    }
+    pre {
+      background: #f0f0f0;
+      padding: 15px;
+      border-radius: 6px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Datos Individuales Ordenados (de menor a mayor)</h1>
+
+  <% if (Array.isArray(datosIndividuales)) {
+    const sorted = [...datosIndividuales].sort((a, b) => a - b);
+  %>
+
+  <ul class="data-list">
+    <% sorted.forEach((valor, index) => { %>
+      <li class="data-item">
+        <span class="index"><%= String(index + 1).padStart(3, '0') %>:</span>
+        <span class="value"><%= valor %></span>
+      </li>
+    <% }) %>
+  </ul>
+
+  <a class="button" href="/show">⬅ Volver</a>
+
+  <!-- Botón 1: Enviar datos ordenados a /parimpar1 -->
+  <form action="/parimpar1" method="POST">
+    <input type="hidden" name="datosOrdenados" value='<%- JSON.stringify(sorted) %>' />
+    <button type="submit" class="button">➡ Ver Pares e Impares Aleatorios</button>
+  </form>
+
+  <!-- Sección de ajuste por desviación estándar -->
+  <h2>Ajustar Datos por Desviación Estándar</h2>
+  <form onsubmit="ajustarDatos(event)">
+    <label>Número de veces la desviación estándar:</label>
+    <input type="number" id="veces" value="1" step="0.1" required>
+
+    <label>Desde el menor (cantidad):</label>
+    <input type="number" id="menor" value="2" required>
+
+    <label>Desde el mayor (cantidad):</label>
+    <input type="number" id="mayor" value="2" required>
+
+    <input type="hidden" id="datosJSON" value='<%- JSON.stringify(sorted) %>'>
+    <button type="submit" class="button">⚙ Aplicar Ajuste</button>
+  </form>
+
+  <pre id="resultado"></pre>
+
+  <!-- Botón 2: Enviar datos ajustados a /parimpar1 -->
+  <form id="formAjustados" action="/parimpar1" method="POST">
+    <input type="hidden" id="datosAjustados" name="datosOrdenados" value="" />
+    <button type="submit" class="button">➡ Usar Datos Ajustados en /parimpar1</button>
+  </form>
+
+  <script>
+    function ajustarDatos(event) {
+      event.preventDefault();
+  
+      const veces = parseFloat(document.getElementById('veces').value);
+      const menor = parseInt(document.getElementById('menor').value);
+      const mayor = parseInt(document.getElementById('mayor').value);
+      const datos = JSON.parse(document.getElementById('datosJSON').value);
+  
+      const n = datos.length;
+      const media = datos.reduce((s, v) => s + v, 0) / n;
+      const varianza = datos.reduce((s, v) => s + Math.pow(v - media, 2), 0) / n;
+      const desv = Math.sqrt(varianza);
+  
+      const ajustados = [...datos];
+      for (let i = 0; i < menor && i < n; i++) {
+        ajustados[i] += veces * desv;
+      }
+      for (let i = n - mayor; i < n; i++) {
+        ajustados[i] -= veces * desv;
+      }
+  
+      const resultado = `
+Desviación estándar: ${desv.toFixed(4)}
+Media: ${media.toFixed(4)}
+
+Datos ajustados (una línea por celda, listo para pegar en Excel):
+${ajustados.map(x => x.toFixed(3)).join('\n')}
+      `;
+  
+      document.getElementById('resultado').textContent = resultado.trim();
+
+      // Actualiza el formulario de datos ajustados
+      document.getElementById('datosAjustados').value = JSON.stringify(ajustados);
+    }
+  </script>
+
+  <% } else { %>
+    <p>No se recibieron datos válidos para ordenar.</p>
+  <% } %>
+</body>
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>PCP Excel</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem auto;
+      font-size: 14px;
+    }
+    td {
+      border: 1px solid #ccc;
+      padding: 6px;
+    }
+    h2 {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h2>Formato PCP para Excel</h2>
+  <table>
+    <tr><td>Número de parte</td><td><%= registro.pa6 %></td></tr>
+    <tr><td>Descripción</td><td></td></tr>
+    <tr><td>Material</td><td><%= registro.ch4 %></td></tr>
+    <tr><td>rev. PFD</td><td><%= new Date(registro.updatedAt).toLocaleDateString() %></td></tr>
+    <tr><td>No. de parte cliente/kunhwa</td><td><%= registro.pa6 %> / <%= registro.pa1 %></td></tr>
+    <tr><td></td><td><%= registro.pa1 %></td></tr>
+    <tr><td>Nombre de la parte</td><td><%= registro.pa4 %></td></tr>
+    <tr><td>Modelo</td><td><%= registro.pa8 %></td></tr>
+    <tr><td>Dibujo del cliente</td><td><%= registro.pa7 %></td></tr>
+    <tr><td>Peso</td><td><%= registro.pa13 %></td></tr>
+    <tr><td>Eng. Change level</td><td><%= registro.pa10 %></td></tr>
+    <tr><td>Date</td><td><%= registro.pa11 %></td></tr>
+    <tr><td>IMDS</td><td><%= registro.pa45 %></td></tr>
+    <tr><td>Customer name division</td><td><%= registro.cu1 %></td></tr>
+    <tr><td>Purchase order</td><td><%= registro.pa47 %></td></tr>
+    <tr><td>Humedad de resina</td><td><%= registro.ch5 %></td></tr>
+    <tr><td>Temperatura de secado</td><td><%= registro.ch6 %></td></tr>
+    <tr><td>Tiempo de secado</td><td><%= registro.ch7 %></td></tr>
+    <tr><td>Humedad del material</td><td><%= registro.ch8 %></td></tr>
+    <tr><td>Peso con tolerancia</td><td><%= registro.chr_peso || '' %></td></tr>
+
+    <% for (let i = 1; i <= 8; i++) { %>
+      <tr><td>Espesor peak <%= i %></td><td><%= registro['chr_peak_' + i] || '' %></td></tr>
+    <% } %>
+
+    <% for (let i = 1; i <= 7; i++) { %>
+      <tr><td>Espesor root <%= i %></td><td><%= registro['chr_root_' + i] || '' %></td></tr>
+    <% } %>
+
+    <tr><td>Espesor de pared falda</td><td><%= registro.chr_falda_1 || '' %></td></tr>
+    <tr><td>Machine</td><td><%= registro.machine || '' %></td></tr>
+    <tr><td>Espesor de pared cuello</td><td><%= registro.chr_cuello || '' %></td></tr>
+    <tr><td>Espesor de pared falda</td><td><%= registro.chr_falda_2 || '' %></td></tr>
+  </table>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<%- include ('partials/_header'); %>
+
+
+<form action="/chr/submit" method="POST">
+
+  <label class="label1" for="us1">Usuario:</label>
+  <input class="label1" type="text" id="us1" name="us1" placeholder="Usuario" value="<%= ope && ope.us1 %>">
+
+  <label class="label1" for="or1">Organización:</label>
+  <input class="label1" type="text" id="or1" name="or1" placeholder="Organización" value="<%= ope && ope.or1 %>">
+  
+  <label class="label1" for="cu1">Cliente:</label>
+  <input class="label1" type="text" id="cu1" name="cu1" placeholder="Cliente" value="<%= ope && ope.cu1 %>">
+
+    <label class="label1" for="pa1">Num interno:</label>
+    <input class="label1" type="text" id="pa1" name="pa1" placeholder="Num interno" value="<%= ope && ope.pa1 %>">
+
+    <label class="label1" for="op1">Número de operación:</label>
+    <input class="label1" type="text" id="op1" name="op1" placeholder="Número de operación" value="<%= ope && ope.op1 %>">
+    
+    <label for="ch1">Número de Caracteristica:</label>
+    <input type="text" id="ch1" name="ch1" placeholder="Número de Caracteristica">
+
+    <label for="ch2">Simbolo de caracteristica especial:</label>
+    <input type="text" id="ch2" name="ch2" placeholder="Simbolo">
+    
+    <label for="ch3">Descripción:</label>
+    <input type="text" id="ch3" name="ch3" placeholder="Descripción">
+    
+    <label for="ch4">especificación:</label>
+    <input type="text" id="ch4" name="ch4" placeholder="especificación">
+    
+    <label for="ch5">Tipo:</label>
+    <input type="text" id="ch5" name="ch5" placeholder="Tipo">
+    
+    <label for="ch6">mínimo</label>
+    <input type="number" id="ch6" name="ch6" placeholder="mínimo">
+    
+    <label for="ch7">máximo:</label>
+    <input type="text" id="ch7" name="ch7" placeholder="máximo">
+
+    <label for="ch8">unidad:</label>
+    <input type="text" id="ch8" name="ch8" placeholder="unidad">
+
+    <!-- <label for="ch9">comentarios:</label>
+    <input type="text" id="ch9" name="ch9" placeholder="comentarios">
+
+    <label for="ch10">Nivel de ingria.</label>
+    <input type="text" id="ch10" name="ch10" placeholder="Nivel de ingria.">
+
+    <label for="ch11">Fecha de cambio de ingria.</label>
+    <input type="text" id="ch11" name="ch11" placeholder="Nivel de ingria.">
+
+    <label for="ch12">Historial de cambios</label>
+    <input type="text" id="ch12" name="ch12" placeholder="Nivel de ingria."> -->
+  
+    <button class=btn type="submit">Enviar</button>
+  </form>
+
+<%- include ('partials/_footer'); %>

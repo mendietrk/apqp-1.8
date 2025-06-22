@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Crear PCP</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      margin: 2rem;
+      color: #333;
+    }
+
+    h1 {
+      color: #0d6efd;
+    }
+
+    form {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.3rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      background: #0d6efd;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    button:hover {
+      background: #0b5ed7;
+    }
+
+    hr {
+      margin: 2rem 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Crear PCP</h1>
+
+  <form action="/pcp/guardar" method="POST">
+    <label for="pa6">Selecciona número de parte:</label>
+    <select id="pa6" name="pa6" required onchange="llenarCamposParte()">
+      <option value="">-- Selecciona --</option>
+      <% partes.forEach(p => { %>
+        <option value="<%= p.pa6 %>"><%= p.pa6 %></option>
+      <% }) %>
+    </select>
+
+    <label>No. Interno:<input type="text" name="pa1" readonly></label>
+    <label>Nombre de la parte:<input type="text" name="pa4" readonly></label>
+    <label>Modelo:<input type="text" name="pa8" readonly></label>
+    <label>Dibujo del cliente:<input type="text" name="pa7" readonly></label>
+    <label>Peso:<input type="text" name="pa13" readonly></label>
+    <label>Eng. Change level:<input type="text" name="pa10" readonly></label>
+    <label>Fecha:<input type="text" name="pa11" readonly></label>
+    <label>IMDS:<input type="text" name="pa45" readonly></label>
+    <label>Cliente:<input type="text" name="cu1" readonly></label>
+    <label>PO:<input type="text" name="pa47" readonly></label>
+
+    <hr>
+
+    <label for="ch4">Selecciona especificación:</label>
+    <select id="ch4" name="ch4" onchange="llenarDatosCH()">
+      <option value="">-- Selecciona --</option>
+      <% caracteristicas.forEach(c => { %>
+        <option value="<%= c.ch4 %>"><%= c.ch4 %></option>
+      <% }) %>
+    </select>
+
+    <label>Humedad de resina:<input type="text" name="ch5" readonly></label>
+    <label>Temp. de secado:<input type="text" name="ch6" readonly></label>
+    <label>Tiempo de secado:<input type="text" name="ch7" readonly></label>
+    <label>Humedad del material:<input type="text" name="ch8" readonly></label>
+
+    <hr>
+
+    <h3>Selecciona características (chr.ch3):</h3>
+    <% for (let i = 1; i <= 20; i++) { %>
+      <label>chr<%= i %>:
+        <select name="chr<%= i %>">
+          <option value="">-- Selecciona --</option>
+          <% opcionesCh3.forEach(opcion => { %>
+            <option value="<%= opcion %>"><%= opcion %></option>
+          <% }) %>
+        </select>
+      </label>
+    <% } %>
+
+    <label>Machine TPE:<input type="text" name="machine"></label>
+
+    <button type="submit">Guardar PCP</button>
+  </form>
+
+  <script>
+    const partes = <%- JSON.stringify(partes) %>;
+    const caracteristicas = <%- JSON.stringify(caracteristicas) %>;
+
+    function llenarCamposParte() {
+      const pa6 = document.getElementById("pa6").value;
+      const parte = partes.find(p => p.pa6 === pa6);
+
+      if (!parte) {
+        console.warn("No se encontró la parte seleccionada con pa6:", pa6);
+        return;
+      }
+
+      const campos = ['pa1', 'pa4', 'pa8', 'pa7', 'pa13', 'pa10', 'pa11', 'pa45', 'cu1', 'pa47'];
+      campos.forEach(field => {
+        const input = document.querySelector(`[name="${field}"]`);
+        if (input) {
+          input.value = parte[field] || '';
+        } else {
+          console.warn(`No se encontró el campo ${field}`);
+        }
+      });
+    }
+
+    function llenarDatosCH() {
+      const ch4 = document.getElementById("ch4").value;
+      const ch = caracteristicas.find(c => c.ch4 === ch4);
+
+      if (!ch) {
+        console.warn("No se encontró la característica con ch4:", ch4);
+        return;
+      }
+
+      ['ch5', 'ch6', 'ch7', 'ch8'].forEach(field => {
+        const input = document.querySelector(`[name="${field}"]`);
+        if (input) {
+          input.value = ch[field] || '';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
+

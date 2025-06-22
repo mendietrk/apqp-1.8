@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista Combinada Aleatoria</title>
+  <style>
+    body { font-family: Arial; padding: 30px; background: #f0f4f8; }
+    h1 { color: #333; }
+    ul.data-list { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+    li.data-item {
+      background: #d0eaff; padding: 10px 15px; border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-size: 0.95em;
+      flex: 0 0 calc(20% - 10px); display: flex; align-items: center;
+      justify-content: center;
+    }
+    .value { font-weight: bold; color: #007bff; }
+    a.button { display: inline-block; margin-top: 20px; padding: 10px 15px;
+      background-color: #007bff; color: white; text-decoration: none;
+      border-radius: 5px; font-size: 1em; }
+    a.button:hover { background-color: #0056b3; }
+  </style>
+</head>
+<body>
+  <h1>Lista Mezclada: Pares e Impares Aleatorios</h1>
+
+  <ul class="data-list">
+    <% listaFinal.forEach((valor) => { %>
+      <li class="data-item">
+        <span class="value"><%= valor %></span>
+      </li>
+    <% }) %>
+  </ul>
+
+  <a class="button" href="/">⬅ Volver al inicio</a>
+  <a class="button" href="/show">⬅ iniciar de nuevo</a>
+</body>
+</html>
+
+
+
+
+
+
+
+

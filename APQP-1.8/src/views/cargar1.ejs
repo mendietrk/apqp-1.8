@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cargar Parte</title>
+  <script>
+    const partes = <%- JSON.stringify(partes) %>;
+
+    function actualizarPA7() {
+      const pa6Seleccionado = document.getElementById("pa6").value;
+      const pa7Select = document.getElementById("pa7");
+      pa7Select.innerHTML = "";
+
+      const versiones = partes
+        .filter(p => p.pa6 === pa6Seleccionado)
+        .map(p => p.pa7);
+
+      versiones.forEach(v => {
+        const option = document.createElement("option");
+        option.value = v;
+        option.textContent = v;
+        pa7Select.appendChild(option);
+      });
+    }
+
+    function mostrarFormulario() {
+      document.getElementById("formularioDatos").style.display = "block";
+    }
+  </script>
+</head>
+<body>
+  <h1>Seleccionar Parte y Versión</h1>
+
+  <!-- Selección de pa6 -->
+  <label for="pa6">Número de Parte (pa6):</label>
+  <select id="pa6" name="pa6" onchange="actualizarPA7(); mostrarFormulario()" required>
+    <option value="">Seleccione</option>
+    <% 
+      const pa6s = [...new Set(partes.map(p => p.pa6))];
+      pa6s.forEach(p => { 
+    %>
+      <option value="<%= p %>"><%= p %></option>
+    <% }) %>
+  </select>
+
+  <!-- Selección de pa7 -->
+  <label for="pa7">Versión (pa7):</label>
+  <select id="pa7" name="pa7" required>
+    <option value="">Seleccione una versión</option>
+  </select>
+
+  <!-- Formulario de datos -->
+  <form id="formularioDatos" action="/guardar" method="POST" style="display: none; margin-top: 20px;">
+    <input type="hidden" name="pa6" id="input_pa6">
+    <input type="hidden" name="pa7" id="input_pa7">
+
+    <script>
+      document.getElementById('pa6').addEventListener('change', () => {
+        document.getElementById('input_pa6').value = document.getElementById('pa6').value;
+      });
+
+      document.getElementById('pa7').addEventListener('change', () => {
+        document.getElementById('input_pa7').value = document.getElementById('pa7').value;
+      });
+    </script>
+
+    <div>
+      <label>Nombre de la Parte:</label>
+      <input type="text" name="nombreDeLaParte" required>
+    </div>
+    <div>
+      <label>Material:</label>
+      <input type="text" name="material" required>
+    </div>
+    <div>
+      <label>Descripción:</label>
+      <input type="text" name="descripcion" required>
+    </div>
+    <div>
+      <label>Proveedor:</label>
+      <input type="text" name="proveedor">
+    </div>
+    <div>
+      <label>Número de Dibujo:</label>
+      <input type="text" name="numeroDeDibujo">
+    </div>
+    <div>
+      <label>Peso:</label>
+      <input type="number" step="0.0001" name="peso">
+    </div>
+    <div>
+      <label>Clasificación:</label>
+      <input type="text" name="clasificacion">
+    </div>
+    <div>
+      <label>Fecha de Revisión:</label>
+      <input type="date" name="fechaRevision">
+    </div>
+    <!-- Agrega más campos según sea necesario -->
+
+    <button type="submit">Guardar</button>
+  </form>
+</body>
+</html>

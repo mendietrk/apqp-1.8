@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Subgrupos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    form {
+      display: inline;
+    }
+    .btn {
+      padding: 4px 8px;
+      cursor: pointer;
+      border: none;
+      background-color: #007BFF;
+      color: white;
+      border-radius: 4px;
+    }
+    .btn-delete {
+      background-color: #dc3545;
+    }
+  </style>
+</head>
+<body>
+  <h2>Subgrupos Registrados</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Parte</th>
+        <th>Versión</th>
+        <th>Muestra 1</th>
+        <th>Muestra 2</th>
+        <th>Muestra 3</th>
+        <th>Muestra 4</th>
+        <th>Muestra 5</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% subgrupos.forEach((sg, i) => { %>
+        <tr>
+          <td><%= i + 1 %></td>
+          <td><%= sg.pa6 || '-' %></td>
+          <td><%= sg.pa7 || '-' %></td>
+    
+          <% if (Array.isArray(sg.muestras) && sg.muestras.length === 5) { %>
+            <% sg.muestras.forEach(m => { %>
+              <td><%= m %></td>
+            <% }) %>
+          <% } else { %>
+            <td colspan="5">Datos incompletos</td>
+          <% } %>
+    
+          <td>
+            <a class="btn" href="/subgrupo/<%= sg._id %>/editar">Editar</a>
+            <form action="/subgrupo/<%= sg._id %>/eliminar" method="POST" onsubmit="return confirm('¿Eliminar este subgrupo?')">
+              <button class="btn btn-delete">Eliminar</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+   
+  </table>
+</body>
+</html>
+
+
+
+

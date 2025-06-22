@@ -1,0 +1,238 @@
+<%- include ('styles'); %>
+
+<!-- FORM -->
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Editar</h1>
+
+        <div style="display: inline-block;">
+            <a href="/par/delete/<%= pars._id %>" class="edit-btn" style="color: red;">Borrar</a>
+
+        <div class=container>
+            <div class="container">
+                <div class="container">
+                    <form action="/par/update/<%= pars._id %>" method="POST">
+                        <label for="us1">Producto:</label>
+                        <div>
+                            <input class="label1" type="text" id="us1" name="us1" placeholder="Usuario" value="<%= pars.us1 %>">
+                        </div>
+                        <div>
+                            <input class="label1" type="text" id="or1" name="or1" placeholder="Organización" value="<%= pars.or1 %>">
+                        </div>
+                        <div>
+                            <input class="label1" type="text" id="cu1" name="cu1" placeholder="Cliente" value="<%= pars.cu1 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa1" placeholder="Num interno" value="<%= pars.pa1 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa2" placeholder="Rev interna" value="<%= pars.pa2 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa3" placeholder="Fecha de rev" value="<%= pars.pa3 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa4" placeholder="Nombre de pieza" value="<%= pars.pa4 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa5" placeholder="Número de dibujo interno" value="<%= pars.pa5 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa6" placeholder="Num de pza. del cliente" value="<%= pars.pa6 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa7" placeholder="Num de dibujo del cliente" value="<%= pars.pa7 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa8" placeholder="Aplicación" value="<%= pars.pa8 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa9" placeholder="comentarios" value="<%= pars.pa9 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa10" placeholder="Nivel de ingria." value="<%= pars.pa10 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa11" placeholder="Fecha de cambio de ingria." value="<%= pars.pa11 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa12" placeholder="Historial de cambios" value="<%= pars.pa12 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa13" placeholder="peso" value="<%= pars.pa13 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa14" placeholder="Cod. de comprador" value="<%= pars.pa14 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa15" placeholder="contenido de sustancias restringidas (SI)" value="<%= pars.pa15 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa16" placeholder="contenido de sustancias restringidas (NO)" value="<%= pars.pa16 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa17" placeholder="Los plasticos han sido debidamente identificados conforme a ISO (SI)" value="<%= pars.pa17 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa18" placeholder="Los plasticos han sido debidamente identificados conforme a ISO (NO)" value="<%= pars.pa18 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa19" placeholder="Initial submision" value="<%= pars.pa19 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa20" placeholder="Engineering change" value="<%= pars.pa20 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa21" placeholder="Tooling transfer, replacement, refurbishment, or additional correction of discrepancy" value="<%= pars.pa21 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa22" placeholder="correction of discrepancy" value="<%= pars.pa22 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa23" placeholder="Tooling inactive >than 1 year" value="<%= pars.pa23 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa24" placeholder="Change to Optional Construction or material" value="<%= pars.pa24 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa25" placeholder="Sub-Supplier or Material Source Change" value="<%= pars.pa25 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa26" placeholder="Change in Part Processing" value="<%= pars.pa26 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa27" placeholder="Parts Produced at Additional Location" value="<%= pars.pa27 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa28" placeholder="otther- please specify:" value="<%= pars.pa28 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa29" placeholder="Level 1" value="<%= pars.pa29 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa30" placeholder="Level 2" value="<%= pars.pa30 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa31" placeholder="Level 3" value="<%= pars.pa31 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa32" placeholder="Level 4" value="<%= pars.pa32 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa33" placeholder="Level 5" value="<%= pars.pa33 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa34" placeholder="dimensional measurement" value="<%= pars.pa34 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa35" placeholder="material and functiional test" value="<%= pars.pa35 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa36" placeholder="Appereance criteria and" value="<%= pars.pa36 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa37" placeholder="statistical process package" value="<%= pars.pa37 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa38" placeholder="These results meet all drawing and specification requirements (YES)" value="<%= pars.pa38 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa39" placeholder="These results meet all drawing and specification requirements (NO)" value="<%= pars.pa39 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa40" placeholder="molde" value="<%= pars.pa40 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa41" placeholder="cavidades" value="<%= pars.pa41 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa42" placeholder="proceso" value="<%= pars.pa42 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa43" placeholder="rate" value="<%= pars.pa43 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa44" placeholder="justificación" value="<%= pars.pa44 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa45" placeholder="Submitted by: (IMDS)" value="<%= pars.pa45 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa46" placeholder="Submitted by: (other customer format)" value="<%= pars.pa46 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa47" placeholder="No. De orden de compra" value="<%= pars.pa47 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa48" placeholder="Cada herramental esta debidamente identificado (SI)" value="<%= pars.pa48 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa49" placeholder="Cada herramental esta debidamente identificado (NO)" value="<%= pars.pa49 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa50" placeholder="Cada herramental esta debidamente identificado (NA)" value="<%= pars.pa50 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa51" placeholder="timepo de duraciond de la corrida" value="<%= pars.pa51 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa52" placeholder="Aprobado por:" value="<%= pars.pa52 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa53" placeholder="Fecha" value="<%= pars.pa53 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa54" placeholder="Cargo" value="<%= pars.pa54 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa55" placeholder="Dpto." value="<%= pars.pa55 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa56" placeholder="Tel" value="<%= pars.pa56 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pa57" placeholder="Fax" value="<%= pars.pa57 %>">
+                        </div>
+                        <div>
+                            <div>
+                                <input type="text" name="pa58" placeholder="Email" value="<%= pars.pa58 %>">
+                            </div>
+                            <div>
+                                <input type="text" name="pa59" placeholder="Aprobado" value="<%= pars.pa59 %>">
+                            </div>
+                            <div>
+                                <input type="text" name="pa60" placeholder="ident de sustancias NA" value="<%= pars.pa60 %>">
+                            </div>
+                            <div>
+                                <input type="text" name="pa61" placeholder="Ident ISO NA" value="<%= pars.pa61 %>">
+                            </div>
+                            <div>
+                                <input type="text" name="pa62" placeholder="Checking aid #" value="<%= pars.pa62 %>">
+                            </div>
+                            <div>
+                                <input type="text" name="pa63" placeholder="eng level" value="<%= pars.pa63 %>">
+                            </div>
+                            <div>
+                                <input type="text" name="pa64" placeholder="imagen dropbox 02" value="<%= pars.pa64 %>">
+                            </div>
+                            <div>
+                                <input type="text" name="pa65" placeholder="imagen dropbox 14" value="<%= pars.pa65 %>">
+                            </div>
+                            
+                            
+                           
+                        
+                        
+                        
+                        
+                            <a href="/par" class="btn">Cancel</a>
+                            <button type="submit" class="btn">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include ('partials/_footer'); %>

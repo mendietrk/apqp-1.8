@@ -1,0 +1,33 @@
+<%- include ('partials/_header'); %>
+
+
+<form action="/org/submit" method="POST">
+
+  <label class="label1" for="us1">Usuario:</label>
+  <input class="label1" type="text" id="us1" name="us1" placeholder="Usuario" value="<%= id %>">
+
+  <label for="or1">Organización:</label>
+  <input type="text" id="or1" name="or1" placeholder="Organización">
+  
+  <label for="or2">Nombre completo:</label>
+  <input type="text" id="or2" name="or2" placeholder="Nombre completo">
+  
+  <label for="or3">Dirección:</label>
+  <input type="text" id="or3" name="or3" placeholder="Dirección">
+  
+  <label for="or4">Ciudad:</label>
+  <input type="text" id="or4" name="or4" placeholder="Ciudad">
+  
+  <label for="or5">Estado:</label>
+  <input type="text" id="or5" name="or5" placeholder="Estado">
+  
+  <label for="or6">Pais</label>
+  <input type="text" id="or6" name="or6" placeholder="Pais">
+  
+  <label for="or7">c.p:</label>
+  <input type="text" id="or7" name="or7" placeholder="c.p">
+
+  <button class=btn type="submit">Enviar</button>
+</form>
+     
+  <%- include ('partials/_footer'); %>

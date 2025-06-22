@@ -1,0 +1,63 @@
+<%- include ('partials/_header'); %>
+<!-- <div>
+    <a href="/flowchart" class="btn">Generar Diagrama de Flujo</a>
+</div>
+<div>
+    <a href="/pcp" class="btn">Generar Plan de control de proceso</a>
+</div>
+<div>
+    <a href="/fmea" class="btn">Generar FMEA</a>
+</div> -->
+<div class="col-md-7">
+    <div>
+        
+    </div>
+    <table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Número de PCP:</th>
+            <th>Equipo:</th>
+            <th>no. de op.</th>
+            <th>operacion:</th>
+            <th>producto</th>
+            <th>Tolerancia</th>
+            <th>Tecnica de med.</th> 
+        </tr>
+    </thead>
+  
+    <tbody>
+        <% for(var i = 0; i < pcps.length; i++) { %>
+      </div>
+        <td><%= pcps[i].pc1 %></td>
+        <td><%= pcps[i].pc5 %></td>  
+        <td><%= pcps[i].pc6 %></td>
+        <td><%= pcps[i].pc7 %></td>
+        <td><%= pcps[i].pc10 %></td>
+        <td><%= pcps[i].pc13 %></td>
+        <td><%= pcps[i].pc14 %></td>
+      
+        <td class="plus">
+                  
+                    <a href="/pcp/edit/<%= pcps[i]._id %>" class="edit-btn">Editar</a>
+
+                    <div>
+                        <a href="/pcpview/<%= pcps[i]._id %>" class="edit-btn">PCP</a>
+                    </div>
+
+                    <!-- <a href="/chr/<%= pcps[i]._id %>" class="edit-btn">Registrar Caracteristica</a> -->
+                    
+                    <% if (pcps[i] && pcps[i].op1) { %>
+                    <div>
+                        <a href="/pcp/<%= pcps[i].cu1 %>" class="edit-btn">PCP</a>
+                    </div>
+                    
+                    <% } %>
+                  
+                </td>
+            </tr>
+        <% } %>   
+        </tbody>
+    </table>
+  </div>
+
+  <%- include ('partials/_footer'); %>

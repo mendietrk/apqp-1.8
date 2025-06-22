@@ -1,0 +1,73 @@
+<%- include ('partials/_header'); %>
+
+<form action="/submit" method="POST">
+  
+  <label for="us1">Usuario:</label>
+  <input type="text" id="us1" name="us1" placeholder="Usuario">
+  
+  <label for="us2">Nombre completo:</label>
+  <input type="text" id="us2" name="us2" placeholder="Nombre completo">
+  
+  <label for="us3">Contraseña:</label>
+  <input type="text" id="us3" name="us3" placeholder="Contraseña">
+  
+  <label for="us4">Puesto:</label>
+  <input type="text" id="us4" name="us4" placeholder="Puesto">
+  
+  <label for="us5">Área:</label>
+  <input type="text" id="us5" name="us5" placeholder="Área">
+  
+  <label for="us6">Teléfono</label>
+  <input type="number" id="us6" name="us6" placeholder="Teléfono">
+  
+  <label for="us7">Correo electrónico::</label>
+  <input type="text" id="us7" name="us7" placeholder="Correo electrónico:">
+
+  <button class=btn type="submit">Enviar</button>
+</form>
+
+<div class="col-md-7">
+  <table class="table table-bordered table-hover">
+      <thead>
+          <tr>
+              <th>Usuario</th>
+              <th>Nombre completo</th>
+              <!-- <th>password</th>
+              <th>puesto</th>
+              <th>área</th>
+              <th>telefono</th>
+              <th>correo</th> -->
+          </tr>
+      </thead>
+
+      <tbody>
+        <% for(var i = 0; i < users.length; i++) { %>
+        </div>
+        <td><%= users[i].us1 %></td>
+        <td><%= users[i].us2 %></td>
+        <!-- <td><%= users[i].us3 %></td>
+          <td><%= users[i].us4 %></td>
+          <td><%= users[i].us5 %></td>
+          <td><%= users[i].us6 %></td>
+          <td><%= users[i].us7 %></td> -->
+          <td class="plus">
+                    
+                      <a href="/edit/<%= users[i]._id %>" class="edit-btn">Editar</a>
+                      <a href="/org/<%= users[i]._id %>" class="edit-btn">Registrar Organización</a>
+                      
+                    <!-- <div style="display: inline-block;">
+                      <a href="/delete/<%= users[i]._id %>" class="edit-btn" style="color: red;">Borrar</a> -->
+                  </td>
+              </tr>
+          <% } %>
+      </tbody>
+  </table>
+</div>
+
+
+
+
+      
+
+     
+  <%- include ('partials/_footer'); %>

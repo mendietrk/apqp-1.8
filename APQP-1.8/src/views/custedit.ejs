@@ -1,0 +1,52 @@
+<%- include ('styles'); %>
+
+<!-- FORM -->
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Editar</h1>
+
+        <div style="display: inline-block;">
+            <a href="/cus/delete/<%= cust._id %>" class="edit-btn" style="color: red;">Borrar</a>
+
+        <div class=container>
+            <div class="container">
+                <div class="container">
+                    <form action="/cus/update/<%= cust._id %>" method="POST">
+                        <label for="us1">Cliente:</label>
+                        <div>
+                            <input type="text" name="cu1" placeholder="Cliente" value="<%= cust.cu1 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="cu2" placeholder="Código" value="<%= cust.cu2 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="cu3" placeholder="razon social" value="<%= cust.cu3 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="cu4" placeholder="ciudad" value="<%= cust.cu4 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="cu5" placeholder="estado" value="<%= cust.cu5 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="cu6" placeholder="pais" value="<%= cust.cu6 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="cu7" placeholder="c. postal" value="<%= cust.cu7 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="cu8" placeholder="Usuario" value="<%= cust.cu8 %>">
+                        </div>
+                        
+                        
+                            <a href="/cust" class="btn">Cancel</a>
+                            <button type="submit" class="btn">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include ('partials/_footer'); %>

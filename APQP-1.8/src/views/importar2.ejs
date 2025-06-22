@@ -1,0 +1,51 @@
+const express = require('express');
+const router = express.Router();
+const Subgrupo = require('../models/Subgrupo'); // Ajusta la ruta según tu estructura
+
+router.post('/subgrupo/importar', async (req, res) => {
+  try {
+    const { pa6, pa7, datos } = req.body;
+
+    // Separar filas por salto de línea
+    const lineas = datos.trim().split('\n');
+
+    let subgrupos = [];
+
+    for (let linea of lineas) {
+      const valores = linea.trim().split('\t').map(Number).filter(v => !isNaN(v));
+
+      if (valores.length === 0) continue;
+
+      if (valores.length === 1) {
+        // Si solo hay un número en la línea, lo añadimos a un acumulador
+        subgrupos.push(valores[0]);
+      } else {
+        // Si hay múltiples valores en la línea, asumimos que ya es un subgrupo
+        await Subgrupo.create({
+          pa6,
+          pa7,
+          valores: valores
+        });
+      }
+    }
+
+    // Agrupar los valores de una sola columna en subgrupos de 5
+    for (let i = 0; i < subgrupos.length; i += 5) {
+      const grupo = subgrupos.slice(i, i + 5);
+      if (grupo.length === 5) {
+        await Subgrupo.create({
+          pa6,
+          pa7,
+          valores: grupo
+        });
+      }
+    }
+
+    res.send('Importación completada correctamente.');
+  } catch (error) {
+    console.error('Error al importar subgrupos:', error);
+    res.status(500).send('Error al importar subgrupos.');
+  }
+});
+
+module.exports = router;

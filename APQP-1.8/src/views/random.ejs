@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Datos Aleatorios por Grupo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background-color: #f9f9f9;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    .group {
+      margin-top: 30px;
+    }
+    .data-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      list-style-type: none;
+      padding: 0;
+    }
+    .data-item {
+      background-color: #dfefff;
+      padding: 10px 15px;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      font-size: 0.95em;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex: 0 0 calc(20% - 10px);
+    }
+    .index {
+      font-weight: bold;
+      color: #007bff;
+      min-width: 40px;
+      text-align: right;
+    }
+    .value {
+      flex: 1;
+    }
+    a.button {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    a.button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Datos Aleatorios Dentro de Cada Grupo</h1>
+
+  <% function mezclar(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  } %>
+
+  <% 
+    const pares = mezclar([...datosPares]);
+    const impares = mezclar([...datosImpares]);
+  %>
+
+  <div class="group">
+    <h2>Grupo de Índices Pares (Reordenado)</h2>
+    <ul class="data-list">
+      <% pares.forEach(d => { %>
+        <li class="data-item">
+          <span class="index"><%= String(d.index).padStart(3, '0') %>:</span>
+          <span class="value"><%= d.valor %></span>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+
+  <div class="group">
+    <h2>Grupo de Índices Impares (Reordenado)</h2>
+    <ul class="data-list">
+      <% impares.forEach(d => { %>
+        <li class="data-item">
+          <span class="index"><%= String(d.index).padStart(3, '0') %>:</span>
+          <span class="value"><%= d.valor %></span>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+
+  <a class="button" href="/parimpar">⬅ Volver a Pares e Impares</a>
+</body>
+</html>

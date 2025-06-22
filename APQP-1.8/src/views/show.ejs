@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selector de Partes y Datos Individuales</title>
+  <style>
+    /* Tus estilos completos sin cambios */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2 {
+      color: #0056b3;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    select, input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .btn {
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .individual-data-section {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+    .individual-data-section h2 {
+      color: #0056b3;
+      margin-bottom: 15px;
+    }
+    .individual-data-list {
+      list-style-type: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .individual-data-item {
+      background-color: #e9e9e9;
+      margin-bottom: 5px;
+      padding: 10px 12px;
+      border-radius: 4px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      flex: 0 0 calc(20% - 10px);
+      box-sizing: border-box;
+      font-size: 0.9em;
+    }
+    .individual-data-index {
+      font-weight: bold;
+      color: #007bff;
+      margin-right: 8px;
+      min-width: 35px;
+      text-align: right;
+    }
+    .individual-data-value {
+      flex-grow: 1;
+    }
+    .no-data {
+      color: #555;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Selección de Parte y Revisión</h1>
+
+  <form method="GET" action="/show">
+    <div class="form-group">
+      <label for="pa6">Número de Parte (PA6):</label>
+      <select name="pa6" id="pa6" required onchange="this.form.submit()">
+        <option value="">Selecciona una parte...</option>
+        <% const uniquePa6 = [...new Set(partes.map(p => p.pa6))].sort(); %>
+        <% uniquePa6.forEach(p6Val => { %>
+          <option value="<%= p6Val %>" <%= p6Val === pa6 ? 'selected' : '' %>><%= p6Val %></option>
+        <% }) %>
+      </select>
+    </div>
+
+    <% if (pa6) { %>
+      <div class="form-group">
+        <label for="pa7">Revisión (PA7):</label>
+        <select name="pa7" id="pa7" onchange="this.form.submit()">
+          <option value="">Todas las revisiones</option>
+          <% 
+            const filteredPartesByPa6 = partes.filter(p => p.pa6 === pa6);
+            const uniquePa7ForSelectedPa6 = [...new Set(filteredPartesByPa6.map(p => p.pa7 === null ? 'N/A' : p.pa7))].sort();
+            uniquePa7ForSelectedPa6.forEach(pa7OptionValue => {
+              let isSelected = false;
+              if (pa7OptionValue === 'N/A' && pa7 === 'N/A') {
+                isSelected = true;
+              } else if (pa7OptionValue !== 'N/A' && pa7 === pa7OptionValue) {
+                isSelected = true;
+              }
+          %>
+            <option value="<%= pa7OptionValue %>" <%= isSelected ? 'selected' : '' %>><%= pa7OptionValue %></option>
+          <% }) %>
+        </select>
+      </div>
+    <% } %>
+
+    <button type="submit" class="btn">Filtrar</button>
+  </form>
+
+  <hr>
+
+  <% if (subgrupos && subgrupos.length > 0) { %>
+    <h2>Subgrupos Encontrados (Formato de Tabla Original)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Muestra 1</th>
+          <th>Muestra 2</th>
+          <th>Muestra 3</th>
+          <th>Muestra 4</th>
+          <th>Muestra 5</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% subgrupos.forEach(subgrupo => { %>
+          <tr>
+            <td><%= new Date(subgrupo.fecha).toLocaleDateString() %></td>
+            <% subgrupo.muestras.forEach(muestra => { %>
+              <td><%= muestra %></td>
+            <% }) %>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } else if (pa6 && pa7) { %>
+    <p class="no-data">No se encontraron subgrupos para los filtros seleccionados.</p>
+  <% } %>
+
+  <hr>
+
+  <div class="individual-data-section">
+    <h2>Datos Individuales Desagrupados</h2>
+    <% if (datosIndividuales && datosIndividuales.length > 0) { %>
+      <ul class="individual-data-list">
+        <% datosIndividuales.forEach((dato, index) => { %>
+          <li class="individual-data-item">
+            <span class="individual-data-index"><%= String(index).padStart(3, '0') %>:</span>
+            <span class="individual-data-value"><%= dato %></span>
+          </li>
+        <% }) %>
+      </ul>
+      <p>Total de datos: <strong><%= datosIndividuales.length %></strong></p>
+
+      <!-- Envío al siguiente paso -->
+      <form method="POST" action="/sort">
+        <input type="hidden" name="datos" value='<%= JSON.stringify(datosIndividuales) %>'>
+        <button type="submit" class="btn">Siguiente</button>
+      </form>
+    <% } else if (pa6) { %>
+      <p class="no-data">No hay datos individuales para mostrar con la selección actual.</p>
+    <% } else { %>
+      <p class="no-data">Seleccione un número de parte (PA6) para cargar los datos individuales.</p>
+    <% } %>
+  </div>
+</div>
+</body>
+</html>
+

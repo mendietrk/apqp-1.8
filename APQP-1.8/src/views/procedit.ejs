@@ -1,0 +1,88 @@
+<%- include ('partials/_header'); %>
+
+<!-- FORM -->
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Editar</h1>
+
+        <div style="display: inline-block;">
+            <a href="/pro/delete/<%= procs._id %>" class="edit-btn" style="color: red;">Borrar</a>
+
+        <div class=container>
+            <div class="container">
+                <div class="container">
+                    <form action="/pro/update/<%= procs._id %>" method="POST">
+                        <label for="us1">Producto:</label>
+                        <label class="label1" for="us1">Usuario:</label>
+                        <input class="label1" type="text" id="us1" name="us1" placeholder="Usuario" value="<%= procs && procs.us1 %>">
+                      
+                        <label class="label1" for="or1">Organización:</label>
+                        <input class="label1" type="text" id="or1" name="or1" placeholder="Organización" value="<%= procs && procs.or1 %>">
+                        
+                        
+                        <div>
+                            <input type="text" name="pg1" placeholder="Num interno" value="<%= procs.pg1 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pg2" placeholder="Rev interna" value="<%= procs.pg2 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pg3" placeholder="Rev" value="<%= procs.pg3 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pg4" placeholder="Razón de revisión" value="<%= procs.pg4 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pg5" placeholder="Fecha" value="<%= procs.pg5 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pg6" placeholder="Autor" value="<%= procs.pg6 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pg7" placeholder="Aprobado" value="<%= procs.pg7 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pg8" placeholder="Revisado" value="<%= procs.pg8 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pg9" placeholder="Objetivo" value="<%= procs.pg9 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pg10" placeholder="Alcance" value="<%= procs.pg10 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pg11" placeholder="Responsables" value="<%= procs.pg11 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pg12" placeholder="Diagrama" value="<%= procs.pg12 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pg13" placeholder="Responsable" value="<%= procs.pg13 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pg14" placeholder="Entradas" value="<%= procs.pg14 %>">
+                        </div>
+                        <div>
+                            <textarea name="pg15" placeholder="Actividad"><%= procs.pg15 %></textarea>
+                        </div>
+                        
+                        <div>
+                            <input type="text" name="pg16" placeholder="Salida" value="<%= procs.pg16 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="pg17" placeholder="Registro" value="<%= procs.pg17 %>">
+                        </div>
+                        
+
+                        
+                        <a href="/pro" class="btn">Cancel</a>
+                        <button type="submit" class="btn">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<%- include ('partials/_footer'); %>

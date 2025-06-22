@@ -1,0 +1,76 @@
+<h2>Editar Actividad</h2>
+<form action="/actividades/<%= actividad._id %>?_method=PUT" method="POST">
+  <div>
+    <label>Índice:</label>
+    <input type="number" name="indice" value="<%= actividad.indice %>" required>
+  </div>
+
+  <div>
+    <label>Actividad:</label>
+    <input type="text" name="actividad" value="<%= actividad.actividad %>" required>
+  </div>
+
+  <div>
+    <label>Responsable:</label>
+    <input type="text" name="responsable" value="<%= actividad.responsable %>" required>
+  </div>
+
+  <div>
+    <label>Inicio:</label>
+    <input type="date" name="inicio" value="<%= actividad.inicio?.toISOString().substring(0,10) %>">
+  </div>
+
+  <div>
+    <label>Plazo:</label>
+    <input type="date" name="plazo" value="<%= actividad.plazo?.toISOString().substring(0,10) %>">
+  </div>
+
+  <div>
+    <label>Días:</label>
+    <input type="number" name="dias" value="<%= actividad.dias %>">
+  </div>
+
+  <div>
+    <label>% Concluido:</label>
+    <input type="number" name="porcentajeConcluido" value="<%= actividad.porcentajeConcluido %>">
+  </div>
+
+  <div>
+    <label>Inicio Real:</label>
+    <input type="date" name="inicioReal" value="<%= actividad.inicioReal?.toISOString().substring(0,10) %>">
+  </div>
+
+  <div>
+    <label>Fin:</label>
+    <input type="date" name="fin" value="<%= actividad.fin?.toISOString().substring(0,10) %>">
+  </div>
+
+  <div>
+    <label>Días Real:</label>
+    <input type="number" name="diasReal" value="<%= actividad.diasReal %>">
+  </div>
+
+  <div>
+    <label>Observaciones:</label>
+    <textarea name="observaciones"><%= actividad.observaciones %></textarea>
+  </div>
+
+  <div>
+    <label>Email para:</label>
+    <input type="email" name="emailPara" value="<%= actividad.emailPara %>">
+  </div>
+
+  <div>
+    <label>Email CC:</label>
+    <input type="email" name="emailCC" value="<%= actividad.emailCC %>">
+  </div>
+
+  <div>
+    <label>Diferencia de Días:</label>
+    <input type="number" name="difDias" value="<%= actividad.difDias %>">
+  </div>
+
+  <div>
+    <button type="submit">Actualizar</button>
+  </div>
+</form>

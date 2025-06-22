@@ -1,0 +1,88 @@
+<%- include ('styles'); %>
+
+  <h1>Balance Total: <%= balanceTotal.toFixed(2) %> MXN</h1>
+
+  <!-- Formulario para actualizar tipos de cambio -->
+  <h2>Actualizar Tipos de Cambio</h2>
+  <form action="/actualizar-tipos-cambio" method="POST">
+    <label for="moneda">Moneda:</label>
+    <select name="moneda" id="moneda">
+      <option value="ETH">Ethereum (ETH)</option>
+      <option value="BTC">Bitcoin (BTC)</option>
+      <option value="USD">Dólares (USD)</option>
+    </select>
+    <label for="compra">Tipo de Cambio (Compra en MXN):</label>
+    <input type="number" name="compra" step="0.01" required>
+    <label for="venta">Tipo de Cambio (Venta en MXN):</label>
+    <input type="number" name="venta" step="0.01" required>
+    <button type="submit">Actualizar</button>
+  </form>
+
+  <!-- Formulario para agregar movimientos -->
+  <h2>Agregar Movimiento</h2>
+  <form action="/agregar-movimiento" method="POST">
+    <label for="tipo">Tipo:</label>
+    <select name="tipo" id="tipo">
+      <option value="entrada">Entrada</option>
+      <option value="salida">Salida</option>
+    </select>
+    <label for="monto">Monto:</label>
+    <input type="number" name="monto" step="0.01" required>
+    <label for="moneda">Moneda:</label>
+    <select name="moneda" id="moneda">
+      <option value="ETH">Ethereum (ETH)</option>
+      <option value="BTC">Bitcoin (BTC)</option>
+      <option value="USD">Dólares (USD)</option>
+    </select>
+    <label for="descripcion">Descripción:</label>
+    <input type="text" name="descripcion" required>
+    <button type="submit">Agregar</button>
+  </form>
+
+  <!-- Balances por denominación -->
+  <h2>Balances por Denominación</h2>
+  <ul>
+    <% denominaciones.forEach(denominacion => { %>
+      <li>
+        <%= denominacion.nombre %>: <%= denominacion.balance.toFixed(4) %>
+        (Compra: <%= denominacion.compra %> MXN, Venta: <%= denominacion.venta %> MXN)
+      </li>
+    <% }) %>
+  </ul>
+
+  <!-- Registro de movimientos -->
+  <h2>Registro de Movimientos</h2>
+  <ul>
+    <% movimientos.forEach(movimiento => { %>
+      <li>
+        <span class="fecha"><%= movimiento.fecha.toLocaleDateString() %></span> -
+        <span class="<%= movimiento.tipo %>"><%= movimiento.tipo %>: <%= movimiento.monto.toFixed(4) %> <%= movimiento.moneda %></span>
+        (<%= movimiento.descripcion %>)
+      </li>
+    <% }) %>
+  </ul>
+
+  <!-- Script para cambiar el modo -->
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    // Verificar el tema guardado en localStorage
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      body.setAttribute('data-theme', savedTheme);
+    }
+
+    // Cambiar el tema al hacer clic en el botón
+    themeToggle.addEventListener('click', () => {
+      if (body.getAttribute('data-theme') === 'dark') {
+        body.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        body.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+  </script>
+</body>
+</html>

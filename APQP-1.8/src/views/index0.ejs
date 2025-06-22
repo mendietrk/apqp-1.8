@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aplicación Principal</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <h1>Bienvenido a la aplicación</h1>
+  <p>La conexión a la base de datos fue exitosa.</p>
+
+  <!-- Balance total -->
+  <h2>Balance Total: <%= balanceTotal.toFixed(2) %> MXN</h2>
+
+  <!-- Resumen de movimientos -->
+  <h2>Resumen de Movimientos</h2>
+  <ul>
+    <% movimientos.forEach(movimiento => { %>
+      <li>
+        <span class="fecha"><%= movimiento.fecha.toLocaleDateString() %></span> -
+        <span class="<%= movimiento.tipo %>"><%= movimiento.tipo %>: <%= movimiento.monto.toFixed(4) %> <%= movimiento.moneda %></span>
+        (<%= movimiento.descripcion %>)
+      </li>
+    <% }) %>
+  </ul>
+
+  <!-- Enlace al formulario de ingreso de datos -->
+  <a href="/app/ingresar">Ingresar nuevo movimiento</a>
+
+  <!-- Botón de modo oscuro/claro -->
+  <div id="theme-toggle" class="theme-toggle">
+    <i class="fas fa-sun"></i> <!-- Ícono del sol (modo claro) -->
+    <i class="fas fa-moon"></i> <!-- Ícono de la luna (modo oscuro) -->
+  </div>
+
+  <!-- Script para cambiar el modo -->
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    // Verificar el tema guardado en localStorage
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      body.setAttribute('data-theme', savedTheme);
+    }
+
+    // Cambiar el tema al hacer clic en el botón
+    themeToggle.addEventListener('click', () => {
+      if (body.getAttribute('data-theme') === 'dark') {
+        body.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        body.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+  </script>
+</body>
+</html>

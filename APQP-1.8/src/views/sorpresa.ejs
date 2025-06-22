@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Felicidades!</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        
+        .message {
+            color: #fff;
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 1s ease-out;
+            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073;
+            margin-bottom: 30px;
+        }
+        
+        .message.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+        
+        .btn-continuar {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background: linear-gradient(45deg, #ff00cc, #3333ff);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease-out 1.5s;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+        
+        .btn-continuar.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .btn-continuar:hover {
+            background: linear-gradient(45deg, #3333ff, #ff00cc);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="message" id="message">
+        <h1>¡Felicidades!</h1>
+        <p>Tu registro se ha guardado de manera exitosa en la base de datos.</p>
+    </div>
+    
+    <button class="btn-continuar" id="btnContinuar">Continuar</button>
+
+    <script>
+        // Espera a que cargue la página
+        window.onload = function() {
+            // Muestra el mensaje con animación
+            setTimeout(function() {
+                document.getElementById('message').classList.add('show');
+                
+                // Lanza confeti
+                confetti({
+                    particleCount: 150,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+                
+                // Más confeti después de un retraso
+                setTimeout(() => {
+                    confetti({
+                        particleCount: 100,
+                        angle: 60,
+                        spread: 55,
+                        origin: { x: 0 }
+                    });
+                    
+                    confetti({
+                        particleCount: 100,
+                        angle: 120,
+                        spread: 55,
+                        origin: { x: 1 }
+                    });
+                }, 500);
+                
+                // Muestra el botón después de que aparezca el mensaje
+                setTimeout(() => {
+                    document.getElementById('btnContinuar').classList.add('show');
+                }, 1500);
+                
+            }, 500);
+            
+            // Evento para el botón Continuar
+            document.getElementById('btnContinuar').addEventListener('click', function() {
+                window.location.href = '/';
+            });
+        };
+    </script>
+</body>
+</html>

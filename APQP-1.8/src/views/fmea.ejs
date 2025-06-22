@@ -1,0 +1,132 @@
+<%- include ('partials/_header'); %>
+
+
+<form action="/fme/submit" method="POST">
+
+    <label class="label1" for="us1">Usuario:</label>
+    <input class="label1" type="text" id="us1" name="us1" placeholder="Usuario" value="<%= ope && ope.us1 %>">
+  
+    <label class="label1" for="or1">Organización:</label>
+    <input class="label1" type="text" id="or1" name="or1" placeholder="Organización" value="<%= ope && ope.or1 %>">
+    
+    <label class="label1" for="cu1">Cliente:</label>
+    <input class="label1" type="text" id="cu1" name="cu1" placeholder="Cliente" value="<%= ope && ope.cu1 %>">
+  
+      <label class="label1" for="pa1">Num interno:</label>
+      <input class="label1" type="text" id="pa1" name="pa1" placeholder="Num interno" value="<%= ope && ope.pa1 %>">
+      
+      <label for="pa4">Nombre de pieza:</label>
+      <input type="text" id="pa4" name="pa4" placeholder="Nombre de pieza">
+      
+      <label for="pa5">Número de dibujo interno:</label>
+      <input type="text" id="pa5" name="pa5" placeholder="Número de dibujo interno">
+      
+      <label for="pa6">Num de pza. del cliente</label>
+      <input type="text" id="pa6" name="pa6" placeholder="Num de pza. del cliente">
+
+      <label class="label1" for="op1">Número de operación:</label>
+      <input class="label1" type="text" id="op1" name="op1" placeholder="Número de operación" value="<%= ope && ope.op1 %>">
+      
+
+  <!-- Campo 1: Original FMEA Date / Fecha AMEF Original -->
+  <div>
+    <label for="fm1">Original FMEA Date / Fecha AMEF Original:</label>
+    <input type="date" id="fm1" name="fm1">
+</div>
+
+<!-- Campo 2: Last Revision Date / Fecha de la última revisión -->
+<div>
+    <label for="fm2">Last Revision Date / Fecha de la última revisión:</label>
+    <input type="date" id="fm2" name="fm2">
+</div>
+
+<!-- Campo 3: Rev -->
+<div>
+    <label for="fm3">Rev:</label>
+    <input type="text" id="fm3" name="fm3">
+</div>
+
+<!-- Campo 4: Core team / Equipo -->
+<div>
+    <label for="fm4">Core team / Equipo:</label>
+    <input type="text" id="fm4" name="fm4">
+</div>
+
+<!-- Campo 5: Input (KIPV) / Entrada -->
+<div>
+    <label for="fm5">Input (KIPV) / Entrada:</label>
+    <input type="text" id="fm5" name="fm5">
+</div>
+
+<!-- Campo 6: Potential Failure Mode / Posible Modo de falla -->
+<div>
+    <label for="fm6">Potential Failure Mode / Posible Modo de falla:</label>
+    <input type="text" id="fm6" name="fm6">
+</div>
+
+<!-- Campo 7: Potential Failure Effect / Posible Efecto de falla -->
+<div>
+    <label for="fm7">Potential Failure Effect / Posible Efecto de falla:</label>
+    <input type="text" id="fm7" name="fm7">
+</div>
+
+<!-- Campo 8: SEV -->
+<div>
+    <label for="fm8">SEV:</label>
+    <input type="number" id="fm8" name="fm8" min="1" max="10">
+</div>
+
+<!-- Campo 9: Potential Causes / Posibles Causas -->
+<div>
+    <label for="fm9">Potential Causes / Posibles Causas:</label>
+    <input type="text" id="fm9" name="fm9">
+</div>
+
+<!-- Campo 10: OCC -->
+<div>
+    <label for="fm10">OCC:</label>
+    <input type="number" id="fm10" name="fm10" min="1" max="10">
+</div>
+
+<!-- Campo 11: Current Process Control / Controles actuales del proceso -->
+<div>
+    <label for="fm11">Current Process Control / Controles actuales del proceso:</label>
+    <input type="text" id="fm11" name="fm11">
+</div>
+
+<!-- Campo 12: DET -->
+<div>
+    <label for="fm12">DET:</label>
+    <input type="number" id="fm12" name="fm12" min="1" max="10">
+</div>
+
+<!-- Campo 13: RPN (SEV * OCC * DET) -->
+<div>
+    <label for="fm13">RPN:</label>
+    <input type="number" id="fm13" name="fm13" readonly>
+</div>
+
+<button type="submit">Enviar</button>
+</form>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sevInput = document.getElementById('fm8');
+    const occInput = document.getElementById('fm10');
+    const detInput = document.getElementById('fm12');
+    const rpnInput = document.getElementById('fm13');
+
+    function calculateRPN() {
+        const sev = parseInt(sevInput.value) || 0;
+        const occ = parseInt(occInput.value) || 0;
+        const det = parseInt(detInput.value) || 0;
+        rpnInput.value = sev * occ * det;
+    }
+
+    sevInput.addEventListener('input', calculateRPN);
+    occInput.addEventListener('input', calculateRPN);
+    detInput.addEventListener('input', calculateRPN);
+});
+</script>
+
+<%- include ('partials/_footer'); %>

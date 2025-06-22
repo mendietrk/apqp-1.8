@@ -1,0 +1,54 @@
+<%- include ('partials/_header'); %>
+
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Duplicar</h1>
+
+        <div style="display: inline-block;">
+            <a href="/delete/<%= user._id %>" class="edit-btn" style="color: red;">Borrar</a>
+
+        <div class=container>
+            <div class="container">
+                <div class="container">
+                    <form action="/submit" method="POST">
+                        <div>
+                            <input type="text" name="us1" placeholder="Usuario" value="<%= user.us1 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="us2" placeholder="Nombre completo" value="<%= user.us2 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="us3" placeholder="password" value="<%= user.us3 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="us4" placeholder="puesto" value="<%= user.us4 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="us5" placeholder="área" value="<%= user.us5 %>">
+                        </div>
+                        <div>
+                            <input type="number" name="us6" placeholder="telefono" value="<%= user.us6 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="us7" placeholder="correo" value="<%= user.us7 %>">
+                        </div>
+                        <div>
+                            <input type="text" name="email" placeholder="correo" value="<%= user.email %>">
+                        </div>
+                        <div>
+                            <input type="text" name="password" placeholder="correo" value="<%= user.password %>">
+                        </div>
+                        
+                        
+                            <a href="/db" class="btn">Cancel</a>
+                            <button type="submit" class="btn">Guardar</button>
+                        
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include ('partials/_footer'); %>

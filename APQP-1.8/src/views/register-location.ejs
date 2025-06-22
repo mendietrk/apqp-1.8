@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registrar Ubicación</title>
+</head>
+<body>
+  <h1>Registro de Ubicación</h1>
+  <button id="getLocationBtn">Obtener y Registrar Ubicación</button>
+
+  <form id="locationForm" method="POST" action="/registro-ubicacion" style="display:none;">
+    <input type="hidden" name="latitud" id="latitud">
+    <input type="hidden" name="longitud" id="longitud">
+    <input type="hidden" name="fechaHora" id="fechaHora">
+    <button type="submit">Enviar Registro</button>
+  </form>
+
+  <p id="status"></p>
+
+  <script>
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0,
+    };
+
+    function success(pos) {
+      const crd = pos.coords;
+      const now = new Date().toISOString();
+
+      document.getElementById('latitud').value = crd.latitude;
+      document.getElementById('longitud').value = crd.longitude;
+      document.getElementById('fechaHora').value = now;
+
+      document.getElementById('status').textContent = `Ubicación obtenida. Lat: ${crd.latitude}, Lng: ${crd.longitude}, Fecha: ${now}`;
+      document.getElementById('locationForm').style.display = 'block';
+    }
+
+    function error(err) {
+      document.getElementById('status').textContent = `ERROR(${err.code}): ${err.message}`;
+    }
+
+    document.getElementById('getLocationBtn').addEventListener('click', () => {
+      navigator.geolocation.getCurrentPosition(success, error, options);
+    });
+  </script>
+</body>
+</html>

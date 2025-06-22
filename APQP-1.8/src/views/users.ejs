@@ -1,0 +1,44 @@
+<%- include ('partials/_header'); %>
+<div class="col-md-7">
+
+  <!-- <div>
+    <a href="/submit" class="btn">Registrar Usuario</a>
+</div> -->
+  <table class="table table-bordered table-hover">
+      <thead>
+          <tr>
+              <th>Usuario</th>
+              <th>Nombre completo</th>
+              <!-- <th>password</th>
+              <th>puesto</th>
+              <th>área</th>
+              <th>telefono</th>
+              <th>correo</th> -->
+          </tr>
+      </thead>
+
+      <tbody>
+        <% for(var i = 0; i < users.length; i++) { %>
+        </div>
+        <td><%= users[i].us1 %></td>
+        <td><%= users[i].us2 %></td>
+        <!-- <td><%= users[i].us3 %></td>
+          <td><%= users[i].us4 %></td>
+          <td><%= users[i].us5 %></td>
+          <td><%= users[i].us6 %></td>
+          <td><%= users[i].us7 %></td> -->
+          <td class="plus">
+                    
+                      <a href="/edit/<%= users[i]._id %>" class="edit-btn">Editar</a>
+                      <a href="/org/<%= users[i]._id %>" class="edit-btn">Registrar Organización</a>
+                      
+                    <!-- <div style="display: inline-block;">
+                      <a href="/delete/<%= users[i]._id %>" class="edit-btn" style="color: red;">Borrar</a> -->
+                  </td>
+              </tr>
+          <% } %>
+      </tbody>
+  </table>
+</div>
+
+<%- include ('partials/_footer'); %>

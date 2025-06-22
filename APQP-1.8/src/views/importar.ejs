@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Importar Datos Masivos</title>
+</head>
+<body>
+  <h2>Importar Subgrupos desde Excel</h2>
+
+  <form action="/subgrupo/importar2" method="POST">
+    <label for="pa6">Número de parte:</label>
+    <select name="pa6" id="pa6" required>
+      <% partes.forEach(p => { %>
+        <option value="<%= p.pa6 %>"><%= p.pa6 %></option>
+      <% }) %>
+    </select><br>
+
+    <label for="pa7">Versión:</label>
+    <input type="text" name="pa7" id="pa7" required><br><br>
+
+    <label for="datos">Pega los datos aquí (separados por TAB):</label><br>
+    <textarea name="datos" id="datos" rows="20" cols="80" placeholder="1[TAB]87.896[TAB]87.909[TAB]..."></textarea><br><br>
+
+    <button type="submit">Importar</button>
+  </form>
+
+  <br>
+  <a href="/" class="btn">Volver</a>
+</body>
+</html>
+
+

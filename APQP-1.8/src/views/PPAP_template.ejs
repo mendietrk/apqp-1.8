@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title><%= title %></title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    header, footer { text-align: center; }
+    .content { margin: 20px; }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="data:image/png;base64,<%= logoBase64 %>" alt="Logo" height="50" />
+    <h1><%= subtitle %></h1>
+  </header>
+  <div class="content">
+    <p><%= description %></p>
+    <pre><%= JSON.stringify(pars, null, 2) %></pre> <!-- puedes personalizar -->
+  </div>
+  <footer>
+    <p><%= footer %></p>
+  </footer>
+</body>
+</html>

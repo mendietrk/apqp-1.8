@@ -1,0 +1,46 @@
+<%- include ('partials/_header'); %>
+
+<div class="col-md-7">
+    <div>
+        
+    </div>
+    <table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Número de Caracteristica:</th>
+            <th>Descripción:</th>
+            <!-- <th>password</th>
+            <th>puesto</th>
+            <th>área</th>
+            <th>telefono</th>
+            <th>correo</th> -->
+        </tr>
+    </thead>
+  
+    <tbody>
+        <% for(var i = 0; i < chrc.length; i++) { %>
+      </div>
+      <td><%= chrc[i].ch1 %></td>
+      <td><%= chrc[i].ch3 %></td>
+  
+      <!-- <td><%= chrc[i].ch3 %></td>
+        <td><%= chrc[i].ch4 %></td>
+        <td><%= chrc[i].ch5 %></td>
+        <td><%= chrc[i].ch6 %></td>
+        <td><%= chrc[i].ch7 %></td> -->
+      
+        <td class="plus">
+                  
+                    <a href="/chr/edit/<%= chrc[i]._id %>" class="edit-btn">Editar</a>
+
+                    <a href="/pcp/<%= chrc[i]._id %>" class="edit-btn">Registrar PCP</a>
+                  
+                  
+                </td>
+            </tr>
+        <% } %>   
+        </tbody>
+    </table>
+  </div>
+
+  <%- include ('partials/_footer'); %>

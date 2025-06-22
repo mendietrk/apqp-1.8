@@ -1,0 +1,83 @@
+<%- include ('styles'); %>
+
+<div class="col-md-10 mx-auto">
+
+    <!-- Buscador -->
+    <div class="mb-3">
+        <input type="text" id="searchInput" class="form-control" placeholder="Buscar por número de parte o versión...">
+    </div>
+
+    <table class="table table-bordered table-hover" id="partsTable">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Rev. interna</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(var i = 0; i < pars.length; i++) { %>
+            <tr>
+                <td class="pa6"><%= pars[i].pa6 %></td>
+                <td class="pa7"><%= pars[i].pa1 %></td>
+                <td class="plus">
+                    <a href="/par/edit/<%= pars[i]._id %>" class="edit-btn">Editar</a>
+                    <a href="/ope/<%= pars[i]._id %>" class="edit-btn">Registrar Operación</a>
+                    <a href="/psw/<%= pars[i]._id %>" class="edit-btn">PSW</a>
+                    <a href="/ppap2/<%= pars[i]._id %>" class="edit-btn">02</a>
+                    <a href="/ppap3/<%= pars[i]._id %>" class="edit-btn">03</a>
+                    <a href="/ppap4/<%= pars[i]._id %>" class="edit-btn">04</a>
+                    <a href="/ppap8/<%= pars[i]._id %>" class="edit-btn">08</a>
+                    <a href="/ppap13/<%= pars[i]._id %>" class="edit-btn">13</a>
+                    <a href="/ppap14/<%= pars[i]._id %>" class="edit-btn">14</a>
+                    <a href="/ppap15/<%= pars[i]._id %>" class="edit-btn">15</a>
+                    <a href="/ppap16/<%= pars[i]._id %>" class="edit-btn">16</a>
+                    <a href="/ppap17/<%= pars[i]._id %>" class="edit-btn">17</a>
+
+                    <a href="/ppap2p/<%= pars[i]._id %>" class="download-btn" target="_blank">2p</a>
+                    <a href="/ppap3p/<%= pars[i]._id %>" class="download-btn" target="_blank">3p</a>
+                    <a href="/ppap4p/<%= pars[i]._id %>" class="download-btn" target="_blank">4p</a>
+                    <a href="/ppap8p/<%= pars[i]._id %>" class="download-btn" target="_blank">8p</a>
+                    <a href="/ppap13p/<%= pars[i]._id %>" class="download-btn" target="_blank">13p</a>
+                    <a href="/ppap14p/<%= pars[i]._id %>" class="download-btn" target="_blank">14p</a>
+                    <a href="/ppap15p/<%= pars[i]._id %>" class="download-btn" target="_blank">15p</a>
+                    <a href="/ppap16p/<%= pars[i]._id %>" class="download-btn" target="_blank">16p</a>
+                    <a href="/ppap17p/<%= pars[i]._id %>" class="download-btn" target="_blank">17p</a>
+                    <a href="/ppap2pi/<%= pars[i]._id %>" class="download-btn" target="_blank">2pi</a>
+                    <a href="/ppap14pi/<%= pars[i]._id %>" class="download-btn" target="_blank">14pi</a>
+
+                   
+                    <% if (pars[i].pa62) { %>
+                        <a href="<%= pars[i].pa62 %>" class="download-btn" target="_blank">2024</a>
+                    <% } %>
+
+                    <% if (pars[i].pa63) { %>
+                        <a href="<%= pars[i].pa63 %>" class="download-btn" target="_blank">2025</a>
+                    <% } %>
+                </td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
+
+<%- include ('partials/_footer'); %>
+
+<!-- Filtro por pa6 y pa7 -->
+<script>
+    document.getElementById("searchInput").addEventListener("keyup", function() {
+        const filter = this.value.toLowerCase();
+        const rows = document.querySelectorAll("#partsTable tbody tr");
+
+        rows.forEach(row => {
+            const pa6 = row.querySelector(".pa6").textContent.toLowerCase();
+            const pa7 = row.querySelector(".pa7").textContent.toLowerCase();
+
+            if (pa6.includes(filter) || pa7.includes(filter)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
+</script>

@@ -1,0 +1,66 @@
+<%- include('partials/_header'); %>
+
+<div class="col-md-8 mx-auto">
+  <h2>Registrar Ubicación</h2>
+
+  <!-- Botón para ir a /ubicaciones -->
+  <a href="/ubicaciones" class="btn btn-secondary mb-3">Ubicaciones registradas</a>
+
+  <button id="getLocationBtn">Obtener Ubicación</button>
+
+  <form id="locationForm" method="POST" action="/registro-ubicacion" style="display:none;">
+    <div class="form-group mt-3">
+      <label for="nombre">Nombre:</label>
+      <input type="text" name="nombre" id="nombre" class="form-control" required>
+    </div>
+
+    <input type="hidden" name="latitud" id="latitud">
+    <input type="hidden" name="longitud" id="longitud">
+    <input type="hidden" name="fechaHora" id="fechaHora">
+
+    <button type="submit" class="btn btn-primary mt-2">Registrar</button>
+  </form>
+
+  <p id="status" class="mt-3"></p>
+  <div id="mapLinkContainer" style="display:none;">
+    <a id="mapLink" href="#" target="_blank">Ver en Google Maps</a>
+  </div>
+</div>
+
+<script>
+  const options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0,
+  };
+
+  function success(pos) {
+    const crd = pos.coords;
+    const now = new Date().toISOString();
+
+    document.getElementById('latitud').value = crd.latitude;
+    document.getElementById('longitud').value = crd.longitude;
+    document.getElementById('fechaHora').value = now;
+
+    document.getElementById('locationForm').style.display = 'block';
+    document.getElementById('status').textContent = `Ubicación: ${crd.latitude}, ${crd.longitude}. Hora: ${now}`;
+
+    const mapUrl = `https://www.google.com/maps?q=${crd.latitude},${crd.longitude}`;
+    const mapLink = document.getElementById('mapLink');
+    mapLink.href = mapUrl;
+    mapLink.textContent = `Ver ubicación en Google Maps`;
+    document.getElementById('mapLinkContainer').style.display = 'block';
+  }
+
+  function error(err) {
+    document.getElementById('status').textContent = `ERROR(${err.code}): ${err.message}`;
+  }
+
+  document.getElementById('getLocationBtn').addEventListener('click', () => {
+    navigator.geolocation.getCurrentPosition(success, error, options);
+  });
+</script>
+
+<%- include('partials/_footer'); %>
+
+

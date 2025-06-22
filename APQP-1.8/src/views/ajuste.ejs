@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ajuste de Datos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    label, input, select {
+      display: block;
+      margin-top: 10px;
+    }
+    button {
+      margin-top: 15px;
+    }
+    pre {
+      background-color: #f0f0f0;
+      padding: 10px;
+      margin-top: 20px;
+    }
+  </style>
+  <script>
+    function calcularDesviacionEstandar(arr) {
+      const n = arr.length;
+      const media = arr.reduce((sum, val) => sum + val, 0) / n;
+      const varianza = arr.reduce((sum, val) => sum + Math.pow(val - media, 2), 0) / n;
+      return Math.sqrt(varianza);
+    }
+
+    function procesarDatos() {
+      const datos = JSON.parse(document.getElementById("datos").value);
+      const vecesDesv = parseFloat(document.getElementById("vecesDesv").value);
+      const desdeMenor = parseInt(document.getElementById("desdeMenor").value);
+      const desdeMayor = parseInt(document.getElementById("desdeMayor").value);
+
+      if (!datos.length) {
+        alert("No hay datos.");
+        return;
+      }
+
+      datos.sort((a, b) => a - b);
+      const desviacion = calcularDesviacionEstandar(datos);
+      const datosAjustados = [...datos];
+
+      // Ajustar datos desde menor
+      for (let i = 0; i < desdeMenor && i < datos.length; i++) {
+        datosAjustados[i] += vecesDesv * desviacion;
+      }
+
+      // Ajustar datos desde mayor
+      for (let i = datos.length - desdeMayor; i < datos.length; i++) {
+        datosAjustados[i] -= vecesDesv * desviacion;
+      }
+
+      document.getElementById("resultado").innerText = 
+        "Desviación estándar: " + desviacion.toFixed(4) + "\n\n" +
+        "Datos originales:\n" + datos.join(", ") + "\n\n" +
+        "Datos ajustados:\n" + datosAjustados.join(", ");
+    }
+  </script>
+</head>
+<body>
+  <h1>Ajuste de Datos por Desviación Estándar</h1>
+
+  <!-- Formulario para seleccionar número de parte y versión -->
+  <form method="GET" action="/show">
+    <label for="pa6">Número de Parte:</label>
+    <select name="pa6" id="pa6" required onchange="this.form.submit()">
+      <% 
+        const pa6Unicos = [...new Set(partes.map(p => p.pa6))];
+        pa6Unicos.forEach(p => { 
+      %>
+        <option value="<%= p %>" <%= p === pa6 ? 'selected' : '' %>><%= p %></option>
+      <% }) %>
+    </select>
+
+    <label for="pa7">Versión:</label>
+    <select name="pa7" id="pa7" required>
+      <% 
+        const pa7Unicos = [
+          ...new Set(
+            partes
+              .filter(p => p.pa6 === pa6)
+              .map(p => (p.pa7 !== null && p.pa7 !== undefined ? p.pa7 : 'N/A'))
+          )
+        ];
+        pa7Unicos.forEach(p => { 
+      %>
+        <option value="<%= p %>" <%= p === pa7 ? 'selected' : '' %>><%= p %></option>
+      <% }) %>
+    </select>
+
+    <button type="submit">Cargar datos</button>
+  </form>
+
+  <% if (datosIndividuales && datosIndividuales.length > 0) { %>
+    <h2>Parámetros de Ajuste</h2>
+    <input type="hidden" id="datos" value='<%= JSON.stringify(datosIndividuales) %>'>
+
+    <label for="vecesDesv">Número de veces la desviación estándar:</label>
+    <input type="number" id="vecesDesv" value="1" step="0.1">
+
+    <label for="desdeMenor">Cantidad de datos desde el menor:</label>
+    <input type="number" id="desdeMenor" value="2">
+
+    <label for="desdeMayor">Cantidad de datos desde el mayor:</label>
+    <input type="number" id="desdeMayor" value="2">
+
+    <button onclick="procesarDatos()">Aplicar Ajuste</button>
+
+    <pre id="resultado"></pre>
+  <% } else if (pa6 && pa7) { %>
+    <p>No se encontraron datos para esta combinación de parte y versión.</p>
+  <% } %>
+</body>
+</html>
+

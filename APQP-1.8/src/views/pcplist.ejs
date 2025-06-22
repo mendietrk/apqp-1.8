@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista PCP</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      text-align: left;
+    }
+    th {
+      background: #f2f2f2;
+    }
+    .btn {
+      padding: 0.3rem 0.6rem;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .edit-btn {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .delete-btn {
+      background-color: #f44336;
+      color: white;
+    }
+    form {
+      display: inline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Lista de PCPs</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Parte</th>
+        <th>Especificación</th>
+        <th>Peso con tolerancia</th>
+        <th>Espesor peak 1</th>
+        <th>Espesor root 1</th>
+        <th>Cuello</th>
+        <th>Falda</th>
+        <th>Machine</th>
+        <th>Fecha</th>
+        <th>Acciones</th> <!-- nueva columna -->
+      </tr>
+    </thead>
+    <tbody>
+      <% registros.forEach(r => { %>
+        <tr>
+          <td><%= r.pa6 || '-' %></td>
+          <td><%= r.ch4 || '-' %></td>
+          <td><%= r.chr_peso || '-' %></td>
+          <td><%= r.chr_peak_1 || '-' %></td>
+          <td><%= r.chr_root_1 || '-' %></td>
+          <td><%= r.chr_cuello || '-' %></td>
+          <td><%= r.chr_falda_1 || '-' %></td>
+          <td><%= r.machine || '-' %></td>
+          <td><%= r.createdAt ? new Date(r.createdAt).toLocaleDateString() : '-' %></td>
+          <td>
+            <a class="btn edit-btn" href="/pcpedit/<%= r._id %>">Editar</a>
+            <form action="/pcpdelete/<%= r._id %>" method="POST" onsubmit="return confirm('¿Deseas eliminar este registro?');">
+              <button type="submit" class="btn delete-btn">Borrar</button>
+              <a class="btn edit-btn" href="/pcpexcel/<%= r._id %>">excel</a>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</body>
+</html>
+
+

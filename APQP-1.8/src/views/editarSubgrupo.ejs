@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Subgrupo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+    input, select {
+      padding: 4px;
+      margin-left: 10px;
+    }
+    button {
+      padding: 6px 12px;
+      margin-top: 10px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>Editar Subgrupo</h2>
+
+  <form action="/subgrupo/<%= subgrupo._id %>" method="POST">
+
+    <label>
+      Número de Parte (pa6):
+      <input name="pa6" type="text" value="<%= subgrupo.pa6 || '' %>" required>
+    </label>
+
+    <label>
+      Revisión (pa7):
+      <input name="pa7" type="text" value="<%= subgrupo.pa7 || '' %>">
+    </label>
+
+    <% if (Array.isArray(subgrupo.muestras) && subgrupo.muestras.length === 5) { %>
+      <% subgrupo.muestras.forEach((m, i) => { %>
+        <label>
+          Muestra <%= i + 1 %>: 
+          <input name="muestra<%= i + 1 %>" type="number" step="any" value="<%= m %>" required>
+        </label>
+      <% }) %>
+    <% } else { %>
+      <% for (let i = 0; i < 5; i++) { %>
+        <label>
+          Muestra <%= i + 1 %>: 
+          <input name="muestra<%= i + 1 %>" type="number" step="any" required>
+        </label>
+      <% } %>
+    <% } %>
+
+    <button type="submit">Guardar Cambios</button>
+  </form>
+</body>
+</html>
+
+
