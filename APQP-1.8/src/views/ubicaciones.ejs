@@ -1,4 +1,4 @@
-<%- include('partials/_header'); %>
+<<%- include('partials/_header'); %>
 
 <div class="col-md-10 mx-auto mt-4">
   <h2>Registros de Ubicación</h2>
@@ -9,7 +9,8 @@
         <th>Nombre</th>
         <th>Latitud</th>
         <th>Longitud</th>
-        <th>Fecha y Hora (GMT-6)</th>
+        <th>Entrada/Salida</th>
+        <th>Fecha y Hora</th>
         <th>Mapa</th>
         <th>Acciones</th>
       </tr>
@@ -20,34 +21,35 @@
           <td colspan="6" class="text-center">No hay registros aún.</td>
         </tr>
       <% } else { %>
-        <% ubicaciones.forEach(ubicacion => { 
-             const fechaGMT6 = new Date(ubicacion.fechaHora).toLocaleString('es-MX', { timeZone: 'America/Mexico_City' }); 
-        %>
+        <% ubicaciones.forEach(ubicacion => { %>
           <tr>
             <td><%= ubicacion.nombre %></td>
             <td><%= ubicacion.latitud %></td>
             <td><%= ubicacion.longitud %></td>
-            <td><%= fechaGMT6 %></td>
+            <td><%= ubicacion.entrada %></td>
+            <td><%= new Date(ubicacion.fechaHora).toLocaleString('es-GT', { timeZone: 'America/Guatemala' }) %></td>
+
             <td>
-              <!-- Botón Ver en Google Maps -->
-              <a href="https://www.google.com/maps?q=<%= ubicacion.latitud %>,<%= ubicacion.longitud %>" 
-                 target="_blank" 
-                 class="edit-btn" 
-                 style="background-color: #6f42c1; color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; display: inline-block;">
-                Ver en Google Maps
-              </a>
-            </td>
+                <!-- Botón Ver en Google Maps -->
+                <a href="https://www.google.com/maps?q=<%= ubicacion.latitud %>,<%= ubicacion.longitud %>" 
+                   target="_blank" 
+                   class="edit-btn" 
+                   style="background-color: #6f42c1; color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; display: inline-block;">
+                  Ver en Google Maps
+                </a>
+              </td>
             <td>
-              <form 
-                action="/ubicaciones/<%= ubicacion._id %>?_method=DELETE" 
-                method="POST" 
-                onsubmit="return confirm('¿Estás seguro de borrar este registro?');" 
-                style="display: inline;">
-                <button type="submit" class="edit-btn" style="background-color: red; color: white; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer;">
-                  🗑 Borrar
-                </button>
-              </form>
-            </td>
+                <form 
+                  action="/ubicaciones/<%= ubicacion._id %>?_method=DELETE" 
+                  method="POST" 
+                  onsubmit="return confirm('¿Estás seguro de borrar este registro?');" 
+                  style="display: inline;">
+                  <button type="submit" class="edit-btn" style="background-color: red; color: white; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer;">
+                    🗑 Borrar
+                  </button>
+                </form>
+              </td>
+              
           </tr>
         <% }); %>
       <% } %>

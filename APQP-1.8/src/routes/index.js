@@ -23,6 +23,7 @@ router.post('/registro-ubicacion', async (req, res) => {
       nombre,
       latitud: parseFloat(latitud),
       longitud: parseFloat(longitud),
+      entrada: req.body.entrada,
       fechaHora: new Date(fechaHora),
     });
 
@@ -279,7 +280,6 @@ const PcpMake = require('../models/pcpmake');
 
 router.post('/pcp/guardar', async (req, res) => {
   try {
-    // Lista de campos de características donde antes se usaban ObjectId, ahora valores string
     const camposCaracteristicas = [
       'chr_peso',
       'chr_peak_1', 'chr_peak_2', 'chr_peak_3', 'chr_peak_4',
@@ -291,20 +291,21 @@ router.post('/pcp/guardar', async (req, res) => {
 
     const pcpData = { ...req.body };
 
-    // convierte strings vacíos a null
+    // Limpia strings vacíos
     Object.keys(pcpData).forEach(key => {
       if (pcpData[key] === '') pcpData[key] = null;
     });
-    
-    await PcpMake.findByIdAndUpdate(req.params.id, pcpData);
-    
 
-    res.redirect('/pcp/lista');
+    const nuevoPCP = new PcpMake(pcpData);
+    await nuevoPCP.save();
+
+    res.redirect('/pcp/lista'); // O a donde desees redirigir tras guardar
   } catch (error) {
     console.error('Error al guardar PCP:', error);
     res.status(500).send('Error al guardar PCP. Por favor, revisa los datos ingresados.');
   }
 });
+
 
 router.get('/pcpmake', async (req, res) => {
   const partes = await Par.find();
