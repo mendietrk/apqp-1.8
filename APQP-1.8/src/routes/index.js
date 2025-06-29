@@ -171,6 +171,14 @@ const rutasPPAP = [
     fileNamePrefix: "04. Design Failure Mode and Effect Analysis (D-FMEA)",
   },
   {
+    path: "ppap4dp",
+    subtitle: "04. Design Failure Mode and Effect Analysis (D-FMEA)",
+    description: (pa6) =>
+      `Design Failure Mode and Effect Analysis (D-FMEA) ${pa6} confidential document by Organization.`,
+    footerText: (pa6) => `PPAP ${pa6} DESIGN FAILURE MODE AND EFFECT ANALYSIS (D-FMEA)`,
+    fileNamePrefix: "04. Design Failure Mode and Effect Analysis (D-FMEA)",
+  },
+  {
     path: "ppap8p",
     subtitle: "08. Measurement System Analysis",
     description: (pa6) =>
