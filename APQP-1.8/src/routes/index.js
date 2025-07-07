@@ -1,11 +1,82 @@
 const express = require("express");
 const router = express.Router();
-
+const multer = require('multer');
 
 const fs = require("fs");
 const path = require("path");
 const ejs = require("ejs");
 const puppeteer = require("puppeteer"); // O puppeteer-core, según usas
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/'); // Carpeta donde se guardan las imágenes
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, uniqueSuffix + path.extname(file.originalname)); // Nombre único + extensión original
+  }
+});
+
+// Filtro para imágenes
+const fileFilter = (req, file, cb) => {
+  const allowedTypes = /jpeg|jpg|png|gif/;
+  const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
+  const mimetype = allowedTypes.test(file.mimetype);
+  
+  if (extname && mimetype) {
+    return cb(null, true);
+  } else {
+    cb(new Error('Solo se permiten imágenes (jpeg, jpg, png, gif)'));
+  }
+};
+
+// Configurar Multer
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // Máximo 5 MB
+  fileFilter: fileFilter
+});
+
+// Ruta POST para cargar imagen
+router.post('/', upload.single('imagen'), (req, res) => {
+  try {
+    res.json({
+      mensaje: 'Imagen cargada correctamente',
+      archivo: req.file.filename,
+      ruta: `/uploads/${req.file.filename}`
+    });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+router.get('/', (req, res) => {
+  const uploadsDir = path.join(__dirname, '../uploads');
+
+  fs.readdir(uploadsDir, (err, archivos) => {
+    if (err) {
+      console.error('Error al leer la carpeta de imágenes:', err);
+      return res.status(500).send('Error al leer las imágenes');
+    }
+
+    const imagenes = archivos.filter(archivo => /\.(jpg|jpeg|png|gif)$/i.test(archivo));
+    res.render('imagenes', { imagenes });
+  });
+});
+
+router.delete('/:nombre', (req, res) => {
+  const nombreImagen = req.params.nombre;
+  const rutaImagen = path.join(__dirname, '../uploads', nombreImagen);
+
+  fs.unlink(rutaImagen, (err) => {
+    if (err) {
+      console.error('Error al eliminar la imagen:', err);
+      return res.status(500).json({ mensaje: 'Error al eliminar la imagen' });
+    }
+
+    res.json({ mensaje: 'Imagen eliminada correctamente' });
+  });
+});
 
 
 const Ubicacion = require("../models/ubicacion.js");

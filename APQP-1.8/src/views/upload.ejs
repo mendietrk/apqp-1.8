@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Subir Imagen</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .form-container {
+      max-width: 400px;
+      margin: auto;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
+    .preview {
+      margin-top: 20px;
+    }
+    .preview img {
+      max-width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Subir Imagen</h2>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <label for="imagen">Selecciona una imagen:</label><br>
+      <input type="file" name="imagen" id="imagen" accept="image/*" required><br><br>
+      <button type="submit">Subir Imagen</button>
+    </form>
+
+    <div class="preview" id="preview"></div>
+  </div>
+
+  <script>
+    const imagenInput = document.getElementById('imagen');
+    const previewDiv = document.getElementById('preview');
+
+    imagenInput.addEventListener('change', function() {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          previewDiv.innerHTML = '<img src="' + e.target.result + '" alt="Vista previa">';
+        }
+        reader.readAsDataURL(file);
+      } else {
+        previewDiv.innerHTML = '';
+      }
+    });
+  </script>
+</body>
+</html>

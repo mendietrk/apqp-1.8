@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Galería de Imágenes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+    }
+    .image-card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      background-color: #f9f9f9;
+    }
+    .image-card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+    .delete-btn {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Galería de Imágenes</h2>
+
+  <div class="gallery">
+    <% imagenes.forEach(function(imagen) { %>
+      <div class="image-card">
+        <img src="/uploads/<%= imagen %>" alt="Imagen">
+        <button class="delete-btn" onclick="eliminarImagen('<%= imagen %>')">Eliminar</button>
+      </div>
+    <% }); %>
+  </div>
+
+  <script>
+    function eliminarImagen(nombreArchivo) {
+      if (confirm('¿Seguro que quieres eliminar esta imagen?')) {
+        fetch(`/imagenes/${nombreArchivo}`, {
+          method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(data => {
+          alert(data.mensaje);
+          location.reload(); // Recargar la página para actualizar la galería
+        })
+        .catch(err => {
+          alert('Error al eliminar la imagen');
+        });
+      }
+    }
+  </script>
+</body>
+</html>
