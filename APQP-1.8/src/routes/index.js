@@ -129,7 +129,67 @@ router.delete('/ubicaciones/:id', async (req, res) => {
   }
 });
 
+router.get("/ppap14pi/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const pars = await Par.findById(id);
 
+    const logoPath = path.join(__dirname, "../../public/images/ppap/image001.png");
+    const logoBase64 = fs.readFileSync(logoPath, "base64");
+
+    const html = await ejs.renderFile(
+      path.join(__dirname, "../views/PPAPp14.ejs"),
+      { pars, logoBase64 }
+    );
+
+    res.send(html);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error interno");
+  }
+});
+
+// Ruta 2
+router.get("/ppap17.07p/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const pars = await Par.findById(id);
+
+    const logoPath = path.join(__dirname, "../../public/images/ppap/image001.png");
+    const logoBase64 = fs.readFileSync(logoPath, "base64");
+
+    const html = await ejs.renderFile(
+      path.join(__dirname, "../views/PPAPp1707.ejs"),
+      { pars, logoBase64 }
+    );
+
+    res.send(html);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error interno");
+  }
+});
+
+// Ruta 3
+router.get("/ppap17.08p/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const pars = await Par.findById(id);
+
+    const logoPath = path.join(__dirname, "../../public/images/ppap/image001.png");
+    const logoBase64 = fs.readFileSync(logoPath, "base64");
+
+    const html = await ejs.renderFile(
+      path.join(__dirname, "../views/PPAPp1708.ejs"),
+      { pars, logoBase64 }
+    );
+
+    res.send(html);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error interno");
+  }
+});
 
 router.get("/ppap2pi/:id", async (req, res) => {
   try {
@@ -152,6 +212,88 @@ router.get("/ppap2pi/:id", async (req, res) => {
     await page.setContent(html, { waitUntil: "networkidle0" });
 
     const nombreArchivo = `02.${pars.pa6 || "sin_nombre"} Enginering Changes.pdf`;
+
+    const pdfBuffer = await page.pdf({
+      format: "A4",
+      printBackground: true,
+    });
+
+    await browser.close();
+
+    res.set({
+      "Content-Type": "application/pdf",
+      "Content-Disposition": `attachment; filename="${nombreArchivo}"`,
+    });
+
+    res.send(pdfBuffer);
+  } catch (err) {
+    console.error("Error al generar PDF:", err);
+    res.status(500).send("Error al generar el PDF.");
+  }
+});
+
+router.get("/ppap17.07pi/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const pars = await Par.findById(id);
+
+    // Leer logo y convertirlo a base64
+    const logoPath = path.join(__dirname, "../../public/images/ppap/image001.png");
+    const logoBase64 = fs.readFileSync(logoPath, "base64");
+
+    // Renderizar HTML con EJS
+    const html = await ejs.renderFile(
+      path.join(__dirname, "../views/PPAPp1707.ejs"),
+      { pars, logoBase64 }
+    );
+
+    // Lanzar Puppeteer y generar PDF
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.setContent(html, { waitUntil: "networkidle0" });
+
+    const nombreArchivo = `17.07.${pars.pa6 || "sin_nombre"} CustSpecifReq.pdf`;
+
+    const pdfBuffer = await page.pdf({
+      format: "A4",
+      printBackground: true,
+    });
+
+    await browser.close();
+
+    res.set({
+      "Content-Type": "application/pdf",
+      "Content-Disposition": `attachment; filename="${nombreArchivo}"`,
+    });
+
+    res.send(pdfBuffer);
+  } catch (err) {
+    console.error("Error al generar PDF:", err);
+    res.status(500).send("Error al generar el PDF.");
+  }
+});
+
+router.get("/ppap17.08pi/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const pars = await Par.findById(id);
+
+    // Leer logo y convertirlo a base64
+    const logoPath = path.join(__dirname, "../../public/images/ppap/image001.png");
+    const logoBase64 = fs.readFileSync(logoPath, "base64");
+
+    // Renderizar HTML con EJS
+    const html = await ejs.renderFile(
+      path.join(__dirname, "../views/PPAPp1708.ejs"),
+      { pars, logoBase64 }
+    );
+
+    // Lanzar Puppeteer y generar PDF
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.setContent(html, { waitUntil: "networkidle0" });
+
+    const nombreArchivo = `17.08.${pars.pa6 || "sin_nombre"} CustSpecifReq.pdf`;
 
     const pdfBuffer = await page.pdf({
       format: "A4",
@@ -331,6 +473,22 @@ const rutasPPAP = [
       `Customer-Specific Requirements ${pa6} not required for annual validation.`,
     footerText: (pa6) => `PPAP ${pa6} CUSTOMER-SPECIFIC REQUIREMENTS`,
     fileNamePrefix: "17. Customer-Specific Requirements",
+  },
+  {
+    path: "ppap17.07p",
+    subtitle: "17. Customer-Specific Requirements",
+    description: (pa6) =>
+      `IATF 16949 certificated is uploaded and up-to-date in the DPS.`,
+    footerText: (pa6) => `PPAP ${pa6} CUSTOMER-SPECIFIC REQUIREMENTS`,
+    fileNamePrefix: "17.07 Customer-Specific Requirements",
+  },
+  {
+    path: "ppap17.08p",
+    subtitle: "17. Customer-Specific Requirements",
+    description: (pa6) =>
+      `CQI audits at the current revision are uploaded in the DPS`,
+    footerText: (pa6) => `PPAP ${pa6} CUSTOMER-SPECIFIC REQUIREMENTS`,
+    fileNamePrefix: "17.0 Customer-Specific Requirements",
   },
 ];
 
@@ -545,6 +703,18 @@ router.post('/pcp1', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).send('Error del servidor');
+  }
+});
+
+router.get('/pcp2/:id', async (req, res) => {
+  try {
+    const registro = await PcpMake.findById(req.params.id).lean();
+    if (!registro) return res.status(404).send('Registro no encontrado');
+
+    res.render('pcp2', { registro });
+  } catch (error) {
+    console.error('Error al cargar el PCP2:', error);
+    res.status(500).send('Error al cargar PCP2');
   }
 });
 

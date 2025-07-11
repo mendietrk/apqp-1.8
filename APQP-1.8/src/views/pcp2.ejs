@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Plan de Control de Procesos</title>
+  <style>
+    table { border-collapse: collapse; width: 100%; }
+    td, th { border: 1px solid #000; padding: 4px; }
+    h2 { text-align: center; }
+  </style>
+</head>
+<body>
+
+<h2>Plan de Control de Procesos</h2>
+
+<table>
+  <tr><td>Nombre de la empresa:</td><td>Kunhwa México S. de R.L. de C.V.</td></tr>
+  <tr><td>Ubicación:</td><td>Av. San Fernando 500B Col. Valle de Santa María, Querétaro</td></tr>
+  <tr><td>Cliente:</td><td>GKN DO BRASIL</td></tr>
+</table>
+
+<h3>Datos Generales del Producto</h3>
+<table>
+  <tr><td>Número de parte</td><td><%= registro.pa6 %></td></tr>
+  <tr><td>Descripción</td><td><%= registro.pa4 %></td></tr>
+  <tr><td>Material</td><td><%= registro.ch4 %></td></tr>
+  <tr><td>Rev. PFD</td><td><%= new Date(registro.updatedAt).toLocaleDateString() %></td></tr>
+  <tr><td>No. de parte cliente/kunhwa</td><td><%= registro.pa6 %> / <%= registro.pa1 %></td></tr>
+  <tr><td>Nombre de la parte</td><td><%= registro.pa4 %></td></tr>
+  <tr><td>Modelo</td><td><%= registro.pa8 %></td></tr>
+  <tr><td>Dibujo del cliente</td><td><%= registro.pa7 %></td></tr>
+  <tr><td>Peso</td><td><%= registro.pa13 %></td></tr>
+  <tr><td>Eng. Change level</td><td><%= registro.pa10 %></td></tr>
+  <tr><td>Date</td><td><%= registro.pa11 %></td></tr>
+  <tr><td>IMDS</td><td><%= registro.pa45 %></td></tr>
+  <tr><td>Customer name division</td><td><%= registro.cu1 %></td></tr>
+  <tr><td>Purchase order</td><td><%= registro.pa47 %></td></tr>
+  <tr><td>Humedad de resina</td><td><%= registro.ch5 %></td></tr>
+  <tr><td>Temperatura de secado</td><td><%= registro.ch6 %></td></tr>
+  <tr><td>Tiempo de secado</td><td><%= registro.ch7 %></td></tr>
+  <tr><td>Humedad del material</td><td><%= registro.ch8 %></td></tr>
+  <tr><td>Peso con tolerancia</td><td><%= registro.chr_peso || '' %></td></tr>
+</table>
+
+<h3>Tabla de Procesos (Datos Fijos del Plan de Control)</h3>
+<!-- Tabla convertida directamente desde Excel -->
+<table border="1">
+  <tbody>
+    <% [
+      ["Proceso", "Nombre del Proceso", "Nombre del Equipo", "Características"],
+      ["I-010", "Inspección de recepción de materia prima/Subensambles", "-", "1"],
+      ["P-070", "Deshumidificación y secado", "Secador TPE", "1"],
+      ["SP-05", "Purgando", "TPE", "1"],
+      ["IP-01", "Inspección de Set up", "TPE", "1"],
+      ["0.07", "Setup", "Molde, maquina TPE, bascula", "1"]
+    ].forEach(function(row) { %>
+      <tr>
+        <% row.forEach(function(cell) { %>
+          <td><%= cell %></td>
+        <% }); %>
+      </tr>
+    <% }); %>
+  </tbody>
+</table>
+
+</body>
+</html>
