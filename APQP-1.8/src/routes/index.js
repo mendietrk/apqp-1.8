@@ -242,6 +242,30 @@ const rutasPPAP = [
     fileNamePrefix: "04. Design Failure Mode and Effect Analysis (D-FMEA)",
   },
   {
+    path: "ppap5p",
+    subtitle: "05. Process Flow Diagram",
+    description: (pa6) =>
+      `Process Flow Diagram ${pa6} not required for annual validation.`,
+    footerText: (pa6) => `PPAP ${pa6} PROCESS FLOW DIAGRAM`,
+    fileNamePrefix: "05. Process Flow Diagram",
+  },
+  {
+    path: "ppap6p",
+    subtitle: "06. Process Failure Mode and Effects Analysis",
+    description: (pa6) =>
+      `Process Failure Mode and Effects Analysis ${pa6} not required for annual validation.`,
+    footerText: (pa6) => `PPAP ${pa6} PROCESS FAILURE MODE AND EFFECTS ANALYSIS`,
+    fileNamePrefix: "06. Process Failure Mode and Effects Analysis",
+  },
+  {
+    path: "ppap7p",
+    subtitle: "07. Control Plan",
+    description: (pa6) =>
+      `Control Plan ${pa6} not required for annual validation.`,
+    footerText: (pa6) => `PPAP ${pa6} CONTROL PLAN`,
+    fileNamePrefix: "07. Control Plan",
+  },
+  {
     path: "ppap4dp",
     subtitle: "04. Design Failure Mode and Effect Analysis (D-FMEA)",
     description: (pa6) =>
@@ -258,6 +282,14 @@ const rutasPPAP = [
     fileNamePrefix: "08. Measurement System Analysis",
   },
   {
+    path: "ppap12p",
+    subtitle: "12) Qualified Laboratory Documentation",
+    description: (pa6) =>
+      `Qualified Laboratory Documentation ${pa6} not required for annual validation.`,
+    footerText: (pa6) => `PPAP ${pa6} QUALIFIED LABORATORY DOCUMENTATION`,
+    fileNamePrefix: "12) Qualified Laboratory Documentation",
+  },
+  {
     path: "ppap13p",
     subtitle: "13. Appearance Approval Report",
     description: (pa6) => `Appearance Approval Report ${pa6} not applicable`,
@@ -268,6 +300,13 @@ const rutasPPAP = [
     path: "ppap14p",
     subtitle: "14. Sample Production Parts",
     description: (pa6) => `Sample Production Parts ${pa6}`,
+    footerText: (pa6) => `PPAP ${pa6} SAMPLE PRODUCTION PARTS`,
+    fileNamePrefix: "14. Sample Production Parts",
+  },
+  {
+    path: "ppap14np",
+    subtitle: "14. Sample Production Parts",
+    description: (pa6) => `Sample Production Parts ${pa6} not required for annual validation.`,
     footerText: (pa6) => `PPAP ${pa6} SAMPLE PRODUCTION PARTS`,
     fileNamePrefix: "14. Sample Production Parts",
   },
@@ -469,6 +508,43 @@ router.get('/pcpexcel/:id', async (req, res) => {
   } catch (error) {
     console.error('Error al generar Excel-view:', error);
     res.status(500).send('Error al generar vista para Excel');
+  }
+});
+
+router.get('/pcp1', async (req, res) => {
+  try {
+    // Obtener todos los números de parte y versiones (sin duplicados)
+    const pcpList = await PcpMake.find({}, 'pa6 pa7').lean();
+    res.render('pcp1', { pcpList, pcpData: null, controlPlan: [] });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error del servidor');
+  }
+});
+
+// Ruta para mostrar PCP seleccionado
+router.post('/pcp1', async (req, res) => {
+  try {
+    const { pa6, pa7 } = req.body;
+    const pcpData = await PcpMake.findOne({ pa6, pa7 }).lean();
+    if (!pcpData) {
+      return res.send('No se encontró el PCP para los datos seleccionados.');
+    }
+
+    const controlPlan = [
+      { proceso: 'Peso', caracteristica: pcpData.chr_peso, metodo: 'Balanza', frecuencia: 'Cada lote' },
+      { proceso: 'Peak 1', caracteristica: pcpData.chr_peak_1, metodo: 'Inspección Visual', frecuencia: 'Cada hora' },
+      { proceso: 'Root 1', caracteristica: pcpData.chr_root_1, metodo: 'Calibrador', frecuencia: 'Cada cambio de turno' },
+      { proceso: 'Falda 1', caracteristica: pcpData.chr_falda_1, metodo: 'Regla', frecuencia: 'Cada lote' },
+    ];
+
+    // Volver a enviar lista de PCP para el menú
+    const pcpList = await PcpMake.find({}, 'pa6 pa7').lean();
+
+    res.render('pcp1', { pcpList, pcpData, controlPlan });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error del servidor');
   }
 });
 

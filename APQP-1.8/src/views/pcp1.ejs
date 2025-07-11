@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Plan de Control - Selección</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f9f9f9; margin: 0; padding: 20px; }
+    .tabs { display: flex; border-bottom: 2px solid #ccc; background: #eee; margin-top: 20px; }
+    .tab { padding: 10px 20px; cursor: pointer; }
+    .tab.active { background: #fff; border: 2px solid #ccc; border-bottom: none; }
+    .content { padding: 20px; background: #fff; }
+    .hidden { display: none; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background: #eee; }
+  </style>
+</head>
+<body>
+
+  <h1>Seleccionar Plan de Control</h1>
+  <form action="/pcp1" method="POST">
+    <label for="pa6">Número de Parte:</label>
+    <select name="pa6" id="pa6" required>
+      <option value="">-- Selecciona --</option>
+      <% pcpList.forEach(item => { %>
+        <option value="<%= item.pa6 %>"><%= item.pa6 %></option>
+      <% }) %>
+    </select>
+
+    <label for="pa7">Versión:</label>
+    <select name="pa7" id="pa7" required>
+      <option value="">-- Selecciona --</option>
+      <% pcpList.forEach(item => { %>
+        <option value="<%= item.pa7 %>"><%= item.pa7 %></option>
+      <% }) %>
+    </select>
+
+    <button type="submit">Ver PCP</button>
+  </form>
+
+  <% if (pcpData) { %>
+    <div class="tabs">
+      <div class="tab active" onclick="showTab('cover')">Cover PCP</div>
+      <div class="tab" onclick="showTab('control')">Control Plan</div>
+    </div>
+
+    <div class="content" id="cover">
+      <h2>Cover PCP</h2>
+      <table>
+        <tr><th>Número de Parte</th><td><%= pcpData.pa6 %></td></tr>
+        <tr><th>Revisión</th><td><%= pcpData.pa7 %></td></tr>
+        <tr><th>Cliente</th><td><%= pcpData.cu1 %></td></tr>
+        <tr><th>Producto</th><td><%= pcpData.pa1 %></td></tr>
+        <tr><th>Máquina</th><td><%= pcpData.machine %></td></tr>
+        <tr><th>Otra Especificación</th><td><%= pcpData.pa13 %></td></tr>
+      </table>
+    </div>
+
+    <div class="content hidden" id="control">
+      <h2>Control Plan</h2>
+      <table>
+        <tr>
+          <th>Proceso</th>
+          <th>Característica</th>
+          <th>Método</th>
+          <th>Frecuencia</th>
+        </tr>
+        <% controlPlan.forEach(item => { %>
+          <tr>
+            <td><%= item.proceso %></td>
+            <td><%= item.caracteristica %></td>
+            <td><%= item.metodo %></td>
+            <td><%= item.frecuencia %></td>
+          </tr>
+        <% }) %>
+      </table>
+    </div>
+  <% } %>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.content').forEach(el => el.classList.add('hidden'));
+      document.getElementById(tabId).classList.remove('hidden');
+      document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+      if (tabId === 'cover') {
+        document.querySelector('.tab:nth-child(1)').classList.add('active');
+      } else {
+        document.querySelector('.tab:nth-child(2)').classList.add('active');
+      }
+    }
+  </script>
+
+</body>
+</html>
+
+
