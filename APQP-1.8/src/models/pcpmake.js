@@ -11,6 +11,7 @@ const PcpMakeSchema = new Schema({
     pa10: String,
     pa11: String,
     pa13: String,
+    pa19: String,
     pa45: String,
     cu1: String,
     pa47: String,

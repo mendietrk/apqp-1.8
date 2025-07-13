@@ -669,6 +669,24 @@ router.get('/pcpexcel/:id', async (req, res) => {
   }
 });
 
+const { formatearFecha } = require('../utils'); // ajusta la ruta según la estructura de tu proyecto
+
+router.get('/pcpexcel2/:id', async (req, res) => {
+  try {
+    const registro = await PcpMake.findById(req.params.id).lean();
+
+    // Formatea fechas necesarias
+    registro.fechaCreacionFormateada = formatearFecha(registro.pa11); // Ej: "10-Feb-23"
+    registro.fechaFirmaFormateada1 = formatearFecha(registro.pa19);    // Ej: "13-Jul-25"
+    registro.fechaFirmaFormateada2 = formatearFecha(registro.pa19);
+    res.render('pcpexcel2', { registro });
+  } catch (error) {
+    console.error('Error al generar Excel-view:', error);
+    res.status(500).send('Error al generar vista para Excel');
+  }
+});
+
+
 router.get('/pcp1', async (req, res) => {
   try {
     // Obtener todos los números de parte y versiones (sin duplicados)

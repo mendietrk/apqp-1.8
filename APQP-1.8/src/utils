@@ -1,0 +1,13 @@
+// utils.js
+function formatearFecha(fechaString) {
+    if (!fechaString) return '';
+    const [dia, mes, anio] = fechaString.split('/');
+    const meses = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                   'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const mesTexto = meses[parseInt(mes, 10) - 1];
+    const anioCorto = anio.slice(-2);
+    return `${dia}-${mesTexto}-${anioCorto}`;
+  }
+  
+  module.exports = { formatearFecha };
+  
