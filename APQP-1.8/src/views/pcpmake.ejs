@@ -156,7 +156,7 @@
       </select>
     </label>
 
-    <% for(let i = 1; i <= 8; i++) { %>
+    <% for(let i = 1; i <= 9; i++) { %>
       <label>Espesor peak <%= i %>:
         <input type="text" name="chr_peak_<%= i %>" id="chr_peak_<%= i %>" />
         <select onchange="document.getElementById('chr_peak_<%= i %>').value = this.value">
@@ -168,7 +168,7 @@
       </label>
     <% } %>
 
-    <% for(let i = 1; i <= 7; i++) { %>
+    <% for(let i = 1; i <= 9; i++) { %>
       <label>Espesor root <%= i %>:
         <input type="text" name="chr_root_<%= i %>" id="chr_root_<%= i %>" />
         <select onchange="document.getElementById('chr_root_<%= i %>').value = this.value">

@@ -71,8 +71,9 @@
           <td>
             <a class="btn edit-btn" href="/pcpedit/<%= r._id %>">Editar</a>
             <form action="/pcpdelete/<%= r._id %>" method="POST" onsubmit="return confirm('¿Deseas eliminar este registro?');">
-              <button type="submit" class="btn delete-btn">Borrar</button>
+              <!--<button type="submit" class="btn delete-btn">Borrar</button>-->
               <a class="btn edit-btn" href="/pcpexcel/<%= r._id %>">excel</a>
+              <a class="btn edit-btn" href="/pcpexcel2/<%= r._id %>">excel2</a>
             </form>
           </td>
         </tr>

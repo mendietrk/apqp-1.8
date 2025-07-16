@@ -43,11 +43,11 @@
     <tr><td>Humedad del material</td><td><%= registro.ch8 %></td></tr>
     <tr><td>Peso con tolerancia</td><td><%= registro.chr_peso || '' %></td></tr>
 
-    <% for (let i = 1; i <= 8; i++) { %>
+    <% for (let i = 1; i <= 9; i++) { %>
       <tr><td>Espesor peak <%= i %></td><td><%= registro['chr_peak_' + i] || '' %></td></tr>
     <% } %>
 
-    <% for (let i = 1; i <= 7; i++) { %>
+    <% for (let i = 1; i <= 9; i++) { %>
       <tr><td>Espesor root <%= i %></td><td><%= registro['chr_root_' + i] || '' %></td></tr>
     <% } %>
 

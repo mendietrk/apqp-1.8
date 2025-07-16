@@ -34,6 +34,7 @@ const PcpMakeSchema = new Schema({
     chr_peak_6: String,
     chr_peak_7: String,
     chr_peak_8: String,
+    chr_peak_9: String,
 
     chr_root_1: String,
     chr_root_2: String,
@@ -42,6 +43,8 @@ const PcpMakeSchema = new Schema({
     chr_root_5: String,
     chr_root_6: String,
     chr_root_7: String,
+    chr_root_8: String,
+    chr_root_9: String,
 
     chr_falda_1: String,
     chr_cuello: String,
