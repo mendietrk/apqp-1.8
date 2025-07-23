@@ -1,0 +1,60 @@
+<<%- include('partials/_header'); %>
+
+<div class="col-md-10 mx-auto mt-4">
+  <h2>Registros de Ubicación</h2>
+
+  <table class="table table-bordered table-hover mt-3">
+    <thead class="table-light">
+      <tr>
+        <th>Nombre</th>
+        <th>Latitud</th>
+        <th>Longitud</th>
+        <th>Entrada/Salida</th>
+        <th>Fecha y Hora</th>
+        <th>Mapa</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (ubicacionesGKN.length === 0) { %>
+        <tr>
+          <td colspan="6" class="text-center">No hay registros aún.</td>
+        </tr>
+      <% } else { %>
+        <% ubicacionesGKN.forEach(ubicacionGKN => { %>
+          <tr>
+            <td><%= ubicacionGKN.nombre %></td>
+            <td><%= ubicacionGKN.latitud %></td>
+            <td><%= ubicacionGKN.longitud %></td>
+            <td><%= ubicacionGKN.entrada %></td>
+            <td><%= new Date(ubicacionGKN.fechaHora).toLocaleString('es-GT', { timeZone: 'America/Guatemala' }) %></td>
+
+            <td>
+                <!-- Botón Ver en Google Maps -->
+                <a href="https://www.google.com/maps?q=<%= ubicacionGKN.latitud %>,<%= ubicacionGKN.longitud %>" 
+                   target="_blank" 
+                   class="edit-btn" 
+                   style="background-color: #6f42c1; color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; display: inline-block;">
+                  Ver en Google Maps
+                </a>
+              </td>
+            <td>
+                <form 
+                  action="/ubicacionesGKN/<%= ubicacionGKN._id %>?_method=DELETE" 
+                  method="POST" 
+                  onsubmit="return confirm('¿Estás seguro de borrar este registro?');" 
+                  style="display: inline;">
+                  <button type="submit" class="edit-btn" style="background-color: red; color: white; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer;">
+                    🗑 Borrar
+                  </button>
+                </form>
+              </td>
+              
+          </tr>
+        <% }); %>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/_footer'); %>

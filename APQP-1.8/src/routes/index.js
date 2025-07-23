@@ -88,7 +88,7 @@ router.get('/registro-ubicacion', (req, res) => {
 
 router.post('/registro-ubicacion', async (req, res) => {
   try {
-    const { nombre, latitud, longitud, fechaHora } = req.body;
+    const { nombre, latitud, longitud, entrada, fechaHora } = req.body;
 
     await Ubicacion.create({
       nombre,
@@ -97,6 +97,8 @@ router.post('/registro-ubicacion', async (req, res) => {
       entrada: req.body.entrada,
       fechaHora: new Date(fechaHora),
     });
+
+    
 
    
     res.redirect('/ubicaciones'); // ✅ Recomendado si usas una vista
@@ -129,7 +131,60 @@ router.delete('/ubicaciones/:id', async (req, res) => {
   }
 });
 
-router.get("/ppap14pi/:id", async (req, res) => {
+const UbicacionGKN = require("../models/ubicacionGKN.js");
+
+// Ruta GET para mostrar la vista
+router.get('/registro-ubicacionGKN', (req, res) => {
+  res.render('../views/ubicacionGKN.ejs'); 
+});
+
+router.post('/registro-ubicacionGKN', async (req, res) => {
+  try {
+    const { nombre, latitud, longitud, entrada, fechaHora } = req.body;
+
+    await UbicacionGKN.create({
+      nombre,
+      latitud: parseFloat(latitud),
+      longitud: parseFloat(longitud),
+      entrada: req.body.entrada,
+      fechaHora: new Date(fechaHora),
+    });
+
+    
+
+   
+    res.redirect('/ubicacionesGKN'); // ✅ Recomendado si usas una vista
+    // res.send('Ubicación registrada exitosamente'); // ❌ No usar ambas
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error al registrar la ubicación');
+  }
+});
+
+
+
+router.get('/ubicacionesGKN', async (req, res) => {
+  try {
+    const ubicacionesGKN = await UbicacionGKN.find().sort({ fechaHora: -1 }); // más recientes primero
+    res.render('../views/ubicacionesGKN', { ubicacionesGKN });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error al obtener ubicaciones');
+  }
+});
+
+router.delete('/ubicacionesGKN/:id', async (req, res) => {
+  try {
+    await UbicacionGKN.findByIdAndDelete(req.params.id);
+    res.redirect('/ubicacionesGKN');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error al borrar el registro');
+  }
+});
+
+
+router.get("/ppap14p/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const pars = await Par.findById(id);
@@ -686,6 +741,61 @@ router.get('/pcpexcel2/:id', async (req, res) => {
   }
 });
 
+router.get('/pcpexcel2p/:id', async (req, res) => {
+  try {
+    const registro = await PcpMake.findById(req.params.id).lean();
+
+    if (!registro) {
+      return res.status(404).send('Registro no encontrado');
+    }
+
+    // Formatear fechas
+    registro.fechaCreacionFormateada = formatearFecha(registro.pa11);
+    registro.fechaFirmaFormateada1 = formatearFecha(registro.pa19);
+    registro.fechaFirmaFormateada2 = formatearFecha(registro.pa19);
+
+    // Renderizar el EJS manualmente (NO con `res.render`)
+    const html = await ejs.renderFile(
+      path.join(__dirname, '../views/pcpexcel2.ejs'), // o la ruta completa a tu vista
+      { registro },
+      { async: true }
+    );
+
+    // Lanzar Puppeteer
+    const browser = await puppeteer.launch({
+      headless: 'new', // o false si necesitas ver el navegador
+      args: ['--no-sandbox', '--disable-setuid-sandbox']
+    });
+
+    const page = await browser.newPage();
+
+    // Establecer contenido HTML
+    await page.setContent(html, {
+      waitUntil: 'networkidle0' // espera a que cargue todo
+    });
+
+    // Generar PDF
+    const pdfBuffer = await page.pdf({
+      format: 'A4',
+      printBackground: true,
+      margin: { top: '10mm', bottom: '10mm', left: '10mm', right: '10mm' }
+    });
+
+    await browser.close();
+
+    // Enviar PDF como respuesta
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': 'inline; filename=pcpexcel2.pdf',
+      'Content-Length': pdfBuffer.length
+    });
+
+    res.send(pdfBuffer);
+  } catch (error) {
+    console.error('Error al generar el PDF:', error);
+    res.status(500).send('Error al generar PDF');
+  }
+});
 
 router.get('/pcp1', async (req, res) => {
   try {
