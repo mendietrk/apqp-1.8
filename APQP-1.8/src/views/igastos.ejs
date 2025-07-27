@@ -1,0 +1,78 @@
+<%- include ('partials/_header1'); %>
+<!-- <link href="style.css" /> -->
+    
+        <h3>Historial</h3>
+        <ul id="list" class="list">
+            <!-- <thead>
+                <tr>
+                    <th>Concepto</th>
+                    <div><th class="text-right">Monto</th></div>
+                    
+                </tr>
+            </thead> -->
+
+                       
+            <body>
+    <% let totalAmount = 0; %>
+    <% let totalMinus = 0; %>
+    <% let totalPlus = 0; %>
+    <% for(let i = 0; i < gastos.length; i++) { %>
+        <% totalAmount += gastos[i].amount; %>
+        <% if (gastos[i].amount < 0) { %>
+          <% totalMinus += gastos[i].amount; %>
+      <% } else { %>
+          <% totalPlus += gastos[i].amount; %>
+      <% } %>
+      <div class="item-container">
+        <div class="item">
+            <li class="<%= gastos[i].amount < 0 ? 'minus' : 'plus' %>">
+                <%= gastos[i].text %> <span><%= gastos[i].amount %></span>
+                <a href="/db/delete/<%= gastos[i]._id %>" class="delete-btn">x</a>
+            </li>
+        </div>
+        <a href="/edit/<%= gastos[i]._id %>" class="edit-btn">Editar</a>
+    </div>
+    <% } %>
+
+    <div class="container">
+      <h4>Saldo</h4>
+    <h1>$ <%= totalAmount %></h1>
+    <div class="inc-exp-container">
+      <div>
+        <h4>Ingresos</h4>
+        <p id="money-plus" class="money plus">+$<%= totalPlus %>.00</p>
+      </div>
+      <div>
+        <h4>Gastos</h4>
+        <p id="money-minus" class="money minus">-$<%= totalMinus %>.00</p>
+      </div>
+      </div>
+</body>
+            
+
+    <h3>Agregar nueva transacción</h3>
+</div>
+<form action="/add" method="POST">
+<div>
+</div>
+<form id="form">
+  <div class="form-control">
+      <label for="text">Concepto</label>
+      <input type="text" name="text" placeholder="Introduce el concepto..." />
+    </div>
+    <div class="form-control">
+        <label for="amount"
+        >Monto <br />
+        (negativo - gasto, positivo - ingreso)</label
+        >
+        <input type="number" name="amount" placeholder="Introduce el monto..." />
+    </div>
+    <button class="btn">Agregar</button>
+</form>
+
+
+
+      
+
+     
+  <%- include ('partials/_footer'); %>

@@ -33,54 +33,79 @@
     .btn-delete {
       background-color: #dc3545;
     }
+    .acciones {
+      display: flex;
+      gap: 4px;
+      justify-content: center;
+    }
   </style>
 </head>
 <body>
   <h2>Subgrupos Registrados</h2>
 
-  <table>
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Parte</th>
-        <th>Versión</th>
-        <th>Muestra 1</th>
-        <th>Muestra 2</th>
-        <th>Muestra 3</th>
-        <th>Muestra 4</th>
-        <th>Muestra 5</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% subgrupos.forEach((sg, i) => { %>
+  <form id="formEliminarSubgrupos" action="/subgrupos/eliminar-multiples" method="POST" onsubmit="return confirmarEliminacion()">
+    <table>
+      <thead>
         <tr>
-          <td><%= i + 1 %></td>
-          <td><%= sg.pa6 || '-' %></td>
-          <td><%= sg.pa7 || '-' %></td>
-    
-          <% if (Array.isArray(sg.muestras) && sg.muestras.length === 5) { %>
-            <% sg.muestras.forEach(m => { %>
-              <td><%= m %></td>
-            <% }) %>
-          <% } else { %>
-            <td colspan="5">Datos incompletos</td>
-          <% } %>
-    
-          <td>
-            <a class="btn" href="/subgrupo/<%= sg._id %>/editar">Editar</a>
-            <form action="/subgrupo/<%= sg._id %>/eliminar" method="POST" onsubmit="return confirm('¿Eliminar este subgrupo?')">
-              <button class="btn btn-delete">Eliminar</button>
-            </form>
-          </td>
+          <th><input type="checkbox" id="seleccionarTodo"></th>
+          <th>#</th>
+          <th>Parte</th>
+          <th>Versión</th>
+          <th>Muestra 1</th>
+          <th>Muestra 2</th>
+          <th>Muestra 3</th>
+          <th>Muestra 4</th>
+          <th>Muestra 5</th>
+          <th>Acciones</th>
         </tr>
-      <% }) %>
-    </tbody>
-   
-  </table>
+      </thead>
+      <tbody>
+        <% subgrupos.forEach((sg, i) => { %>
+          <tr>
+            <td><input type="checkbox" name="subgruposSeleccionados[]" value="<%= sg._id %>"></td>
+            <td><%= i + 1 %></td>
+            <td><%= sg.pa6 || '-' %></td>
+            <td><%= sg.pa7 || '-' %></td>
+
+            <% if (Array.isArray(sg.muestras) && sg.muestras.length === 5) { %>
+              <% sg.muestras.forEach(m => { %>
+                <td><%= m %></td>
+              <% }) %>
+            <% } else { %>
+              <td colspan="5">Datos incompletos</td>
+            <% } %>
+
+            <td class="acciones">
+              <a class="btn" href="/subgrupo/<%= sg._id %>/editar">Editar</a>
+              <form action="/subgrupo/<%= sg._id %>/eliminar" method="POST" onsubmit="return confirm('¿Eliminar este subgrupo?')">
+                <button class="btn btn-delete">Eliminar</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <br>
+    <button type="submit" class="btn btn-delete">Eliminar seleccionados</button>
+  </form>
+
+  <script>
+    // Seleccionar/Deseleccionar todos
+    document.getElementById('seleccionarTodo').addEventListener('change', function () {
+      const checkboxes = document.querySelectorAll('input[name="subgruposSeleccionados[]"]');
+      checkboxes.forEach(cb => cb.checked = this.checked);
+    });
+
+    // Confirmar eliminación múltiple
+    function confirmarEliminacion() {
+      const seleccionados = document.querySelectorAll('input[name="subgruposSeleccionados[]"]:checked');
+      if (seleccionados.length === 0) {
+        alert("Por favor selecciona al menos un subgrupo para eliminar.");
+        return false;
+      }
+      return confirm("¿Eliminar los subgrupos seleccionados?");
+    }
+  </script>
 </body>
 </html>
-
-
-
-

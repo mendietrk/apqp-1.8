@@ -1,0 +1,63 @@
+<%- include ('../partials/styles'); %>
+<title>Registro de Datos</title>
+</head>
+
+<nav>
+  <ul>
+    <li><a href="/gt">➕ Gastos</a></li>
+      <li><a href="/registro-ubicacion">Ubicacion</a></li>
+    
+
+  </ul>
+</nav>
+
+<br>
+<a href="/logout">Salir</a>
+<a href="/" class="btn">Volver</a>
+
+<h2>Planeación Avanzada de la Calidad del Producto</h2>
+</br>
+
+<!-- Temporizador desde el inicio de sesión -->
+<div id="sessionBox" style="margin: 10px 0; padding: 10px; background-color: #eef; width: fit-content; border-radius: 5px;">
+  Tiempo desde conexión con base de datos: <span id="activeTime">00:00</span>
+</div>
+
+<!-- Mensaje de sesión expirada -->
+<div id="timeoutMsg" style="display: none; padding: 15px; background-color: #f8d7da; color: #721c24; border-radius: 5px; margin-top: 20px;">
+  ⚠️ La sesión con la base de datos ha expirado.<br>Por favor vuelve a ingresar tu clave.<br><br>
+  <a href="/" class="btn">Volver al inicio</a>
+</div>
+
+<<script>
+  const dbStartTime = Number(<%= dbConnectedAt %>);
+  const timeoutLimit = 20 * 60 * 1000;
+  const timerDisplay = document.getElementById('activeTime');
+  const timeoutMsg = document.getElementById('timeoutMsg');
+  const sessionBox = document.getElementById('sessionBox');
+
+  function formatTime(ms) {
+    const totalSeconds = Math.floor(ms / 1000);
+    const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+    const seconds = String(totalSeconds % 60).padStart(2, '0');
+    return `${minutes}:${seconds}`;
+  }
+
+  function checkTimeout() {
+    const now = Date.now();
+    const elapsed = now - dbStartTime;
+
+    timerDisplay.textContent = formatTime(elapsed);
+
+    if (elapsed >= timeoutLimit) {
+      sessionBox.style.display = 'none';
+      timeoutMsg.style.display = 'block';
+    } else {
+      sessionBox.style.display = 'block';
+      timeoutMsg.style.display = 'none';
+    }
+  }
+
+  checkTimeout();
+  setInterval(checkTimeout, 1000);
+</script>

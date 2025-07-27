@@ -1,0 +1,31 @@
+<%- include ('partials/_header1'); %>
+
+<!-- FORM -->
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Editar</h1>
+
+        <a href="/db/delete/<%= gasto._id %>" method="POST" class="edit-btn" style="color: red;">Borrar</a>
+
+        <div class=container>
+            <div class="container">
+                <div class="container">
+                    <form action="/edit/<%= gasto._id %>" method="POST">
+                        <div>
+                            <input type="text" name="text" placeholder="Concepto" value="<%= gasto.text %>">
+                        </div>
+                        <div>
+                            <input type="number" name="amount"  placeholder="Cantidad" value="<%= gasto.amount %>">
+                        </div>
+                        
+                            <a href="/gt" class="btn">Cancel</a>
+                            <button type="submit" class="btn">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include ('partials/_footer'); %>
