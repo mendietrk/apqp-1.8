@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Registro de Calidad</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 6px;
+      margin-top: 5px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .danger {
+      background-color: #d9534f;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    .danger:hover {
+      background-color: #c9302c;
+    }
+
+    button {
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Editar Registro</h1>
+
+  <form action="/qtine/update/<%= registro._id %>" method="POST">
+    <label for="pa6">Número de Parte</label>
+    <input type="text" id="pa6" name="pa6" value="<%= registro.pa6 %>" required>
+
+    <label for="pa7">Descripción</label>
+    <input type="text" id="pa7" name="pa7" value="<%= registro.pa7 %>" readonly>
+
+    <label for="cantidad">Cantidad</label>
+    <input type="number" id="cantidad" name="cantidad" value="<%= registro.cantidad %>" required>
+
+    <label for="defecto">Defecto</label>
+    <input type="text" id="defecto" name="defecto" value="<%= registro.defecto %>">
+
+    <label for="fechaFabricacion">Fecha de Fabricación</label>
+    <input type="date" id="fechaFabricacion" name="fechaFabricacion" value="<%= registro.fechaFabricacion ? registro.fechaFabricacion.toISOString().split('T')[0] : '' %>" required>
+
+    <label for="observaciones">Observaciones</label>
+    <textarea id="observaciones" name="observaciones"><%= registro.observaciones %></textarea>
+
+    <div class="actions">
+      <button type="submit">Guardar Cambios</button>
+    </div>
+  </form>
+
+  <form action="/qtine/delete/<%= registro._id %>" method="POST" style="margin-top: 10px;">
+    <button type="submit" class="danger">Eliminar</button>
+  </form>
+</body>
+</html>
+
+

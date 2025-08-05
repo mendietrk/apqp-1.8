@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registrar Producto No Conforme</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 15px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Formulario de Registro - Producto No Conforme</h2>
+
+  <form action="/qtine" method="POST">
+    <!-- Selección de Número de parte -->
+    <label for="pa6">Número de Parte (pa6):</label>
+    <select name="pa6" id="pa6" required>
+      <option value="">-- Selecciona un número de parte --</option>
+      <% pars.forEach(par => { %>
+        <option value="<%= par.pa6 %>"><%= par.pa6 %></option>
+      <% }); %>
+    </select>
+
+    <!-- Descripción vinculada automáticamente 
+    <label for="pa7">Descripción (pa7):</label>
+    <input type="text" name="pa7" id="pa7" readonly required>-->
+
+    <!-- Cantidad -->
+    <label for="cantidad">Cantidad:</label>
+    <input type="number" name="cantidad" id="cantidad" min="0" required>
+
+    <!-- Defecto -->
+    <label for="defecto">Defecto:</label>
+    <input type="text" name="defecto" id="defecto">
+
+    <!-- Fecha de fabricación -->
+    <label for="fechaFabricacion">Fecha de fabricación:</label>
+    <input type="date" name="fechaFabricacion" id="fechaFabricacion" required>
+
+    <!-- Observaciones -->
+    <label for="observaciones">Observaciones:</label>
+    <textarea name="observaciones" id="observaciones" rows="4"></textarea>
+
+    <button type="submit">Guardar Registro</button>
+  </form>
+
+  <script>
+    // Diccionario pa6 -> pa7 generado desde backend
+    const mapaPa6Pa7 = {
+      <% pars.forEach(par => { %>
+        "<%= par.pa6 %>": "<%= par.pa7 %>",
+      <% }); %>
+    };
+
+    const selectPa6 = document.getElementById('pa6');
+    const inputPa7 = document.getElementById('pa7');
+
+    selectPa6.addEventListener('change', function() {
+      const valorSeleccionado = this.value;
+      inputPa7.value = mapaPa6Pa7[valorSeleccionado] || '';
+    });
+  </script>
+</body>
+</html>

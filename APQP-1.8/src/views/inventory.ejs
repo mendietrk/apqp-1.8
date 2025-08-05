@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Inventario de Producto No Conforme</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    a.button {
+      display: inline-block;
+      padding: 6px 12px;
+      background-color: #1976d2;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    a.button:hover {
+      background-color: #1565c0;
+    }
+  </style>
+</head>
+<body>
+  <h2>Inventario de Producto No Conforme</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Número de Parte</th>
+        <th>Descripción</th>
+        <th>Cantidad</th>
+        <th>Defecto</th>
+        <th>Fecha de Fabricación</th>
+        <th>Observaciones</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (inventario.length === 0) { %>
+        <tr>
+          <td colspan="7">No hay registros disponibles.</td>
+        </tr>
+      <% } else { %>
+        <% inventario.forEach(item => { %>
+          <tr>
+            <td><%= item.pa6 %></td>
+            <td><%= item.pa7 %></td>
+            <td><%= item.cantidad %></td>
+            <td><%= item.defecto || '' %></td>
+            <td><%= item.fechaFabricacion.toISOString().split('T')[0] %></td>
+            <td><%= item.observaciones || '' %></td>
+            <td>
+              <a class="button" href="/qtine/edit/<%= item._id %>">Editar</a>
+            </td>
+          </tr>
+        <% }); %>
+      <% } %>
+    </tbody>
+  </table>
+</body>
+</html>

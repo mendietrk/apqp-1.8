@@ -6,6 +6,58 @@ const fs = require("fs");
 const path = require("path");
 const ejs = require("ejs");
 const puppeteer = require("puppeteer"); // O puppeteer-core, según usas
+const RegistroProduccion = require('../models/RegistroProduccion');
+
+router.get('/inventory', async (req, res) => {
+  const inventario = await RegistroProduccion.find().sort({ fechaFabricacion: -1 });
+  res.render('inventory', { inventario });
+});
+
+router.get('/qtine/edit/:id', async (req, res) => {
+  const registro = await RegistroProduccion.findById(req.params.id);
+  // Aquí puedes reutilizar la vista del formulario con los datos precargados
+  res.render('qtine-edit', { registro });
+});
+
+router.get('/qtine', async (req, res) => {
+  const pars = await Par.find(); // Colección con pa6 y pa7
+  res.render('qtine', { pars });
+});
+
+// Ruta POST para recibir el formulario
+router.post('/qtine', async (req, res) => {
+  const { pa6, pa7, cantidad, defecto, fechaFabricacion, observaciones } = req.body;
+  await RegistroProduccion.create({
+    pa6,
+    pa7,
+    cantidad,
+    defecto,
+    fechaFabricacion,
+    observaciones
+  });
+  res.redirect('/qtine'); // o a donde prefieras
+});
+
+// Actualizar registro
+router.post('/qtine/update/:id', async (req, res) => {
+  const { pa6, pa7, cantidad, defecto, fechaFabricacion, observaciones } = req.body;
+  await RegistroProduccion.findByIdAndUpdate(req.params.id, {
+    pa6,
+    pa7,
+    cantidad,
+    defecto,
+    fechaFabricacion,
+    observaciones
+  });
+  res.redirect('/inventory');
+});
+
+// Eliminar registro
+router.post('/qtine/delete/:id', async (req, res) => {
+  await RegistroProduccion.findByIdAndDelete(req.params.id);
+  res.redirect('/inventory');
+});
+
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
